@@ -1,6 +1,6 @@
 
 config 'mesh' 'bat0'
-	option 'interfaces' 'adhoc0'
+	option 'interfaces' 'adhoc0 eth0.11'
         option 'bonding'
         option 'orig_interval' '1500' 
         option 'bridge_loop_avoidance'
