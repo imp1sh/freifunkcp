@@ -9,7 +9,7 @@ config globals 'globals'
 	option ula_prefix 'fdff:31c3:21::/48'
 
 config interface 'lan'
-	option ifname 'eth1'
+	option ifname 'eth1.5'
 	option type 'bridge'
 	option _orig_ifname 'eth1 wlan0'
 	option _orig_bridge 'true'
@@ -41,39 +41,39 @@ config switch
 
 config switch_vlan
 	option device 'switch0'
-	option vlan '3'
+	option vlan '1'
 	option vid '3'
 	option ports '1 5t 6'
 
 config switch_vlan
 	option device 'switch0'
-	option vlan '5'
+	option vlan '2'
 	option vid '5'
-	option ports '0 2 5t'
+	option ports '0t 2 5t'
 
 config interface 'mesh_radio1'
 	option type 'bridge'
 	option _orig_ifname 'wlan1-1'
 	option _orig_bridge 'true'
-	option proto 'static'
+	option proto 'dhcpv6'
 	option ip6addr 'fd5e:d3d9:ec93:3c4d::1'
-	option ifname 'eth0.12'
+	option ifname 'eth1.12 bat0'
 
 config switch_vlan
 	option device 'switch0'
-	option vlan '7'
+	option vlan '3'
 	option vid '11'
-	option ports '3 5t'
+	option ports '0t 3 5t'
 
 config switch_vlan
 	option device 'switch0'
-	option vlan '8'
+	option vlan '4'
 	option vid '12'
-	option ports '4 5t'
+	option ports '0t 4 5t'
 
 config interface 'mesh_cable'
 	option proto 'batadv'
-	option ifname 'eth0.11'
+	option ifname 'eth1.11'
 	option mesh 'bat0'
 	option mtu '1528'
 

@@ -1,9 +1,9 @@
 
 config 'mesh' 'bat0'
 	option 'interfaces' 'adhoc0 eth0.11'
-        option 'bonding'
+        option 'bonding' '1'
         option 'orig_interval' '1500' 
-        option 'bridge_loop_avoidance'
+        option 'bridge_loop_avoidance' '1'
 
 #config 'mesh' 'bat0'
 #	option 'aggregated_ogms'

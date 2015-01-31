@@ -31,7 +31,7 @@ config wifi-device 'radio1'
 config wifi-iface 'client_radio1'
 	option device 'radio1'
 	option mode 'ap'
-	option ssid 'guests'
+	option ssid 'nkac'
 	option encryption 'none'
 	option network 'mesh_radio1'
 
