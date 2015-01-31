@@ -15,7 +15,7 @@ config interface 'lan'
 	option _orig_bridge 'true'
 	option proto 'dhcp'
 
-config interface 'mesh_radio0'
+config interface 'mesh_spine'
 	option ifname 'adhoc0'
 	option mtu '1528'
 	option proto 'batadv'
@@ -23,7 +23,6 @@ config interface 'mesh_radio0'
 
 config interface 'wan'
 	option proto 'dhcp'
-	option type 'bridge'
 	option _orig_ifname 'eth0'
 	option _orig_bridge 'true'
 	option ifname 'eth0'
@@ -51,13 +50,13 @@ config switch_vlan
 	option vid '5'
 	option ports '0t 2 5t'
 
-config interface 'mesh_radio1'
+config interface 'mesh_guests'
 	option type 'bridge'
 	option _orig_ifname 'wlan1-1'
 	option _orig_bridge 'true'
-	option proto 'dhcpv6'
+	option proto 'static'
 	option ip6addr 'fd5e:d3d9:ec93:3c4d::1'
-	option ifname 'eth1.12 bat0'
+	option ifname 'eth1.12'
 
 config switch_vlan
 	option device 'switch0'

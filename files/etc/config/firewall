@@ -91,14 +91,14 @@ config zone
 	option forward 'REJECT'
 	option output 'ACCEPT'
 	option name 'spine'
-	option network 'mesh_cable mesh_radio0'
+	option network 'mesh_spine'
 
 config zone
 	option input 'ACCEPT'
 	option forward 'REJECT'
 	option output 'ACCEPT'
 	option name 'guests'
-	option network 'mesh_radio1'
+	option network 'mesh_guests'
 
 config forwarding
 	option dest 'guests'
