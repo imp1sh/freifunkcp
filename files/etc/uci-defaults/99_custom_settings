@@ -1,10 +1,1 @@
-#!/bin/ash
-
-# env variables
-hostnamebasis="nkac-"
-randomized=$(</dev/urandom tr -dc A-Z-a-z-0-9 | head -c24)
-
-# when using this line, stuck at boot
-uci set system.@system[0].hostname=$(echo -n "nkac-$randomized")
-uci set system.ntp.enable_server=1
-uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
+../../../../filesnkac/etc/uci-defaults/99_custom_settings
