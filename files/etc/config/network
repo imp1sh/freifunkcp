@@ -55,7 +55,6 @@ config interface 'mesh_guests'
 	option _orig_ifname 'wlan1-1'
 	option _orig_bridge 'true'
 	option proto 'static'
-	option ip6addr 'fd5e:d3d9:ec93:3c4d::1'
 	option ifname 'eth1.12'
 
 config switch_vlan

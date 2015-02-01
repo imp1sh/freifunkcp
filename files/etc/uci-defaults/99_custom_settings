@@ -1,1 +1,23 @@
-../../../../filesnkac/etc/uci-defaults/99_custom_settings
+#!/bin/ash
+
+# env variables
+hostnamebasis="nkac-"
+randomized=$(</dev/urandom tr -dc A-Z-a-z-0-9 | head -c24)
+ulafirst8="FD"
+guestnetidentifier=1
+privnetidentifier=2
+
+#get last 40 bits from adhoc0 interface (spine)
+hwaddr=$(ifconfig adhoc0|grep HWaddr|awk '{print $5}')
+hwaddrwocolon=$(echo $hwaddr|sed -e 's/://g')
+guestnet=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon:6:2}:${hwaddrwocolon:8:2}${hwaddrwocolon:10:1}$guestnetidentifier::/64)`
+guestnetip=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon:6:2}:${hwaddrwocolon:8:2}${hwaddrwocolon:10:1}$guestnetidentifier::1/64)`
+privnet=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon:6:2}:${hwaddrwocolon:8:2}${hwaddrwocolon:10:1}$privnetidentifier::/64)`
+privnetip=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon:6:2}:${hwaddrwocolon:8:2}${hwaddrwocolon:10:1}$privnetidentifier::1/64)`
+
+# when using this line, stuck at boot
+# uci set system.@system[0].hostname=$(echo -n "nkac-$randomized")
+uci set system.@system[0].hostname=$(echo -n "nkac-$hwaddrwocolon")
+uci set system.ntp.enable_server=1
+uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
+uci set network.mesh_guests.ip6addr=$(echo -n $guestnetip)
