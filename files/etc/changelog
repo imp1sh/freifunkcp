@@ -1,6 +1,6 @@
 [beta 0.3]
 January 2015 Jochen Demmer
-- changed env scripts so that global files for all environments can be included
+- created branch system to handle multiple environments easier
 
 
 [beta 0.2]
