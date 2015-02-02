@@ -1,5 +1,5 @@
 #!/bin/ash
-#test
+#
 # env variables
 hostnamebasis="nkac-"
 randomized=$(</dev/urandom tr -dc A-Z-a-z-0-9 | head -c24)
