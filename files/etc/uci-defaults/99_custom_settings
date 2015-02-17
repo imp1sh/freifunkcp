@@ -21,4 +21,5 @@ privnetip=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocol
 uci set system.@system[0].hostname=$(echo -n "nkac-$hwaddrwocolon")
 uci set system.ntp.enable_server=1
 uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
-uci set network.mesh_guests.ip6addr=$(echo -n $guestnetip)
+# commented out, cause guest net is now bridged into mesh spine
+# uci set network.mesh_guests.ip6addr=$(echo -n $guestnetip)
