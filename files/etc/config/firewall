@@ -91,20 +91,25 @@ config zone
 	option forward 'REJECT'
 	option output 'ACCEPT'
 	option name 'spine'
-	option network 'mesh_spine'
+	option network 'mesh_spine mesh'
 
-config zone
-	option input 'ACCEPT'
-	option forward 'REJECT'
-	option output 'ACCEPT'
-	option name 'guests'
-	option network 'mesh_guests'
+config rule
+	option enabled '1'
+	option target 'ACCEPT'
+	option proto 'tcp'
+	option dest_port '2007'
+	option name 'olsrd'
+	option src 'spine'
 
 config forwarding
-	option dest 'guests'
+	option dest 'spine'
 	option src 'lan'
 
 config forwarding
 	option dest 'wan'
 	option src 'lan'
+
+config forwarding
+	option dest 'lan'
+	option src 'spine'
 

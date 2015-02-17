@@ -11,7 +11,7 @@ config globals 'globals'
 config interface 'lan'
 	option ifname 'eth1.5'
 	option type 'bridge'
-	option _orig_ifname 'eth1 wlan0'
+	option _orig_ifname 'eth1 appriv'
 	option _orig_bridge 'true'
 	option proto 'dhcp'
 
@@ -50,24 +50,20 @@ config switch_vlan
 	option vid '5'
 	option ports '0t 2 5t'
 
-config interface 'mesh_guests'
+config interface 'mesh'
 	option type 'bridge'
-	option _orig_ifname 'wlan1-1'
+	option _orig_ifname 'appub'
 	option _orig_bridge 'true'
-	option proto 'static'
-	option ifname 'eth1.12'
+	option ifname 'bat0 appub'
+	option proto 'dhcpv6'
+	option reqaddress 'try'
+	option reqprefix 'auto'
 
 config switch_vlan
 	option device 'switch0'
 	option vlan '3'
 	option vid '11'
-	option ports '0t 3 5t'
-
-config switch_vlan
-	option device 'switch0'
-	option vlan '4'
-	option vid '12'
-	option ports '0t 4 5t'
+	option ports '0t 3 4'
 
 config interface 'mesh_cable'
 	option proto 'batadv'
