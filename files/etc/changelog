@@ -2,11 +2,12 @@
 February 2015
 - switch from own collision domain for guests into bridged setup
 - setting fixed interface names appriv and appub like with adhoc0
+- updated to openwrt commit 02b2a9b82d727f1b50e59fb56cdf40264f5eff9a Chaos Calmer r44362 kernel 3.14.32
+- integrated quagga with RIP and RIPng
 
 [beta 0.31]
 January 2015 Jochen Demmer
 - created branch system to handle multiple environments easier
-
 
 [beta 0.2]
  January 2015 Jochen Demmer
