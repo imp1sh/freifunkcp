@@ -1,4 +1,8 @@
-[bata 0.4]
+[beta 0.41]
+February 2015 Jochen Demmer
+- updated to 5b4e2e7cf913d010594379218b5540ee8c793aaa Februara 27th 2015
+
+[beta 0.4]
 February 2015 Jochen Demmer
 - switch from own collision domain for guests into bridged setup
 - setting fixed interface names appriv and appub like with adhoc0
