@@ -91,7 +91,7 @@ config zone
 	option forward 'REJECT'
 	option output 'ACCEPT'
 	option name 'spine'
-	option network 'mesh_spine mesh'
+	option network 'mesh mesh_cable mesh_spine'
 
 config rule
 	option enabled '1'
@@ -102,14 +102,14 @@ config rule
 	option src 'spine'
 
 config forwarding
-	option dest 'spine'
-	option src 'lan'
-
-config forwarding
 	option dest 'wan'
 	option src 'lan'
 
 config forwarding
 	option dest 'lan'
 	option src 'spine'
+
+config forwarding
+	option dest 'spine'
+	option src 'lan'
 
