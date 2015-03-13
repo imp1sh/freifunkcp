@@ -1,3 +1,8 @@
+[beta 0.41]
+March 2015 Jochen Demmer
+- upgrade to Chaos Calmer commit 32509c39e4499a9060a5e76df6a0dd14dddb470c
+- Netgear WNDR3700 support
+
 [beta 0.4]
 February 2015 Jochen Demmer
 - switch from own collision domain for guests into bridged setup
