@@ -1,6 +1,6 @@
 [beta 0.41]
 March 2015 Jochen Demmer
-- upgrade to Chaos Calmer commit 32509c39e4499a9060a5e76df6a0dd14dddb470c
+- upgrade to Chaos Calmer commit 3b803a735d52f1037cc21c8fd72e61128972d905
 - Netgear WNDR3700 support
 
 [beta 0.4]
