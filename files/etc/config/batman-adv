@@ -1,6 +1,6 @@
 
 config 'mesh' 'bat0'
-	option 'interfaces' 'adhoc0 eth0.11'
+	option 'interfaces' 'adhoc24ghz eth1.11'
         option 'bonding' '1'
         option 'orig_interval' '1500' 
         option 'bridge_loop_avoidance' '1'

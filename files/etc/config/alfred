@@ -1,5 +1,5 @@
 config 'alfred' 'alfred'
-	option interface 'adhoc0'
+	option interface 'adhoc24ghz'
 	option mode 'master'
 	option batmanif 'bat0'
 	option start_vis '1'
