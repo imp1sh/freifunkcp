@@ -1,0 +1,48 @@
+current openwrt CC commit: 02b2a9b82d727f1b50e59fb56cdf40264f5eff9a
+
+there are two main directories:
+1. where you checkout openwrt, we actually use freifuncp as the directory name here
+2. where you checkout freifunkcp sources, we use env as directory name while it is a subdirectory of freifunkcp.
+
+./freifunkcp/ referred to as buildroot directory
+./freifunkcp/env/ referred to as freifunkcp directory
+
+git clone git://git.openwrt.org/openwrt.git
+
+1. prepare your system to be able to use openwrt buildroot env.
+   http://wiki.openwrt.org/doc/howto/buildroot.exigence
+   clone with this command
+      git clone git://git.openwrt.org/openwrt.git freifunkcp
+2. cd freifunkcp
+3. git checkout <<current openwrt CC commit>> e.g.
+   git checkout 02b2a9b82d727f1b50e59fb56cdf40264f5eff9a
+4. ./scripts/feeds update -a
+5. ./scripts/feeds install -a
+6. cd feeds/routing/batman-adv/
+   vim Makefile
+      PKG_VERSION:=2014.4.0
+      => PKG_VERSION:=2013.4.0
+      PKG_MD5SUM:=b1518e84ce530883d224c6ca4c673ce8
+      PKG_MD5SUM:=6590caa324709289e3cb142273a5ff57
+   cd ../alfred/
+   vim Makefile
+      PKG_VERSION:=2014.4.0
+      => PKG_VERSION:=2013.4.0
+      PKG_MD5SUM:=053cb5d9e7ca9384598e82944343dea2
+      => PKG_MD5SUM:=3891697e127b1037cfc9349fd96e9993
+   cd ../batctl
+   vim Makefile
+      PKG_VERSION:=2014.4.0
+      => PKG_VERSION:=2013.4.0
+      PKG_MD5SUM:=f3a14565699313258ee6ba3de783eb0a
+      => PKG_MD5SUM:=42e269cc710bbc9a8fd17628201d4258
+   cd ../../../
+7. git clone https://github.com/imp1sh/freifunkcp.git env
+
+Building exmaple with TP-Link C7
+1. checkout c7 branch for tp-link archer c7 v2
+      cd env
+      git checkout c7_generic
+      cd ..
+      make
+
