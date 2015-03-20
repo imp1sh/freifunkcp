@@ -19,7 +19,7 @@ config wifi-iface
 	option auth_secret 'abcd'
 	option acct_server '10.1.1.49'
 	option acct_secret 'abcd'
-	option nasid 'c7basement'
+	option nasid 'c7_generic'
 
 config wifi-device 'radio1'
 	option type 'mac80211'
@@ -58,6 +58,6 @@ config wifi-iface
 	option auth_secret 'abcd'
 	option acct_server '10.1.1.49'
 	option acct_secret 'abcd'
-	option nasid 'c7basement'
+	option nasid 'c7_generic'
 	option encryption 'wpa2'
 
