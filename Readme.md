@@ -1,5 +1,6 @@
 # freifunkcp
-Full featured OpenWrt that's compatible to Freifunk (batman-adv)
+Full featured OpenWrt that's compatible to Freifunk (batman-adv).
+freifunkcp stands for FreifunkComPatible
 
 =What is this?=
 This is an effort to develop a full featured OpenWrt firmware that has builtin Freifunk compatibility, while meaning batman-adv Freifunk.
