@@ -1,38 +1,28 @@
-there are two main directories:
-1. where you checkout openwrt, we actually use freifuncp as the directory name here
-2. where you checkout freifunkcp sources, we use env as directory name while it is a subdirectory of freifunkcp.
-
+# Main directories:
+1. where you checkout openwrt, we actually use freifuncp as the directory name
 ./freifunkcp/ referred to as buildroot directory
+
+2. where you checkout freifunkcp sources, we use env as directory name while it is a subdirectory of freifunkcp.
 ./freifunkcp/env/ referred to as freifunkcp directory
 
-git clone git://git.openwrt.org/openwrt.git
+# Setup buildroot environment
+1. `git clone git://git.openwrt.org/openwrt.git freifunkcp`
 
-prepare your system to be able to use openwrt buildroot env.
+2. `cd freifunkcp`
+
+3. prepare your system to be able to use openwrt buildroot env.
    http://wiki.openwrt.org/doc/howto/buildroot.exigence
 
+4. `./scripts/feeds update -a`
 
-   clone openwrt and update and install feeds:
-#####
-git clone git://git.openwrt.org/openwrt.git
-cd openwrt
-./scripts/feeds update -a
-./scripts/feeds install -a
-#download version patch and apply
-#####
+5. `./scripts/feeds install -a`
 
+6. `patch -p1 < env/patches/version.patch`
 
-#checkout environment from github and link .config and files/ to it (i guess this is done by ./scripts/env new, but it should be fine to just link them, since we place a remote repository to env)
-#and apply patch from env/patches/version.patch
-#this replaces the source of the batman-adv package, with one i checked out from https://github.com/freifunk-gluon/batman-adv-legacy, this is the 2013.4.0 with patches for freifunk (if i understood correctly), so we can use the actual master branch and not an old commit of openwrt
-#####
-git clone https://github.com/imp1sh/freifunkcp.git env
-patch -p1 < env/patches/version.patch
-#####
-
-Building exmaple with TP-Link C7
+# Exmaple build for TP-Link Archer C7 v2
 1. checkout c7 branch for tp-link archer c7 v2
-      cd env
+      `cd env
       git checkout c7_generic
       cd ..
-      make
+      make`
 
