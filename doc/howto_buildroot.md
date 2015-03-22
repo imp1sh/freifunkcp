@@ -19,6 +19,8 @@
 
 6. `patch -p1 < env/patches/version.patch`
 
+7. git clone https://github.com/imp1sh/freifunkcp.git env
+
 # Exmaple build for TP-Link Archer C7 v2
 1. checkout c7 branch for tp-link archer c7 v2
       `cd env
