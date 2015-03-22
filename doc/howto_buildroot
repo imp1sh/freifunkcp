@@ -13,8 +13,8 @@ prepare your system to be able to use openwrt buildroot env.
 
    clone openwrt and update and install feeds:
 #####
-git clone git://git.openwrt.org/openwrt.git freifunkcp
-cd freifunkcp
+git clone git://git.openwrt.org/openwrt.git
+cd openwrt
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 #download version patch and apply
@@ -26,8 +26,6 @@ cd freifunkcp
 #this replaces the source of the batman-adv package, with one i checked out from https://github.com/freifunk-gluon/batman-adv-legacy, this is the 2013.4.0 with patches for freifunk (if i understood correctly), so we can use the actual master branch and not an old commit of openwrt
 #####
 git clone https://github.com/imp1sh/freifunkcp.git env
-ln -sf env/.config
-ln -sf env/files
 patch -p1 < env/patches/version.patch
 #####
 
