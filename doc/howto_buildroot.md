@@ -17,9 +17,11 @@
 
 5. `./scripts/feeds install -a`
 
-6. `patch -p1 < env/patches/version.patch`
+6. git clone https://github.com/imp1sh/freifunkcp.git env
 
-7. git clone https://github.com/imp1sh/freifunkcp.git env
+7. `patch -p1 < env/patches/version.patch`
+
+
 
 # Exmaple build for TP-Link Archer C7 v2
 ## heckout c7 branch for tp-link archer c7 v2
