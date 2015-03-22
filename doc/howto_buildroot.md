@@ -17,7 +17,7 @@
 
 5. `./scripts/feeds install -a`
 
-6. git clone https://github.com/imp1sh/freifunkcp.git env
+6. `git clone https://github.com/imp1sh/freifunkcp.git env`
 
 7. `patch -p1 < env/patches/version.patch`
 
