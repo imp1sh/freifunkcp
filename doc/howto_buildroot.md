@@ -23,8 +23,8 @@
 
 # Exmaple build for TP-Link Archer C7 v2
 1. checkout c7 branch for tp-link archer c7 v2
-      `cd env
-      git checkout c7_generic
-      cd ..
-      make`
+      `cd env`
+      `git checkout c7_generic`
+      `cd ..`
+      `make`
 
