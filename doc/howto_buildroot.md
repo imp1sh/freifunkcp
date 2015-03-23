@@ -22,6 +22,10 @@
 
 7. `./scripts/feeds install -a`
 
+8. `rm .config`
+
+9. `ln -s ./env/.config .`
+
 # Exmaple build for TP-Link Archer C7 v2
 ## heckout c7 branch for tp-link archer c7 v2
 1. `cd env`
