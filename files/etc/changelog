@@ -1,6 +1,8 @@
 [beta 0.41]
 March 2015 Jochen Demmer
 - publishing as freifunkcp at github
+- moved from batmn-adv to batman-adv-legacy https://github.com/freifunk-gluon/batman-adv-legacy
+- integration of gluon packages
 
 [beta 0.4]
 February 2015 Jochen Demmer

@@ -11,17 +11,16 @@
 2. `cd freifunkcp`
 
 3. prepare your system to be able to use openwrt buildroot env.
+   Especially install necessary software.
    http://wiki.openwrt.org/doc/howto/buildroot.exigence
 
-4. `./scripts/feeds update -a`
+4. `git clone https://github.com/imp1sh/freifunkcp.git env`
 
-5. `./scripts/feeds install -a`
+5. `cp ./env/feeds.conf .`
 
-6. `git clone https://github.com/imp1sh/freifunkcp.git env`
+6. `./scripts/feeds update -a`
 
-7. `patch -p1 < env/patches/version.patch`
-
-
+7. `./scripts/feeds install -a`
 
 # Exmaple build for TP-Link Archer C7 v2
 ## heckout c7 branch for tp-link archer c7 v2
