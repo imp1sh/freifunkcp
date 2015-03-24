@@ -5,7 +5,7 @@
 - VLAN 11 <-> MESH
 
 # SWITCH
-- WAN Port - WAN
+- WAN Port - WAN - untagged VLAN 3
 - 1st Switch Port - LAN - untagged VLAN 5
 - 2nd Switch Port - LAN - untagged VLAN 5
 - 3rd Switch Port - MESH - untagged VLAN 11
