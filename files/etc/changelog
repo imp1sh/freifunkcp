@@ -1,6 +1,10 @@
 [beta 0.41]
 March 2015 Jochen Demmer
 - publishing as freifunkcp at github
+- moved from batmn-adv to batman-adv-legacy https://github.com/freifunk-gluon/batman-adv-legacy
+- integration of gluon packages
+- update to latest CC trunk 31ec9aca727fd81b07565253278f7f5142ff0e74
+- thus also upgrade to kernel 3.14.32 -> 3.18.9
 
 [beta 0.4]
 February 2015 Jochen Demmer

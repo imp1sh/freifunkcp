@@ -1,0 +1,51 @@
+diff -ru a/feeds/routing/alfred/Makefile b/feeds/routing/alfred/Makefile
+--- a/feeds/routing/alfred/Makefile	2015-03-21 10:11:20.584598614 +0100
++++ b/feeds/routing/alfred/Makefile	2015-03-21 10:08:14.091938656 +0100
+@@ -11,9 +11,9 @@
+ # The latest alfred git hash in PKG_REV can be obtained from http://git.open-mesh.org/alfred.git
+ #
+ PKG_NAME:=alfred
+-PKG_VERSION:=2014.4.0
++PKG_VERSION:=2013.4.0
+ PKG_RELEASE:=0
+-PKG_MD5SUM:=053cb5d9e7ca9384598e82944343dea2
++PKG_MD5SUM:=3891697e127b1037cfc9349fd96e9993
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+ PKG_SOURCE_URL:=http://downloads.open-mesh.org/batman/releases/batman-adv-$(PKG_VERSION)
+Nur in b/feeds/routing/alfred: Makefile.orig.
+Nur in b/feeds/routing/alfred: Makefile.rej.
+diff -ru a/feeds/routing/batctl/Makefile b/feeds/routing/batctl/Makefile
+--- a/feeds/routing/batctl/Makefile	2015-03-21 10:11:20.588598629 +0100
++++ b/feeds/routing/batctl/Makefile	2015-03-21 10:01:06.366427625 +0100
+@@ -9,9 +9,9 @@
+ 
+ PKG_NAME:=batctl
+ 
+-PKG_VERSION:=2014.4.0
++PKG_VERSION:=2013.4.0
+ PKG_RELEASE:=1
+-PKG_MD5SUM:=f3a14565699313258ee6ba3de783eb0a
++PKG_MD5SUM:=42e269cc710bbc9a8fd17628201d4258
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+ PKG_SOURCE_URL:=http://downloads.open-mesh.org/batman/releases/batman-adv-$(PKG_VERSION)
+diff -ru a/feeds/routing/batman-adv/Makefile b/feeds/routing/batman-adv/Makefile
+--- a/feeds/routing/batman-adv/Makefile	2015-03-21 10:11:20.588598629 +0100
++++ b/feeds/routing/batman-adv/Makefile	2015-03-21 10:09:36.040228572 +0100
+@@ -10,12 +10,12 @@
+ 
+ PKG_NAME:=batman-adv
+ 
+-PKG_VERSION:=2014.4.0
++PKG_VERSION:=2013.4.0-legacy
+ PKG_RELEASE:=1
+-PKG_MD5SUM:=b1518e84ce530883d224c6ca4c673ce8
++PKG_MD5SUM:=65ddda5b2217e21b40100507f59b6e32
+ 
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+-PKG_SOURCE_URL:=http://downloads.open-mesh.org/batman/releases/batman-adv-$(PKG_VERSION)
++PKG_SOURCE_URL:=http://d1sturbed.org/freifunkcp/
+ PKG_LICENSE:=GPL-2.0
+ 
+ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_NAME)-$(PKG_VERSION)
