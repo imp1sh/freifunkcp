@@ -23,3 +23,13 @@ uci set system.ntp.enable_server=1
 uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
 # commented out, cause guest net is now bridged into mesh spine
 # uci set network.mesh_guests.ip6addr=$(echo -n $guestnetip)
+
+# set release/version
+grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
+grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
+
+# set default MAC for gluon
+echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
+
+# remove unknown script
+rm /lib/gluon/announce/collect.lua

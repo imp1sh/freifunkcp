@@ -1,9 +1,8 @@
-
 config location
-	option share_location '1'
-	option latitude '50.857042'
-	option longitude '6.154736'
+        option share_location '1'
+        option latitude '50.857042'
+        option longitude '6.154736'
 
 config owner
-	option contact 'info@netzkultur-aachen.de'
+        option contact 'info@netzkultur-aachen.de'
 
