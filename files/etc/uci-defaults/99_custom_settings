@@ -25,12 +25,12 @@ uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
 # uci set network.mesh_guests.ip6addr=$(echo -n $guestnetip)
 
 # set release/version
-grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
-grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
+#grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
+#grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
 
 # set default MAC for gluon
-echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
+#echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
 
 # repair init script announced
-sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
+#sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
 
