@@ -31,5 +31,7 @@ grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
 # set default MAC for gluon
 echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
 
-# remove unknown script
-rm /lib/gluon/announce/collect.lua
+# repair init script announced
+sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
+
+reboot
