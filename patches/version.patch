@@ -1,3 +1,5 @@
+## this patch has become obsolete
+
 diff -ru a/feeds/routing/alfred/Makefile b/feeds/routing/alfred/Makefile
 --- a/feeds/routing/alfred/Makefile	2015-03-21 10:11:20.584598614 +0100
 +++ b/feeds/routing/alfred/Makefile	2015-03-21 10:08:14.091938656 +0100
