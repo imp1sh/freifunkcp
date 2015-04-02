@@ -17,9 +17,9 @@ privnet=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon
 privnetip=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocolon:6:2}:${hwaddrwocolon:8:2}${hwaddrwocolon:10:1}$privnetidentifier::1/64)`
 
 # UCI
-uci set system.@system[0].hostname=$(echo -n "nkac-$hwaddrwocolon")
+uci set system.@system[0].hostname=$(echo -n "ffcp-$hwaddrwocolon")
 uci set system.ntp.enable_server=1
-uci set dhcp.@dnsmasq[0].domain=$(echo -n "nkac.lan")
+uci set dhcp.@dnsmasq[0].domain=$(echo -n "ffcp.lan")
 uci set system.@system[0].timezone="CET-1CEST,M3.5.0,M10.5.0/3"
 
 # set release/version
