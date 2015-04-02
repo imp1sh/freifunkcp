@@ -27,7 +27,7 @@
 9. `ln -s ./env/.config .`
 
 # Exmaple build for TP-Link Archer C7 v2
-## heckout c7 branch for tp-link archer c7 v2
+## Checkout c7 branch for tp-link archer c7 v2
 1. `cd env`
 2. `git checkout c7_generic`
 3. `cd ..`
