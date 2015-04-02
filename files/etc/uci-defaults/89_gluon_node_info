@@ -1,0 +1,14 @@
+#!/bin/ash
+#
+# env variables
+
+cat <<EOF >> /etc/config/gluon-node-info
+config location
+        option share_location '0'
+        option latitude '50.857097'
+        option longitude '6.154825'
+
+config owner
+        option contact 'billgates@microsoft.com'
+EOF
+
