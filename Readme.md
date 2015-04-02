@@ -1,4 +1,4 @@
-# freifunkcp
+# Freifunkcp
 Fully featured OpenWrt firmware, that's compatible to Freifunk (batman-adv).
 freifunkcp stands for FreifunkComPatible
 
