@@ -4,9 +4,9 @@
 
 cat <<EOF >> /etc/config/gluon-node-info
 config location
-        option share_location '0'
-        option latitude '50.857097'
-        option longitude '6.154825'
+        option share_location '1'
+        option latitude '50.857165'
+        option longitude '6.154833'
 
 config owner
         option contact 'billgates@microsoft.com'
