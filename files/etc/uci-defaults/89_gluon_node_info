@@ -1,14 +1,14 @@
 #!/bin/ash
 #
 # env variables
+if [ ! -f /etc/config/gluon-node-info ]; then
+	cat <<EOF >> /etc/config/gluon-node-info
+	config location
+	        option share_location '1'
+	        option latitude '50.857165'
+	        option longitude '6.154833'
 
-cat <<EOF >> /etc/config/gluon-node-info
-config location
-        option share_location '1'
-        option latitude '50.857165'
-        option longitude '6.154833'
-
-config owner
-        option contact 'billgates@microsoft.com'
-EOF
-
+	config owner
+	        option contact 'billgates@microsoft.com'
+	EOF
+fi
