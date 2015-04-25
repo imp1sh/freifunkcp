@@ -3,7 +3,9 @@ Fully featured OpenWrt firmware, that's compatible to Freifunk (batman-adv).
 freifunkcp stands for FreifunkComPatible
 
 ## Why is this?
-Freifunk aims differently than us. Freifunk offers free wifi to the people, but mainly to gain access to the Internet. Our goal is to built another decentralized network that exists parallely to your private LAN and to the public Internet. This network should be utilized to give the users the possibility to communicate directly with each other via this self-configuring metropolitan area network (MAN). There are quite a lot of details which we try to improve in order to make everything easier accessible and better usable.
+Freifunk aims a bit differently than us. Freifunk offers free wifi to the people, but mainly to gain access to the Internet. Our goal is to utilize this decentralized network that exists parallely to your private LAN and to the public Internet. This network we use to give the users the possibility to communicate directly with each other via this self-configuring metropolitan area network (MAN).
+[user A]<--->(private lan)<--->(MAN)<--->(private lan)<--->[user B]
+There are quite a lot of details which we try to improve in order to make everything easier accessible and better usable. For example there is a pre-configured VPN service on every device that runs on the MAN interface and that let's access their private network through the MAN. 
 
 ## How to use this?
 Please take a look into the doc directory for further information.
