@@ -14,3 +14,7 @@
 
 # DEVICES with 1 Port
 - in default configuration it is configured as MESH - untagged VLAN 11
+
+# Wireless
+- 2,4 GHz is exclusively used for meshing wirelessly and giving non-batman-adv clients connectivity (wifimesh-g-ac and Freifunk)
+- 5 GHz is exclusively used for private wireless networking
