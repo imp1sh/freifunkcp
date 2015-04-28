@@ -9,3 +9,5 @@ Maybe as a package that gets installed on default, that offers a new tab in LUCI
 # what to do with incoming traffic? The device is publicly reachable through IPv6
 
 # switch from config files to uci commands -> much more flexibility
+
+# pre-configured OpenVPN service for every node
