@@ -18,3 +18,7 @@
 # Wireless
 - 2,4 GHz is exclusively used for meshing wirelessly and giving non-batman-adv clients connectivity (wifimesh-g-ac and Freifunk)
 - 5 GHz is exclusively used for private wireless networking
+- private Wifi isn't being encrypted in stock settings, PLEASE DO SO!
+
+# IP
+- Default IP for LAN is 192.168.0.1/24
