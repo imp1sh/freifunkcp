@@ -13,7 +13,7 @@ config wifi-iface
 	option network 'lan'
 	option mode 'ap'
 	option ifname 'appriv5'
-	option ssid 'Spaltung'
+	option ssid 'freifunkcp_private'
 	option encryption 'none'
 
 config wifi-device 'radio1'
