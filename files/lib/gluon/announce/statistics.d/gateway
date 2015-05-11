@@ -1,6 +1,5 @@
-local gateway = util.trim(util.exec("batctl -m bat0 gateways|grep -v Gateway|awk '{print $1}'"))
+local gateway = util.trim(util.exec("batctl -m bat0 gateways | awk '/^=>/ { print $2 }'"))
 
 if gateway ~= '' then
         return gateway
 end
-
