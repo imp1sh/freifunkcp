@@ -1,3 +1,7 @@
+# Overview
+This is how we imagine merging and building should take place.
+![Build and Merge of freifunkcp](http://www.netzkultur-aachen.de/img/150523_freifunkcp_build_merge.png)
+
 # Main directories:
 1. where you checkout openwrt, we actually use freifuncp as the directory name
 ./freifunkcp/ referred to as buildroot directory

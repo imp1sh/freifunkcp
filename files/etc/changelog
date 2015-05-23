@@ -1,3 +1,10 @@
+[beta 0.5]
+- about at when gluon 2015.1 came out everything kind of breaks down... bigger problem of integrating batman-adv legacy seamlessly without a hassle
+- also problems of embedding gluon packages as when I invoke './scripts/feeds update -a'
+- drew graph in docs so build process is better understandable
+- effort of embedding gluon packages by replacing Makefile options especially Inludes of package.mk
+- version does not build currently, we'll continoue with 0.5.1 when building works ok again
+
 [beta 0.42]
 April 2015 Jochen Demmer
 - launching new template branch
