@@ -19,7 +19,8 @@ If you actually like administration of routers and also like meshed networks, yo
 * There are no official binary releases, yet.
 * Firmware is compatible to Freifunk Aachen's version of gluon. (https://github.com/ffac)<br>We plan to integrate some or maybe all other versions as well.
 * Based on Chaos Calmer trunk (http://wiki.openwrt.org/about/latest)
-* Map integration (Alfred) status: 95 %
+* <strike>Map integration (alfred) status: 95 %</strike>
+* Map integration (collectd) status: 0%
 * Using common OpenWrt buildroot environment (http://wiki.openwrt.org/doc/howto/build)
 * We currently only support TP-Link Archer C7 v2. More devices to come, soon.
 
