@@ -1,3 +1,6 @@
+[beta 0.51]
+- as it turned out I was chasing a problem that was caused by openwrt trunk moving to musl-libc. Thanks a lot to NeoRaider who fixed this in batman-adv-legacy in https://github.com/freifunk-gluon/packages
+
 [beta 0.5]
 - about at when gluon 2015.1 came out everything kind of breaks down... bigger problem of integrating batman-adv legacy seamlessly without a hassle
 - also problems of embedding gluon packages as when I invoke './scripts/feeds update -a'
