@@ -1,3 +1,7 @@
+[beta 0.52]
+- since Chaos Calmer 15.05 is now stable we switched to it which affects only documentation actually
+- slowly getting back to normal. As normal is trying to figure out what the best method is to manage build process and to maintain all those different branches
+
 [beta 0.51]
 - as it turned out I was chasing a problem that was caused by openwrt trunk moving to musl-libc. Thanks a lot to NeoRaider who fixed this in batman-adv-legacy in https://github.com/freifunk-gluon/packages
 
