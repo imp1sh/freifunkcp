@@ -10,7 +10,7 @@ This is how we imagine merging and building should take place.
 ./freifunkcp/env/ referred to as freifunkcp directory
 
 # Setup buildroot environment
-1. `git clone git://git.openwrt.org/openwrt.git freifunkcp`
+1. `git clone git://git.openwrt.org/15.05/openwrt.git freifunkcp`
 
 2. `cd freifunkcp`
 
