@@ -6,7 +6,7 @@
 modulesdir=ffcp_modules.d
 privmodulesdir=ffcp_private_modules.d
 fullmodulesfile=allmodules.list
-ucisettingsfile=./files/etc/uci-defaults/79_generated_settings
+ucisettingsfile=files/etc/uci-defaults/79_generated_settings
 
 # script
 if [ -f "$fullmodulesfile" ]; then
@@ -24,12 +24,13 @@ done
 # simple check
 if [ `grep -v -c "uci set" $fullmodulesfile` -ne 0 ]; then
 	echo "Error in file $fullmodulesfile. Every line HAS TO contain 'uci set'"
+	exit 1
+else
 	echo "#!/bin/ash" > $ucisettingsfile
 	cat $fullmodulesfile >> $ucisettingsfile
 	echo "uci commit" >> $ucisettingsfile
 	echo "exit 0" >> $ucisettingsfile
-	exit 1
-else
+	chmod +x $ucisettingsfile
 	echo "done"
 	exit 0
 fi
