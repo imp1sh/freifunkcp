@@ -1,0 +1,6 @@
+config dhcp 'lan'
+        option interface 'lan'
+        option dhcpv6 'server'
+        option ra 'server'
+        option ra_management '1'
+        option ignore '1'

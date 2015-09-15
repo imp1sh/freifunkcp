@@ -1,0 +1,6 @@
+config zone
+        option forward 'REJECT'
+        option name 'mesh'
+        option input 'REJECT'
+        option output 'REJECT'
+        option network 'mesh_cable mesh_wifi24 mesh_wifi5'

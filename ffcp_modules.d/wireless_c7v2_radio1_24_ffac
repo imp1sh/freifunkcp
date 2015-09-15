@@ -1,0 +1,7 @@
+fi-device 'radio1'
+        option type 'mac80211'
+        option hwmode '11g'
+        option path 'platform/qca955x_wmac'
+        option country 'DE'
+        option channel '11'
+        option txpower '20

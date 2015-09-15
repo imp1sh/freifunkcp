@@ -1,0 +1,5 @@
+config interface 'mesh_wifi24'
+        option ifname 'adhoc24'
+        option mtu '1528'
+        option proto 'batadv'
+        option mesh 'bat0'

@@ -1,0 +1,6 @@
+config zone
+        option forward 'REJECT'
+        option name 'guests'
+        option input 'REJECT'
+        option output 'REJECT'
+        option network 'guests'

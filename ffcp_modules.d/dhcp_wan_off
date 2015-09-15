@@ -1,0 +1,4 @@
+config dhcp 'wan'
+        option interface 'wan'
+        option ignore '1'
+

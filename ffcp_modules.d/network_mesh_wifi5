@@ -1,0 +1,5 @@
+config interface 'mesh_wifi5'
+        option ifname 'adhoc5'
+        option mtu '1528'
+        option proto 'batadv'
+        option mesh 'bat0'

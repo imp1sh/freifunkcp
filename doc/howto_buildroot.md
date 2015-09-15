@@ -30,6 +30,8 @@ This is how we imagine merging and building should take place.
 
 9. `ln -s ./env/.config .`
 
+10. `ln -s ./env/files .`
+
 # Exmaple build for TP-Link Archer C7 v2
 ## Checkout c7 branch for tp-link archer c7 v2
 1. `cd env`

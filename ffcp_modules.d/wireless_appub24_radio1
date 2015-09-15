@@ -1,0 +1,8 @@
+config wifi-iface 'appub24'
+        option device 'radio1'
+        option mode 'ap'
+        option ifname 'appub24'
+        option ssid 'Freifunk'
+        option encryption 'none'
+        option network 'guests'
+	option disabled '0'

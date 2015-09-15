@@ -1,0 +1,8 @@
+config wifi-iface 'appub5'
+        option device 'radio0'
+        option mode 'ap'
+        option ifname 'appub5'
+        option ssid 'Freifunk'
+        option encryption 'none'
+        option network 'guests'
+	option disabled '1'
