@@ -12,3 +12,4 @@ if [ ! -f /etc/config/gluon-node-info ]; then
 	        option contact 'billgates@microsoft.com'
 	EOF
 fi
+exit 0

@@ -18,9 +18,6 @@ privnetip=`echo $ulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrwocol
 
 # UCI
 uci set system.@system[0].hostname=$(echo -n "ffcp-$hwaddrwocolon")
-uci set system.ntp.enable_server=1
-uci set dhcp.@dnsmasq[0].domain=$(echo -n "ffcp.lan")
-uci set system.@system[0].timezone="CET-1CEST,M3.5.0,M10.5.0/3"
 
 # set release/version
 grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
@@ -31,6 +28,7 @@ echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
 
 # repair init script announced
 #sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
-chmod +x /lib/gluon/announce/collect.lua
+#chmod +x /lib/gluon/announce/collect.lua
 
+uci commit
 exit 0

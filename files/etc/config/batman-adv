@@ -1,7 +1,0 @@
-config 'mesh' 'bat0'
-        option 'interfaces' 'adhoc24ghz'
-        option 'gw_mode' 'client'
-        option 'bonding' '1'
-        option 'orig_interval' '1500'
-        option 'bridge_loop_avoidance' '1'
-
