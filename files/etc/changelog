@@ -1,3 +1,8 @@
+[beta 0.6]
+- changed from managing different devices and installation via branch system to managing devices and installation via create_uci.bash script
+- based upon this also documentation needed fixing
+- this is the first release that publishes binary images at http://images.gosix.net
+
 [beta 0.52]
 - since Chaos Calmer 15.05 is now stable we switched to it which affects only documentation actually
 - slowly getting back to normal. As normal is trying to figure out what the best method is to manage build process and to maintain all those different branches
