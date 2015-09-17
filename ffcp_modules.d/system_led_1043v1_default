@@ -1,0 +1,11 @@
+config led 'led_usb'
+        option name 'USB'
+        option sysfs 'tp-link:green:usb'
+        option trigger 'usbdev'
+        option dev '1-1'
+        option interval '50'
+
+config led 'led_wlan'
+        option name 'WLAN'
+        option sysfs 'tp-link:green:wlan'
+        option trigger 'phy0tpt'
