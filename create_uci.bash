@@ -3,11 +3,30 @@
 
 # do not edit below
 configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
+parameters=./ffcp_parameter.conf
 configpath=./files/etc/config
+alfredfile=$configpath/alfred
+batmanadvfile=$configpath/batman\-adv
+dhcpfile=$configpath/dhcp
+dropbearfile=$configpath/dropbear
+dropbearkeyfiles=./files/etc/dropbear/authorized_keys
+firewallfile=$configpath/firewall
+networkfile=$configpath/network
+systemfile=$configpath/system
+vnstatfile=$configpath/vnstat
+wirelessfile=$configpath/wireless
 modulesdir=ffcp_modules.d
 privmodulesdir=ffcp_private_modules.d
 devicesdir=ffcp_devices.d
 privdevicesdir=ffcp_private_devices.d
+function initfile {
+	# $1 is file to check given as relative path
+	if [ -f $1 ]; then
+		> $1
+	else
+		touch $1
+	fi
+}
 function catelement {
 	if [ -f $1/$2 ]; then
 		cat $1/$2
@@ -70,35 +89,44 @@ else
 	# config is ok to use
 	if [ $notindevicesdir -eq 0 ]; then
 		source $devicesdir/$1
+		source $parameters
 	else
 		source $privdevicesdir/$1
+		source $parameters
 	fi
+	# initialize config files
+	for fileelement in $alfredfile $batmanadvfile $dhcpfile $dropbearfile $firewallfile $networkfile $systemfile $vnstatfile $wirelessfile $dropbearkeyfiles; do
+		initfile $fileelement
+	done
 	# loop over elements
 	for alfredelement in "${alfred[@]}"; do
-		catelement $modulesdir $alfredelement >> $configpath/alfred
+		catelement $modulesdir $alfredelement >> $alfredfile
 	done
 	for batmanadvelement in "${batmanadv[@]}"; do
-		catelement $modulesdir $batmanadvelement >> $configpath/batman\-adv
+		catelement $modulesdir $batmanadvelement >> $batmanadvfile
 	done
 	for dhcpelement in "${dhcp[@]}"; do
-		catelement $modulesdir $dhcpelement >> $configpath/dhcp
+		catelement $modulesdir $dhcpelement >> $dhcpfile
 	done
 	for dropbearelement in "${dropbear[@]}"; do
-		catelement $modulesdir $dropbearelement >> $configpath/dropbear
+		catelement $modulesdir $dropbearelement >> $dropbearfile
 	done
 	for firewallelement in "${firewall[@]}"; do
-		catelement $modulesdir $firewallelement >> $configpath/firewall
+		catelement $modulesdir $firewallelement >> $firewallfile
 	done
 	for networkelement in "${network[@]}"; do
-		catelement $modulesdir $networkelement >> $configpath/network
+		catelement $modulesdir $networkelement >> $networkfile
 	done
 	for systemelement in "${system[@]}"; do
-		catelement $modulesdir $systemelement >> $configpath/system
+		catelement $modulesdir $systemelement >> $systemfile
 	done
 	for vnstatelement in "${vnstat[@]}"; do
-		catelement $modulesdir $vnstatelement >> $configpath/vnstat
+		catelement $modulesdir $vnstatelement >> $vnstatfile
 	done
 	for wirelesselement in "${wireless[@]}"; do
-		catelement $modulesdir $wirelesselement >> $configpath/wireless
+		catelement $modulesdir $wirelesselement >> $wirelessfile
+	done
+	for key in "${sshpubkeys[@]}"; do
+		echo $key >> $dropbearkeyfiles
 	done
 fi

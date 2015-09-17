@@ -1,0 +1,11 @@
+config led 'led_wan'
+        option name 'WAN LED (green)'
+        option sysfs 'netgear:green:wan'
+        option default '0'
+
+config led 'led_usb'
+        option name 'USB'
+        option sysfs 'netgear:green:usb'
+        option trigger 'usbdev'
+        option dev '1-1'
+        option interval '50'

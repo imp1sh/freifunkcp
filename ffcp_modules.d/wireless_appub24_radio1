@@ -6,3 +6,4 @@ config wifi-iface 'appub24'
         option encryption 'none'
         option network 'guests'
 	option disabled '0'
+

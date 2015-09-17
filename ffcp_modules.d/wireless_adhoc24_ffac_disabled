@@ -8,3 +8,4 @@ config wifi-iface 'adhoc24'
         option encryption 'none'
         option mcast_rate '12000'
 	option disabled '1'
+

@@ -1,0 +1,8 @@
+config wifi-iface 'appriv5'
+        option device 'radio0'
+        option mode 'ap'
+        option ssid 'changemySSIDandKEY'
+        option network 'lan'
+        option encryption 'psk2'
+        option key 'sdfjkslj(9h4839h8)H8'
+	options disabled '1'
