@@ -13,7 +13,8 @@
 - choose from whatever modueles available in ffcp_modules.d
 - create your own modules in ffcp_private_modules.d and also feel free to select them. These are common uci configuration snippets which you can just take over from your running config
 # build process
-- when you think you are finished go `cd ..` and run `make`
+- when you think you are finished go `cd ..` and run `make menuconfig` and then choose the device you want to build for. Exit and save
+- `make`
 
 ATTENTION
 There is no logic built in that checks if you made sane selections as for your modules. Always check the configuration files after you invoked `./create_uci.bash' and before you actually build the firmware
