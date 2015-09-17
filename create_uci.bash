@@ -35,9 +35,9 @@ function catelement {
 	fi
 }
 function listdevices {
-	echo "devices:"
+	echo -e "\tdevices:"
 	ls $devicesdir
-	echo "private devices:"
+	echo -e "\tprivate devices:"
 	ls $privdevicesdir
 }
 function isuseable {
