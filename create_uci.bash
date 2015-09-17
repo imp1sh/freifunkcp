@@ -89,11 +89,10 @@ else
 	# config is ok to use
 	if [ $notindevicesdir -eq 0 ]; then
 		source $devicesdir/$1
-		source $parameters
 	else
 		source $privdevicesdir/$1
-		source $parameters
 	fi
+	source $parameters
 	# initialize config files
 	for fileelement in $alfredfile $batmanadvfile $dhcpfile $dropbearfile $firewallfile $networkfile $systemfile $vnstatfile $wirelessfile $dropbearkeyfiles; do
 		initfile $fileelement

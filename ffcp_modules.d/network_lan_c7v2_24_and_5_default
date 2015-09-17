@@ -1,8 +1,1 @@
-config interface 'lan'
-        option type 'bridge'
-        option _orig_ifname 'eth1 appriv5 appriv24'
-        option _orig_bridge 'true'
-        option proto 'static'
-        option ifname 'appriv24 appriv5 eth1.5'
-        option netmask '255.255.255.0'
-        option ipaddr '192.168.1.1'
+network_lan_eth1_24_and_5_default

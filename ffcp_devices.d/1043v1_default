@@ -38,8 +38,9 @@ network_vlan_1043v1_default
 network_guests
 network_lan_1043v1_24_default
 network_mesh_wifi24
-network_wan6_eth0
-network_wan_eth0
+network_mesh_cable_1043v1
+network_wan6_1043v1
+network_wan_1043v1
 )
 
 system=(
