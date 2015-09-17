@@ -1,13 +1,9 @@
 # Overview
-This is how we imagine merging and building should take place.
-![Build and Merge of freifunkcp](http://www.netzkultur-aachen.de/img/150523_freifunkcp_build_merge.png)
+There is the branch masterfiles. Within this branch everything is being managed. You can build generic devices (ffcp_devices.d) or you can also manage your private devices (ffcp_private_devices.d).
 
 # Main directories:
-1. where you checkout openwrt, we actually use freifuncp as the directory name
-./freifunkcp/ referred to as buildroot directory
-
-2. where you checkout freifunkcp sources, we use env as directory name while it is a subdirectory of freifunkcp.
-./freifunkcp/env/ referred to as freifunkcp directory
+1. freifunkcp -> this is where openwrt sources reside, buildroot directory
+2. env -> this is where freifunkcp sources reside, this is your main working directory
 
 # Setup buildroot environment
 1. `git clone git://git.openwrt.org/15.05/openwrt.git freifunkcp`
@@ -31,11 +27,3 @@ This is how we imagine merging and building should take place.
 9. `ln -s ./env/.config .`
 
 10. `ln -s ./env/files .`
-
-# Exmaple build for TP-Link Archer C7 v2
-## Checkout c7 branch for tp-link archer c7 v2
-1. `cd env`
-2. `git checkout c7_generic`
-3. `cd ..`
-4. `make`
-

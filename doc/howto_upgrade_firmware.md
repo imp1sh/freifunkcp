@@ -1,4 +1,3 @@
 # How to upgrade firmware
-* Backup your configuration
-* Flash new firmware without keeping old config (sysupgrade -n)
-* Restore your configuration 
+- feel free to use main development branch instead of stable branch
+- build your firmware and flash
