@@ -1,4 +1,5 @@
 # Example with TP-Link 4300v1
+- `cp ffcp_parameter.conf.template ffcp_parameter.conf`
 - within ./env/ directory execute `./create_uci.bash`
 - it will show you the available configs to use
 - there are common devices that are being managed by us, called "devices" and
