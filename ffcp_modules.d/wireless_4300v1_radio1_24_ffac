@@ -1,9 +1,8 @@
 config wifi-device 'radio1'
         option type 'mac80211'
         option hwmode '11g'
-	option path 'platform/ar934x_wmac'
+        option path 'platform/ar934x_wmac'
         option country 'DE'
         option channel '11'
-	option htmode 'HT20'
-        option txpower '20'
+        option txpower '18'
 

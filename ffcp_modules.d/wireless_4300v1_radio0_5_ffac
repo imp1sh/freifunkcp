@@ -1,9 +1,9 @@
 config wifi-device 'radio0'
         option type 'mac80211'
         option hwmode '11a'
-	option path 'pci0000:00/0000:00:00.0'
-        option country 'DE'
-        option htmode 'HT40'
+        option path 'pci0000:00/0000:00:00.0'
         option channel '44'
+        option htmode 'HT40'
         option txpower '15'
+        option country 'DE'
 

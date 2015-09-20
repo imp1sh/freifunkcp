@@ -7,5 +7,5 @@ config wifi-iface 'adhoc5'
         option bssid 'CA:FE:52:FF:AC:52'
         option encryption 'none'
         option mcast_rate '12000'
-	option disabled '0'
+	option disabled '1'
 

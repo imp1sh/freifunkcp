@@ -14,11 +14,11 @@ config switch_vlan
         option device 'switch0'       
         option vlan '3'        
         option vid '11'        
-        option ports '0t 3 5t' 
+        option ports '0t 4 5t' 
                                
 config switch_vlan             
         option device 'switch0'
         option vlan '4'       
         option vid '12'       
-        option ports '0t 4 5t'
+        option ports '0t 3 5t'
 
