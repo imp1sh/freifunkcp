@@ -2,6 +2,9 @@
 Fully featured OpenWrt firmware, that's compatible to Freifunk (batman-adv). In the future we plan to switch to babeld if Freifunk is also making this transition.
 freifunkcp stands for FreifunkComPatible
 
+## Prebuilt images
+[Download](http://images.gosix.net)
+
 ## Why is this?
 Freifunk aims a bit differently than us. Freifunk offers free wifi to the people, but mainly to gain access to the Internet. Our goal is to utilize this decentralized network that exists parallely to your private LAN and to the public Internet. This network we use to give the users the possibility to communicate directly with each other via this self-configuring metropolitan area network (MAN).
 [user A]<--->(private lan)<--->(MAN)<--->(private lan)<--->[user B]
@@ -15,7 +18,7 @@ I would say for those people who aren't afraid of configuring an OpenWrt based d
 If you actually like administration of routers and also like meshed networks, you are very likely to be in the right place.
 
 ## What's the overall state?
-* beta
+* beta 0.6
 * There are no official binary releases, yet.
 * Based on Chaos Calmer stable, but you can also choose development trunk if you prefer (http://wiki.openwrt.org/about/latest)
 * <strike>Map integration (alfred) status: 95 %</strike>
