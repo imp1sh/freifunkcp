@@ -19,7 +19,7 @@ If you actually like administration of routers and also like meshed networks, yo
 
 ## What's the overall state?
 * beta 0.6
-* There are no official binary releases, yet.
+* [Prebuilt images](http://images.gosix.net)
 * Based on Chaos Calmer stable, but you can also choose development trunk if you prefer (http://wiki.openwrt.org/about/latest)
 * <strike>Map integration (alfred) status: 95 %</strike>
 * Map integration (collectd) status: 0%
