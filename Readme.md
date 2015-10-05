@@ -29,12 +29,12 @@ If you actually like administration of routers and also like meshed networks, yo
 
 ## What's the overall state?
 * beta 0.6
-* There are no official binary releases, yet.
+* [Prebuilt images](http://images.gosix.net)
 * Based on Chaos Calmer stable, but you can also choose development trunk if you prefer (http://wiki.openwrt.org/about/latest)
 * <strike>Map integration (alfred) status: 95 %</strike>
 * Map integration (collectd) status: 0%
 * Using common OpenWrt buildroot environment (http://wiki.openwrt.org/doc/howto/build)
-* We currently only support TP-Link Archer C7v2 and TP-Link 4300 v1. More to come soon. Consider donating device if you want your device supported.
+* We currently only support TP-Link Archer C7v2, 1043v1 and TP-Link 4300 v1. More to come soon. Consider donating device if you want your device supported.
 
 ## What's not working
 * This solution does not yet offer vpn/fastd at all. So currently you can only run as satellite. There are also currently no measures taken to get vpn running any time soon. Use gluon offloader or normal gluon device.
