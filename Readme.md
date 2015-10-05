@@ -5,6 +5,16 @@ freifunkcp stands for FreifunkComPatible
 ## Prebuilt images
 [Download](http://images.gosix.net)
 
+##Features##
+* for every supported device there is perfected switch config
+* prefconfigured networks: lan, guest, wan, mesh
+* vnstat traffic monitor already setup
+* Meshing via 2,4 GHz as well as 5 GHz as well as via cable already setup
+* very remote devices with only one cable going to it: you don't have to compromise with features
+* script: create_uci.bash is also a kind of management suite for openwrt buildroot to handle all your devices and configurations
+* based upon Bleeding Edge Chaos Calmer stable
+* able to handle all different freifunk odours
+
 ## Why is this?
 Freifunk aims a bit differently than us. Freifunk offers free wifi to the people, but mainly to gain access to the Internet. Our goal is to utilize this decentralized network that exists parallely to your private LAN and to the public Internet. This network we use to give the users the possibility to communicate directly with each other via this self-configuring metropolitan area network (MAN).
 [user A]<--->(private lan)<--->(MAN)<--->(private lan)<--->[user B]

@@ -35,6 +35,11 @@ function catelement {
 		cat $privmodulesdir/$2
 	fi
 }
+function grabarrayelement {
+	for $1element in "${$1[@]}"; do
+		catelement "$modulesdir" "$1"element >> "$1"file
+	done
+}
 function listdevices {
 	echo -e "\tdevices:"
 	ls $devicesdir
@@ -99,9 +104,10 @@ else
 		initfile $fileelement
 	done
 	# loop over elements
-	for alfredelement in "${alfred[@]}"; do
-		catelement $modulesdir $alfredelement >> $alfredfile
-	done
+	grabarrayelement alfred
+#	for alfredelement in "${alfred[@]}"; do
+#		catelement $modulesdir $alfredelement >> $alfredfile
+#	done
 	for batmanadvelement in "${batmanadv[@]}"; do
 		catelement $modulesdir $batmanadvelement >> $batmanadvfile
 	done
@@ -126,6 +132,8 @@ else
 	for wirelesselement in "${wireless[@]}"; do
 		catelement $modulesdir $wirelesselement >> $wirelessfile
 	done
+
+
 	for key in "${sshpubkeys[@]}"; do
 		echo $key >> $dropbearkeyfiles
 	done
