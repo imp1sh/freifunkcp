@@ -36,7 +36,7 @@ function catelement {
 	fi
 }
 function grabarrayelement {
-	for $1element in "${$1[@]}"; do
+	for $element in "${$1[@]}"; do
 		catelement "$modulesdir" "$1"element >> "$1"file
 	done
 }
