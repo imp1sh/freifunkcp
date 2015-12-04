@@ -5,6 +5,9 @@ There is the branch masterfiles. Within this branch everything is being managed.
 1. freifunkcp -> this is where openwrt sources reside, buildroot directory
 2. env -> this is where freifunkcp sources reside, this is your main working directory
 
+usually like this:
+./freifunkcp/env/
+
 # Setup buildroot environment
 1. `git clone git://git.openwrt.org/15.05/openwrt.git freifunkcp`
 
