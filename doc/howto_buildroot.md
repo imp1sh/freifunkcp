@@ -30,3 +30,5 @@ usually like this:
 9. `ln -s ./env/.config .`
 
 10. `ln -s ./env/files .`
+
+11. Usually next step is to follow howto_build

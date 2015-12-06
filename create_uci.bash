@@ -71,7 +71,7 @@ function isuseable {
 }
 
 if [ -z "$1" ]; then
-	echo "Please choose one of the available configs!"
+	echo "Please choose one of the available configs by giving its name as a parameter!"
 	listdevices
 	exit 1
 fi
