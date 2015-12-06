@@ -20,7 +20,6 @@
 # build process
 - FYI: The target device is chosen under "Target Profile"
 - `cd ..` and run `make menuconfig` and then choose target device. Exit and save
-- `./env/repairconfig.bash`
 - `make` - this might take some hours
 - FYI: If you with to facilitate more cores in order to speed up build process use `make -j 5' as example for 4 core CPU
 - find your firmware files within "bin" directory
