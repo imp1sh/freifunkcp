@@ -31,4 +31,4 @@ usually like this:
 
 10. `ln -s ./env/files .`
 
-11. Usually next step is to follow howto_build
+11. Usually next step is to follow [howto_build](howto_build.md)
