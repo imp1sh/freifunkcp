@@ -24,6 +24,9 @@ There are quite a lot of details which we try to improve in order to make everyt
 
 ## How to use this?
 Please take a look into the doc directory for further information.
+Usually it's like this:
+* howto_buildroot -> setup the necessary environment under linux. It's been tested in Ubuntu and Debian.
+* howto_build -> preparations and build
 
 ## For whom is this?
 I would say for those people who aren't afraid of configuring an OpenWrt based device fully by themself. You can easily brake things by changing e.g. wifi or bridge configurations. Gluon is more targeted at the zero effort approach: less administration overhead.
