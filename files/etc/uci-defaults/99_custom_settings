@@ -38,5 +38,8 @@ echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
 #sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
 #chmod +x /lib/gluon/announce/collect.lua
 
+uci set wireless.radio1.channel='$channel24'
+uci set wireless.radio0.channel='$channel5'
+
 uci commit
 exit 0
