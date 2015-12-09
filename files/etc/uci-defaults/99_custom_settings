@@ -58,5 +58,20 @@ if [ ! -z "$adhoc5ssid" ] ; then
 	uci set wireless.adhoc5.ssid='$adhoc5ssid'
 fi
 
+# set zabbix servers
+raise=0
+if [ -z "$Serverzabbix" ] ; then
+	echo $Serverzabbix >> /etc/zabbix_agentd.conf
+	$raise+=1
+fi
+if [ -z "$ServerActivezabbix" ] ; then
+	echo $ServerActivezabbix >> /etc/zabbix_agentd.conf
+	$raise+=1
+fi
+# enabling zabbix
+if [ $raise -gt 1 ] ; then
+	ln -s /etc/int.d/zabbix_agentd /etc/rc.cd/S60zabbix_agentd
+fi
+
 uci commit
 exit 0
