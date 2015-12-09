@@ -38,8 +38,25 @@ echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
 #sed -i 's/collect.lua/announce.lua/g' /etc/hotplug.d/iface/10-gluon-announced
 #chmod +x /lib/gluon/announce/collect.lua
 
-uci set wireless.radio1.channel='$channel24'
-uci set wireless.radio0.channel='$channel5'
+# set wifi settings
+if [ ! -z "$channel24" ] ; then
+	uci set wireless.radio1.channel='$channel24'
+fi
+if [ ! -z "$channel5" ] ; then
+	uci set wireless.radio0.channel='$channel5'
+fi
+if [ ! -z "$adhoc24mcast" ] ; then
+	uci set wireless.adhoc24.mcast_rate='$adhoc24mcast'
+fi
+if [ ! -z "$adhoc5mcast" ] ; then
+	uci set wireless.adhoc5.mcast_rate='$adhoc5mcast'
+fi
+if [ ! -z "$adhoc24ssid" ] ; then
+	uci set wireless.adhoc24.ssid='$adhoc24ssid'
+fi
+if [ ! -z "$adhoc5ssid" ] ; then
+	uci set wireless.adhoc5.ssid='$adhoc5ssid'
+fi
 
 uci commit
 exit 0
