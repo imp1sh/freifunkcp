@@ -1,8 +1,0 @@
-config interface 'guests'
-        option type 'bridge'
-        option _orig_ifname 'appub'
-        option _orig_bridge 'true'
-        option ifname 'bat0 appub24 appub5 eth0.12'
-        option proto 'dhcpv6'
-        option reqaddress 'try'
-        option reqprefix 'auto'

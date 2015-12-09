@@ -35,7 +35,7 @@ network=(
 network_loopback
 network_switch
 network_vlan_c7v2_default
-network_guests
+network_guests_c7v2
 network_lan_c7v2_24_and_5_default
 network_mesh_wifi24
 network_mesh_wifi5

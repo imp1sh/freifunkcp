@@ -1,3 +1,16 @@
+[beta 0.61]
+2015-12-11
+- optimized documentation, though still far from perfect
+- fix in create_uci.bash, some of the releases prior to this were lacking a functional script
+- renaming of some template files
+- general optimizations
+- 1st video online https://youtu.be/ZM6lvoHKqeU
+- reworks on how the scripts interact and where files reside that are being sources
+- reworks on scripts in general - trying to give it a clearer structure - WIP
+- reworks on how to include ssh keys -> own configuration 
+- added ula_global for non-global parameter in guest or lan - does this really make sense ?
+- configure some more general configuration parameters within ffcp_parameter.conf
+
 [beta 0.6]
 - changed from managing different devices and installation via branch system to managing devices and installation via create_uci.bash script
 - based upon this also documentation needed fixing
