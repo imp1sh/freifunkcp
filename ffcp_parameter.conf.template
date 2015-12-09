@@ -1,4 +1,8 @@
-sshpubkeys=(
-)
 channel24=11
 channel5=44
+Domainname="yourcity001"
+hostnamebasis="ffcp-"
+node_op_name=""
+node_op_mail=""
+domainula=""
+domainulasize=""

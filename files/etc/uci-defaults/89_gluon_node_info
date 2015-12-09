@@ -1,6 +1,8 @@
 #!/bin/ash
-#
 # env variables
+source ffcp_parameter.conf
+# not yet, but in the future try to read from ffcp_parameter.conf and insert into EOF script
+
 if [ ! -f /etc/config/gluon-node-info ]; then
 	cat <<EOF >> /etc/config/gluon-node-info
 	config location

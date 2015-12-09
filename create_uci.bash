@@ -2,6 +2,7 @@
 # edit for your needs
 
 # do not edit below
+ucidefaultspath=files/etc/uci-defaults
 scriptpath=files/etc/uci-defaults/79_create_uci 
 configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
 parameters=./ffcp_parameter.conf
@@ -74,11 +75,13 @@ function isuseable {
 	fi
 }
 
+# check if first parameter is given
 if [ -z "$1" ]; then
 	echo "Please choose one of the available configs by giving its name as a parameter!"
 	listdevices
 	exit 1
 fi
+# check if chosen device is a private one or a regular one
 if [ `ls $devicesdir|grep -c $1` -eq 0 ]; then
 	notindevicesdir=1
 else
@@ -90,22 +93,35 @@ else
 	notinprivdevicesdir=0
 fi
 
+# if equal then config is either in both or in none of both dirs. Both not acceptable.
 if [ $notindevicesdir -eq $notinprivdevicesdir ] ; then
 	# config is either not available or in both directories
 	echo "The given config is wrong. It's either in none or in both folders. Please choose one of the available configs!"
 	listdevices
-	exit ${argAry1[@]}
+	exit ${argAry1[@]}A
 else
 	# config is ok to use
-	# here's action beginning
+	# here's the action
+
+	# is regular
 	if [ $notindevicesdir -eq 0 ]; then
 		source $devicesdir/$1
 		echo "$devicesdir/$1 sourced"
 	else
+	# is private
 		source $privdevicesdir/$1
 		echo "$privdevicesdir/$1 sourced"
 	fi
 	source $parameters
+	# part where the central config files are being distributed to subordinary scripts
+	# very ipmortant, if this file is not being distributed, node will have incomplete info
+	if ( [ -f $parameters ] && [ -d $ucidefaultspath ] ) ; then
+		cp -f $parameters $ucidefaultspath
+	else
+		echo "Either parameter file at $parameters is missing or path to uci-defaults $ucidefaultspath is wrong."
+		exit 15
+	fi
+
 	# initialize config files
 	for fileelement in $alfredfile $batmanadvfile $dhcpfile $dropbearfile $firewallfile $networkfile $systemfile $vnstatfile $wirelessfile $dropbearkeyfiles; do
 		initfile $fileelement
@@ -149,11 +165,16 @@ else
 		catelement $modulesdir $wirelesselement >> $wirelessfile
 	done
 	echo "wireless done"
-
+	
+	# distribute sourced keys from ffcp_parameter.conf into dropbear authorized_keys
+	# array variable is being sourced 
+	source sshpubkeys
+	echo "ssh pubkeys sourced."
 	for key in "${sshpubkeys[@]}"; do
 		echo $key >> $dropbearkeyfiles
 	done
 	echo "sshkeys done"
+
 	#echo "#!/bin/ash" > $scriptpath
 	## 5 ghz set channel
 	#echo "uci set wireless.radio0.channel='$channel5'" >> $scriptpath
