@@ -1,5 +1,5 @@
 config 'alfred' 'alfred'
-        option interface 'br-mesh'
+        option interface 'br-guests'
         option mode 'slave'
         option batmanif 'bat0'
         option start_vis '1'

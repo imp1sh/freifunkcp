@@ -7,6 +7,7 @@ scriptpath=files/etc/uci-defaults/79_create_uci
 configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
 parameters=./ffcp_parameter.conf
 configpath=./files/etc/config
+sshpubkeyfile=sshpubkeys
 
 alfredfile=$configpath/alfred
 batmanadvfile=$configpath/batman\-adv
@@ -168,11 +169,15 @@ else
 	
 	# distribute sourced keys from ffcp_parameter.conf into dropbear authorized_keys
 	# array variable is being sourced 
-	source sshpubkeys
-	echo "ssh pubkeys sourced."
-	for key in "${sshpubkeys[@]}"; do
-		echo $key >> $dropbearkeyfiles
-	done
+	if [ -f $sshpubkeyfile ]; then
+		source $sshpubkeyfile
+		echo "ssh pubkeys sourced."
+			for key in "${sshpubkeys[@]}"; do
+			echo $key >> $dropbearkeyfiles
+		done
+	else
+		echo "no ssh key files handled."
+	fi
 	echo "sshkeys done"
 
 	#echo "#!/bin/ash" > $scriptpath
