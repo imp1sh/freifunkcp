@@ -3,7 +3,6 @@
 
 # do not edit below
 ucidefaultspath=files/etc/uci-defaults
-scriptpath=files/etc/uci-defaults/79_create_uci 
 configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
 parameters=./ffcp_parameter.conf
 configpath=./files/etc/config
@@ -180,12 +179,5 @@ else
 	fi
 	echo "sshkeys done"
 
-	#echo "#!/bin/ash" > $scriptpath
-	## 5 ghz set channel
-	#echo "uci set wireless.radio0.channel='$channel5'" >> $scriptpath
-	## 24 ghz set channel
-	#echo "uci set wireless.radio1.channel='$channel24'" >> $scriptpath
-	#echo "uci commit" >> $scriptpath
-	#echo "exit 0" >> $scriptpath
 	echo "all done"
 fi
