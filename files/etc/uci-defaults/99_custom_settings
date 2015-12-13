@@ -55,23 +55,50 @@ if [ ! -z "$adhoc24ssid" ] ; then
 	uci set wireless.adhoc24.ssid=$adhoc24ssid
 fi
 if [ ! -z "$adhoc5ssid" ] ; then
-	uci set wireless.adhoc5.ssid=$adhoc5ssid'
+	uci set wireless.adhoc5.ssid=$adhoc5ssid
 fi
 
 # set zabbix servers
 raise=0
-if [ -z "$Serverzabbix" ] ; then
-	echo $Serverzabbix >> /etc/zabbix_agentd.conf
-	$raise+=1
+if [ -n "$ZabbixServerValue" ] ; then
+	echo $ZabbixServerFull >> /etc/zabbix_agentd.conf
+	let "raise+=raise+1"
 fi
-if [ -z "$ServerActivezabbix" ] ; then
-	echo $ServerActivezabbix >> /etc/zabbix_agentd.conf
-	$raise+=1
+if [ -n "$ZabbixServerActiveValue" ] ; then
+	echo $ZabbixServerActiveFull >> /etc/zabbix_agentd.conf
+	let "raise+=raise+1"
 fi
 # enabling zabbix
 if [ $raise -gt 1 ] ; then
 	ln -s /etc/int.d/zabbix_agentd /etc/rc.cd/S60zabbix_agentd
 fi
 
+# set remote syslog server
+if [ -n "$rsysloghost" ] ; then
+	uci set system.@system[0].log_ip=$rsysloghost
+	if [ -n "$rsyslogport" ] ; then
+		uci set system.@system[0].log_port=$rsyslogport
+	fi
+fi
+
+# set ntp servers
+# ntp is always enabled
+if [ -n "$ntpserver0" ] ; then
+	uci delete system.ntp.server
+	uci set system.ntp=timeserver
+	uci set system.ntp.enable_server=1
+	uci add system.ntp.server=$ntpserver0
+	if [ -n "$ntpserver1" ] ; then
+		uci add_list system.ntp.server=$ntpserver1
+	fi
+	if [ -n "$ntpserver2" ] ; then
+		uci add_list system.ntp.server=$ntpserver2
+	fi
+	if [ -n "$ntpserver3" ] ; then
+		uci add_list system.ntp.server=$ntpserver3
+	fi
+fi
+
+# end
 uci commit
 exit 0

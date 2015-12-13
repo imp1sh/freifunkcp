@@ -1,3 +1,13 @@
+# put parameters together
+ZabbixServerParametername="Serverzabbix="
+ZabbixServerActiveParametername="ServerActivezabbix="
+# below set specific server values
+ZabbixServerValue=""
+ZabbixServerActiveValue=""
+# use those below for deploying config
+ZabbixServerFull=$ZabbixServerParametername$ZabbixServerValue
+ZabbixServerActiveFull=$ZabbixServerActiveParametername$ZabbixServerActiveValue
+# Simple parameters
 channel24=11
 channel5=44
 Domainname="yourcity001"
@@ -12,4 +22,6 @@ adhoc24mcast=""
 adhoc5bssid=""
 adhoc5ssid=""
 adhoc5mcast=""
-
+rsysloghost=""
+rsyslogport=""
+ntpservers=
