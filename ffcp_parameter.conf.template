@@ -1,6 +1,6 @@
 # put parameters together
-ZabbixServerParametername="Serverzabbix="
-ZabbixServerActiveParametername="ServerActivezabbix="
+ZabbixServerParametername="Server="
+ZabbixServerActiveParametername="ServerActive="
 # below set specific server values
 ZabbixServerValue=""
 ZabbixServerActiveValue=""
@@ -24,4 +24,7 @@ adhoc5ssid=""
 adhoc5mcast=""
 rsysloghost=""
 rsyslogport=""
-ntpservers=
+ntpserver0=""
+ntpserver1=""
+ntpserver2=""
+ntpserver3=""
