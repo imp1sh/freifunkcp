@@ -34,20 +34,20 @@ firewall_rule_wan_Allow-Ping
 network=(
 network_loopback
 network_switch
-network_vlan_4300v1_default
-network_guests_4300v1
-network_lan_4300v1_24_and_5_default
+network_vlan_wndr3700v2_default
+network_guests_wndr3700v2
+network_lan_wndr3700v2_24_and_5_default
 network_mesh_wifi24
 network_mesh_wifi5
-network_mesh_cable_4300v1
-network_wan6_4300v1
-network_wan_4300v1
+network_mesh_cable_wndr3700v2
+network_wan6_wndr3700v2
+network_wan_wndr3700v2
 )
 
 system=(
 system_timezone
 system_ntp_default
-system_led_4300v1_default
+system_led_wndr3700v2_default
 )
 
 vnstat=(
@@ -55,8 +55,8 @@ vnstat_default
 )
 
 wireless=(
-wireless_4300v1_radio0_5_ffac
-wireless_4300v1_radio1_24_ffac
+wireless_wndr3700v2_radio0_5_ffac
+wireless_wndr3700v2_radio1_24_ffac
 wireless_adhoc24_ffac
 wireless_adhoc5_ffac
 wireless_appub24_radio1
