@@ -75,7 +75,10 @@ fi
 
 # set remote syslog server
 if [ -n "$rsysloghost" ] ; then
+	# remote host
 	uci set system.@system[0].log_ip=$rsysloghost
+	# your hostname used as prefix for log entries
+	uci set system.@system[0].log_prefix=$hostnamebasis$hwaddrwocolon
 	if [ -n "$rsyslogport" ] ; then
 		uci set system.@system[0].log_port=$rsyslogport
 	fi
@@ -87,7 +90,7 @@ if [ -n "$ntpserver0" ] ; then
 	uci delete system.ntp.server
 	uci set system.ntp=timeserver
 	uci set system.ntp.enable_server=1
-	uci add system.ntp.server=$ntpserver0
+	uci set system.ntp.server=$ntpserver0
 	if [ -n "$ntpserver1" ] ; then
 		uci add_list system.ntp.server=$ntpserver1
 	fi
