@@ -8,6 +8,7 @@ ZabbixServerActiveValue=""
 ZabbixServerFull=$ZabbixServerParametername$ZabbixServerValue
 ZabbixServerActiveFull=$ZabbixServerActiveParametername$ZabbixServerActiveValue
 # Simple parameters
+timezone="Europe/Amsterdam"
 channel24=11
 channel5=44
 Domainname="yourcity001"

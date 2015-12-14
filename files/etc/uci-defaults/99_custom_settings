@@ -84,6 +84,11 @@ if [ -n "$rsysloghost" ] ; then
 	fi
 fi
 
+# set timezone
+if [ -n "$timezone" ] ; then
+	uci set system.@system[0].zonename=$timezone
+fi
+
 # set ntp servers
 # ntp is always enabled
 if [ -n "$ntpserver0" ] ; then
