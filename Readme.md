@@ -36,10 +36,11 @@ If you actually like administration of routers and also like meshed networks, yo
 ## What's the overall state?
 * beta 0.61
 * actively searching for people to support this solution
+* zabbix agent support out of the box
 * [Prebuilt images](http://images.gosix.net)
 * Based on Chaos Calmer stable, but you can also choose development trunk if you prefer (http://wiki.openwrt.org/about/latest)
 * <strike>Map integration (alfred) status: 95 %</strike>
-* Map integration (collectd) status: 0%
+* Map integration (respondd) status: 0%
 * Using common OpenWrt buildroot environment (http://wiki.openwrt.org/doc/howto/build)
 * We currently only support TP-Link Archer C7v2, 1043v1 and TP-Link 4300 v1. More to come soon. Consider donating device if you want your device supported.
 
