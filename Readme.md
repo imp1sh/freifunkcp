@@ -1,7 +1,8 @@
 # Freifunkcp
-Fully featured OpenWrt firmware, that's compatible to Freifunk (batman-adv). In the future we plan to switch to babeld if Freifunk is also making this transition.
+Firstly Freifunkcp is a script based solution that gives you the possibility to manage firmwares for your OpenWrt devices no matter if it's for your company or for some OpenWrt based project.
+Secondly it is an OpenWrt release that is being built this environment. It is by default compatible to Freifunk (batman-adv). In the future we plan to switch to babeld if Freifunk is also making this transition.
 freifunkcp stands for Freifunk ComPatible
-We want to network with our neighbours, because that's the most natural thing one would do
+We want to network with our neighbours, because that's the most natural thing one would want to do.
 
 ## Prebuilt images
 [Download](http://images.gosix.net)
