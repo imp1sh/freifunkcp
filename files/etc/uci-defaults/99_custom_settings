@@ -58,19 +58,24 @@ if [ ! -z "$adhoc5ssid" ] ; then
 	uci set wireless.adhoc5.ssid=$adhoc5ssid
 fi
 
-# set zabbix servers
+# set zabbix servers and userparameters
 raise=0
 if [ -n "$ZabbixServerValue" ] ; then
-	echo $ZabbixServerFull >> /etc/zabbix_agentd.conf
+	echo $ZabbixServerFull >> /etc/zabbix_agentd.conf.d/servers
+	echo "UnsafeUserParameters=1" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UserParameter=wifi.usersappriv24, iw dev appriv24 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UserParameter=wifi.usersappriv5, iw dev appriv5 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UserParameter=wifi.usersappub24, iw dev appub24 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UserParameter=wifi.usersappub5, iw dev appub5 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
 	let "raise+=raise+1"
 fi
 if [ -n "$ZabbixServerActiveValue" ] ; then
-	echo $ZabbixServerActiveFull >> /etc/zabbix_agentd.conf
+	echo $ZabbixServerActiveFull >> /etc/zabbix_agentd.conf.d/servers
 	let "raise+=raise+1"
 fi
 # enabling zabbix
 if [ $raise -gt 1 ] ; then
-	ln -s /etc/int.d/zabbix_agentd /etc/rc.cd/S60zabbix_agentd
+	/etc/init.d/zabbix_agentd enable
 fi
 
 # set remote syslog server
