@@ -69,7 +69,7 @@ if [ -n "$ZabbixServerValue" ] ; then
 	echo "UserParameter=wifi.usersappub5, iw dev appub5 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
 	echo "UserParameter=mesh.numbernodes, sudo /usr/sbin/batctl o|grep -v Originator|grep -v MainIF|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
 	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=mesh.numbermac, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UserParameter=mesh.numbermacache, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
 	let "raise+=raise+1"
 fi
 if [ -n "$ZabbixServerActiveValue" ] ; then
