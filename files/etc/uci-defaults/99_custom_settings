@@ -59,17 +59,19 @@ if [ ! -z "$adhoc5ssid" ] ; then
 fi
 
 # set zabbix servers and userparameters
+zabbixparampath=/etc/zabbix_agentd.conf.d/userparameters
 raise=0
 if [ -n "$ZabbixServerValue" ] ; then
 	echo $ZabbixServerFull >> /etc/zabbix_agentd.conf.d/servers
-	echo "UnsafeUserParameters=1" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=wifi.usersappriv24, iw dev appriv24 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=wifi.usersappriv5, iw dev appriv5 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=wifi.usersappub24, iw dev appub24 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=wifi.usersappub5, iw dev appub5 station dump|grep Station|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=mesh.numbernodes, sudo /usr/sbin/batctl o|grep -v Originator|grep -v MainIF|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
-	echo "UserParameter=mesh.numbermacache, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> /etc/zabbix_agentd.conf.d/userparameters
+	echo "UnsafeUserParameters=1" >> $zabbixparampath
+	echo "UserParameter=wifi.usersappriv24, iw dev appriv24 station dump|grep Station|wc -l" >> $zabbixparampath
+	echo "UserParameter=wifi.usersappriv5, iw dev appriv5 station dump|grep Station|wc -l" >> $zabbixparampath
+	echo "UserParameter=wifi.usersappub24, iw dev appub24 station dump|grep Station|wc -l" >> $zabbixparampath
+	echo "UserParameter=wifi.usersappub5, iw dev appub5 station dump|grep Station|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numbernodes, sudo /usr/sbin/batctl o|grep -v Originator|grep -v MainIF|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numbermacache, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numberneighbors, sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print $2}'|awk '{print $1}'|uniq -u|wc -l" >> $zabbixparampath
 	let "raise+=raise+1"
 fi
 if [ -n "$ZabbixServerActiveValue" ] ; then
