@@ -71,7 +71,7 @@ if [ -n "$ZabbixServerValue" ] ; then
 	echo "UserParameter=mesh.numbernodes, sudo /usr/sbin/batctl o|grep -v Originator|grep -v MainIF|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.numbermacache, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> $zabbixparampath
-	echo "UserParameter=mesh.numberneighbors, sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print $2}'|awk '{print $1}'|uniq -u|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numberneighbors, sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print \$2}'|awk '{print \$1}'|awk '{print \$1}'|uniq -u|wc -l" >> $zabbixparampath
 	let "raise+=raise+1"
 fi
 if [ -n "$ZabbixServerActiveValue" ] ; then
