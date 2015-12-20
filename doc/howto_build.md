@@ -26,6 +26,13 @@
 - FYI: If you with to facilitate more cores in order to speed up build process use `make -j 5' as example for 4 core CPU
 - find your firmware files within "bin" directory
 
+# flash firmware
+- use numerous online guides on how to flash
+
+# after flashing
+- login to the WebGUI which is in default at https://192.168.1.1
+- set a root password (very important)
+
 ATTENTION
 There is no logic built in that checks if you made sane selections as for your modules. Always check the configuration files after you invoked `./create_uci.bash' and before you actually build the firmware
 
