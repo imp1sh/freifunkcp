@@ -1,0 +1,4 @@
+#!/bin/ash
+
+loss=$(sudo batctl p -c 3 $1 | grep loss|awk -F, '{print $3}'|awk -F'\%' '{print $1}')
+echo `expr 100 - $loss`

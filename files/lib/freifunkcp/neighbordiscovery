@@ -1,0 +1,22 @@
+#!/bin/ash
+# initializing json file with ein Geruest
+amountofvalues=$(sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print $2}'|awk '{print $1}'|awk '{print $1}'|uniq -u |wc -l)
+index=1
+echo "{"
+echo "$tab\"data\":["
+
+# content
+sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print $2}'|awk '{print $1}'|awk '{print $1}'|uniq -u |
+while IFS= read -r line; do
+        echo -n "{\"{#MESHNEIGHBOR}\":\"$line\"}"
+        if [ ! $index -eq $amountofvalues ]; then
+                echo ","
+        else
+                echo "]"
+        fi
+        index=`expr $index + 1`
+done
+
+# end of file
+#echo "]"
+echo "}"
