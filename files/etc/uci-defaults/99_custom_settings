@@ -26,6 +26,9 @@ uci set network.lan.ula_prefix=$privnet
 # mesh net ula
 uci set network.guests.ula_prefix="$domainula/$domainulasize"
 
+# set site code which is $sidecode
+echo "$sidecode" >> /lib/freifunkcp/sitecode
+
 # set release/version
 grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
 grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release

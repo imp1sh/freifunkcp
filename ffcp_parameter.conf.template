@@ -1,31 +1,68 @@
 # put parameters together
+# fixed, don't change
 ZabbixServerParametername="Server="
 ZabbixServerActiveParametername="ServerActive="
-# below set specific server values
-ZabbixServerValue=""
-ZabbixServerActiveValue=""
-# use those below for deploying config
-ZabbixServerFull=$ZabbixServerParametername$ZabbixServerValue
-ZabbixServerActiveFull=$ZabbixServerActiveParametername$ZabbixServerActiveValue
-# Simple parameters
+
+##### MANDATORY PARAMETERS
+# timezone, openwrt format
 timezone="Europe/Amsterdam"
-channel24=11
-channel5=44
-Domainname="yourcity001"
-hostnamebasis="ffcp-"
-node_op_name=""
-node_op_mail=""
-domainula=""
-domainulasize=""
+##### WIFI
+##### 5 GHz is generally radio0 and 2,4 GHz will be radio1
+# set analog to Freifunk domain your node is in. bssid for adhoc 2,4 GHz
 adhoc24bssid=""
+# set analog to Freifunk domain your node is in. ssid for adhoc 2,4
 adhoc24ssid=""
-adhoc24mcast=""
+# set analog to Freifunk domain your node is in. bssid for adhoc 5 GHz
 adhoc5bssid=""
+# set analog to Freifunk domain your node is in. ssid for adoc 5 GHz
 adhoc5ssid=""
+# channel to run 2,4 GHz at
+channel24=11
+# channel to run 5 GHz at
+channel5=44
+##### DOMAIN PARAMETERS
+# give your domain a name or join existing one
+Domainname="yourcity001"
+# that is what your nodename will start with. Recommended to keep this synced for one domain
+hostnamebasis="ffcp-"
+##### IPv6
+# set IPv6 ULA for domain (is this really mandatory?)
+domainula=""
+# set IPv6 ULA prefix size for $domainula (is this really mandatory?)
+domainulasize=""
+
+##### OPTIONAL PARAMETERS
+##### operator
+# nodes operator name (optional)
+node_op_name=""
+# nodes operator email (optional, recommended though)
+node_op_mail=""
+# set analog to Freifunk domain your node is in. mcast_rate in openwrt 2,4 GHz
+adhoc24mcast=""
+# set analog to Freifunk domain your node is in. mcast_rate in openwrt 5 GHz
 adhoc5mcast=""
-rsysloghost=""
-rsyslogport=""
+# set analog to Freifunk domain you want your node to be in
+sitecode="ffac"
+##### NTP
+# room for up to 4 ntp servers. Only if host with index 0 is set all others are being propagated.
 ntpserver0=""
 ntpserver1=""
 ntpserver2=""
 ntpserver3=""
+##### ZABBIX
+# set Zabbix server if you would like your node gets monitored by the zabbix host IP/hostname given here
+ZabbixServerValue=""
+ZabbixServerActiveValue=""
+##### SYSLOG
+# set if you want your node to send log emtries to prepared rsyslog host (optional)
+rsysl SYSLOG""
+# set port if you defined host (optional, otherwise default port is used)
+rsyslogport=""
+
+
+
+# again don't change anything below this very line and the line itself
+# Configuration parameter that is in the end written into file into zabbix_agentd.conf.d
+ZabbixServerFull=$ZabbixServerParametername$ZabbixServerValue
+ZabbixServerActiveFull=$ZabbixServerActiveParametername$ZabbixServerActiveValue
+
