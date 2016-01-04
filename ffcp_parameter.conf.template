@@ -1,24 +1,26 @@
-# put parameters together
-# fixed, don't change
+#### this template file uses parameters from Freifunk Domain Aachen
+
+##### FIXED PARAMETERS
 ZabbixServerParametername="Server="
 ZabbixServerActiveParametername="ServerActive="
 
-##### MANDATORY PARAMETERS
+##### USER PARAMETERS, change to your will
+##### MANDATORY USER PARAMETERS
 # timezone, openwrt format
 timezone="Europe/Amsterdam"
 ##### WIFI
 ##### 5 GHz is generally radio0 and 2,4 GHz will be radio1
 # set analog to Freifunk domain your node is in. bssid for adhoc 2,4 GHz
-adhoc24bssid=""
+adhoc24bssid="CA:FF:24:FF:AC:24"
 # set analog to Freifunk domain your node is in. ssid for adhoc 2,4
-adhoc24ssid=""
+adhoc24ssid="wifimesh-g-ac"
 # set analog to Freifunk domain your node is in. bssid for adhoc 5 GHz
-adhoc5bssid=""
+adhoc5bssid="CA:FE:52:FF:AC:52"
 # set analog to Freifunk domain your node is in. ssid for adoc 5 GHz
-adhoc5ssid=""
-# channel to run 2,4 GHz at
+adhoc5ssid="wifimesh-a-ac"
+# set analog to Freifunk domain your node is in. channel 2,4 GHz
 channel24=11
-# channel to run 5 GHz at
+# set analog to Freifunk domain your node is in. channel 5 GHz
 channel5=44
 ##### DOMAIN PARAMETERS
 # give your domain a name or join existing one
@@ -31,12 +33,18 @@ domainula=""
 # set IPv6 ULA prefix size for $domainula (is this really mandatory?)
 domainulasize=""
 
-##### OPTIONAL PARAMETERS
-##### operator
-# nodes operator name (optional)
+##### OPTIONAL BUT RECOMMENDED USER PARAMETERS
+##### OPERATORS
+# firmware's operator, the name or nick of the clique or guy that publishes the firmware (optional, but recommended)
+firmware_op_name=""
+# firmware's operator email (optional, but recommended)
+firmware_op_mail=""
+# node's operator name (optional, but recommended)
 node_op_name=""
-# nodes operator email (optional, recommended though)
+# node's operator email (optional, but recommended)
 node_op_mail=""
+
+#### OPTIONAL USER PARAMETERS
 # set analog to Freifunk domain your node is in. mcast_rate in openwrt 2,4 GHz
 adhoc24mcast=""
 # set analog to Freifunk domain your node is in. mcast_rate in openwrt 5 GHz
@@ -55,13 +63,12 @@ ZabbixServerValue=""
 ZabbixServerActiveValue=""
 ##### SYSLOG
 # set if you want your node to send log emtries to prepared rsyslog host (optional)
-rsysl SYSLOG""
+rsysloghost=""
 # set port if you defined host (optional, otherwise default port is used)
 rsyslogport=""
 
 
-
-# again don't change anything below this very line and the line itself
+# FIXED PARAMETERS
 # Configuration parameter that is in the end written into file into zabbix_agentd.conf.d
 ZabbixServerFull=$ZabbixServerParametername$ZabbixServerValue
 ZabbixServerActiveFull=$ZabbixServerActiveParametername$ZabbixServerActiveValue
