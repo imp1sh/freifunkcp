@@ -21,7 +21,7 @@ We want to network with our neighbours, because that's the most natural thing on
 Freifunk aims a bit differently than us. Freifunk offers free wifi to the people, but mainly to gain access to the Internet. Our goal is to utilize this decentralized network that exists parallely to your private LAN and to the public Internet. This network we use to give the users the possibility to communicate directly with each other via this self-configuring metropolitan area network (MAN).
 
 | user A | private lan user A | MAN | private lan user B | user B
-
+| - | - | - | - | - |
 There are quite a lot of details which we try to improve in order to make everything easier accessible and better usable. For example there will be a pre-configured VPN service on every device that runs on the MAN interface and that let's access their private network through the MAN. Other than that, meshing via cable is very important in freifunkcp. See ./doc/technial_info.md for background information.
 
 ## How to use this?
