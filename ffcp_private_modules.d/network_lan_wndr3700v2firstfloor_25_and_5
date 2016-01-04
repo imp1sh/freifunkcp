@@ -1,0 +1,11 @@
+config interface 'lan'
+        option type 'bridge'
+        option _orig_ifname 'appriv24 appriv5 eth0.5'
+        option _orig_bridge 'true'
+        option proto 'static'
+        option ifname 'appriv24 appriv5 eth0.5'
+        option netmask '255.255.255.0'
+        option ipaddr '10.10.101.254'
+        option gateway '10.10.101.49'
+	option dns '10.10.101.49'
+
