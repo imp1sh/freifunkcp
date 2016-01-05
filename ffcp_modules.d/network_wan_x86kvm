@@ -1,0 +1,5 @@
+config interface 'wan'
+        option proto 'dhcp'
+        option _orig_ifname 'eth2'
+        option _orig_bridge 'true'
+        option ifname 'eth2'
