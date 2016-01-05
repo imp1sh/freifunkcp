@@ -1,4 +1,5 @@
 # OPENWRT  
+
  # VLAN
  - VLAN  3 <-> WAN
  - VLAN  5 <-> LAN
