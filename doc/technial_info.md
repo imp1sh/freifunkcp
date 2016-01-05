@@ -25,5 +25,9 @@
  - By default DHCP server is enabled leases between 100 and 200
 
 # X86 KVM
- - test1
- - test2
+
+ # Wired NIC
+ - eth0 - LAN (VLAN 5)
+ - eth1 - mesh (VLAN 11)
+ - eth2 - wan (VLAN 3)
+ - eth3 - guests ( VLAN 12)
