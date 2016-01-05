@@ -1,10 +1,9 @@
 # OPENWRT  
  # VLAN
-
-- VLAN  3 <-> WAN
-- VLAN  5 <-> LAN
-- VLAN 11 <-> MESH (native batman-adv)
-- VLAN 12 <-> MESH guests (bridged batman-adv)
+ - VLAN  3 <-> WAN
+ - VLAN  5 <-> LAN
+ - VLAN 11 <-> MESH (native batman-adv)
+ - VLAN 12 <-> MESH guests (bridged batman-adv)
 
  # SWITCH
  - WAN Port - WAN - untagged VLAN 3
