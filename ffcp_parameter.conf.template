@@ -43,6 +43,9 @@ firmware_op_mail=""
 node_op_name=""
 # node's operator email (optional, but recommended)
 node_op_mail=""
+##### hostalias
+# give your node a hostname for you easy to remember and/or fit into your hostnames schema (does not have to be unique, but should be, somehow.)
+hostalias=""
 
 #### OPTIONAL USER PARAMETERS
 # set analog to Freifunk domain your node is in. mcast_rate in openwrt 2,4 GHz
