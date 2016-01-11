@@ -9,3 +9,7 @@ Maybe as a package that gets installed on default, that offers a new tab in LUCI
 # pre-configured OpenVPN service for every node
 
 # make config more flexible instead of managing so many files for different devices and for different domains and such
+
+# autoupdate feature for freifunkcp official release
+
+# x86 release of freifunkcp with different shapes for data collectors node, supernode, etc
