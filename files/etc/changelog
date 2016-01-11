@@ -5,7 +5,7 @@
 - renaming of some template files
 - general optimizations
 - 1st video online https://youtu.be/ZM6lvoHKqeU
-- reworks on how the scripts interact and where files reside that are being sources
+- reworks on how the scripts interact and where files reside that are being sourced
 - reworks on scripts in general - trying to give it a clearer structure - WIP
 - reworks on how to include ssh keys -> own configuration 
 - added ula_global for non-global parameter in guest or lan - does this really make sense ?
