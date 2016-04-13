@@ -1,3 +1,9 @@
+[beta 0.62]
+2016-04-13
+- revised build structure in order to build automatically for different devices and environments, better documentation is yet to come. create_uci.bash
+- therefore new files and new directories
+- addedd module for deactivated bridge for guests (avoid loops)
+
 [beta 0.61]
 2015-12-11
 - optimized documentation, though still far from perfect
