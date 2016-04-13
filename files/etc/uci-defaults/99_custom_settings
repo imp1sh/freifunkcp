@@ -1,6 +1,7 @@
 #!/bin/ash
 # env variables
 source ffcp_parameter.conf
+source ffcp_env.conf
 
 randomized=$(</dev/urandom tr -dc A-Z-a-z-0-9 | head -c24)
 sourceeth="eth0"

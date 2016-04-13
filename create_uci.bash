@@ -3,26 +3,33 @@
 
 # do not edit below
 ucidefaultspath=files/etc/uci-defaults
+# instead maybe source from ./doc/configs
 configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
-parameters=./ffcp_parameter.conf
+parameterfile="$1"
 configpath=./files/etc/config
 sshpubkeyfile=sshpubkeys
+uciparameterfile="ffcp_parameter.conf"
+ucienvfile="ffcp_env.conf"
 
-alfredfile=$configpath/alfred
-batmanadvfile=$configpath/batman\-adv
-dhcpfile=$configpath/dhcp
-dropbearfile=$configpath/dropbear
-dropbearkeyfiles=./files/etc/dropbear/authorized_keys
-firewallfile=$configpath/firewall
-networkfile=$configpath/network
-systemfile=$configpath/system
-vnstatfile=$configpath/vnstat
-wirelessfile=$configpath/wireless
+alfredfile="$configpath/alfred"
+batmanadvfile="$configpath/batman-adv"
+dhcpfile="$configpath/dhcp"
+dropbearfile="$configpath/dropbear"
+dropbearkeyfiles="./files/etc/dropbear/authorized_keys"
+firewallfile="$configpath/firewall"
+networkfile="$configpath/network"
+systemfile="$configpath/system"
+vnstatfile="$configpath/vnstat"
+wirelessfile="$configpath/wireless"
 
-modulesdir=ffcp_modules.d
-privmodulesdir=ffcp_private_modules.d
-devicesdir=ffcp_devices.d
-privdevicesdir=ffcp_private_devices.d
+modulesdir="ffcp_modules.d"
+privmodulesdir="ffcp_private_modules.d"
+devicesdir="ffcp_devices.d"
+privdevicesdir="ffcp_private_devices.d"
+parametersdir="ffcp_parameters.d"
+privparametersdir="ffcp_private_parameters.d"
+envdir="ffcp_env.d"
+privenvdir="ffcp_private_env.d"
 
 function initfile {
 	# $1 is file to check given as relative path
@@ -51,6 +58,12 @@ function listdevices {
 	echo -e "\tprivate devices:"
 	ls $privdevicesdir
 }
+function listparameters {
+	echo -e "\tparameters:"
+	ls $parametersdir/*.conf | awk -F'/' '{print $NF}'
+	echo -e "\tprivate parameters:"
+	ls $privparametersdir/*.conf | awk -F'/' '{print $NF}'
+}
 function isuseable {
 	# $1 is file $2 is folder1 $3 is folder2
 	# returns 0 if file is ok to use
@@ -77,49 +90,76 @@ function isuseable {
 
 # check if first parameter is given
 if [ -z "$1" ]; then
-	echo "Please choose one of the available configs by giving its name as a parameter!"
-	listdevices
+	echo "Error. Please choose one of the available configs by giving its name as a parameter!"
+	listparameters
 	exit 1
 fi
-# check if chosen device is a private one or a regular one
-if [ `ls $devicesdir|grep -c $1` -eq 0 ]; then
-	notindevicesdir=1
+# check if chosen parameter is a private one or a regular one
+if [ `ls $parametersdir|grep -c $parameterfile` -eq 0 ]; then
+	notinparametersdir=1
 else
-	notindevicesdir=0
+	notinparametersdir=0
 fi
-if [ `ls $privdevicesdir | grep -c $1` -eq 0 ]; then
-	notinprivdevicesdir=1
+if [ `ls $privparametersdir | grep -c $parameterfile` -eq 0 ]; then
+	notinprivparametersdir=1
 else
-	notinprivdevicesdir=0
+	notinprivparametersdir=0
 fi
 
 # if equal then config is either in both or in none of both dirs. Both not acceptable.
-if [ $notindevicesdir -eq $notinprivdevicesdir ] ; then
-	# config is either not available or in both directories
+if [ $notinparametersdir -eq $notinprivparametersdir ] ; then
 	echo "The given config is wrong. It's either in none or in both folders. Please choose one of the available configs!"
-	listdevices
-	exit ${argAry1[@]}A
+	listparameters
+	#exit ${argAry1[@]}A
+	exit 2
 else
 	# config is ok to use
 	# here's the action
 
 	# is regular
-	if [ $notindevicesdir -eq 0 ]; then
-		source $devicesdir/$1
-		echo "$devicesdir/$1 sourced"
+	if [ $notinparametersdir -eq 0 ]; then
+		source "$parametersdir/$parameterfile"
+		echo "$parametersdir/$parameterfile sourced"
+		source "$devicesdir/$devicetype"
+		echo "$devicesdir/$devicetype sourced"
+		source "$envdir/$envfile"
+		echo "$envdir/$envfile sourced"
+		# part where the central config files are being distributed to subordinary scripts
+	        # very ipmortant, if this file is not being distributed, node will have incomplete info
+		if ( [ -f $parametersdir/$parameterfile ] && [ -d $ucidefaultspath ] ) ; then
+			cp -f $parametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
+		else
+			echo "Either parameter file at $parametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+			exit 15
+		fi
+		if ( [ -f $envdir/$envfile ] &&  [ -d $ucidefaultspath ] ) ; then
+			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
+		else
+			echo "Either env file at $envdir/$envfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+			exit 16
+		fi
 	else
 	# is private
-		source $privdevicesdir/$1
-		echo "$privdevicesdir/$1 sourced"
-	fi
-	source $parameters
-	# part where the central config files are being distributed to subordinary scripts
-	# very ipmortant, if this file is not being distributed, node will have incomplete info
-	if ( [ -f $parameters ] && [ -d $ucidefaultspath ] ) ; then
-		cp -f $parameters $ucidefaultspath
-	else
-		echo "Either parameter file at $parameters is missing or path to uci-defaults $ucidefaultspath is wrong."
-		exit 15
+		source $privparametersdir/$parameterfile
+		echo "$privparametersdir/$parameterfile sourced"
+		source "$privparametersdir/$devicetype"
+		echo "$privparametersdir/$devicetype sourced"
+		source "$privenvdir/$envfile"
+		echo "$privenvdir/$envfile sourced"
+		if ( [ -f $privparametersdir/$parameterfile ] && [ -d $ucidefaultspath ] ) ; then
+                        cp -f $privparametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
+                else
+                        echo "Either parameter file at $privparametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+                        exit 15
+                fi
+		if ( [ -f $privenvdir/$envfile ] &&  [ -d $ucidefaultspath ] ) ; then
+                        cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
+                else
+                        echo "Either env file at $privenvdir/$envfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+                        exit 16
+                fi
+
+
 	fi
 
 	# initialize config files

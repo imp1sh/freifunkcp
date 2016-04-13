@@ -47,7 +47,7 @@ system_ntp_default
 )
 
 vnstat=(
-vnstat_default
+vnstat_x86kvm
 )
 
 wireless=(
