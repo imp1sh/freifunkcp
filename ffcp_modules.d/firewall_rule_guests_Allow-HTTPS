@@ -1,0 +1,7 @@
+config rule
+        option name 'Allow-HTTPS'
+        option src 'guests'
+        option proto 'tcp'
+        option dest_port '443'
+        option target 'ACCEPT'
+        option family 'ipv6'
