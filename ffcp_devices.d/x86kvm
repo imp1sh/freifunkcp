@@ -29,6 +29,11 @@ firewall_rule_wan_Allow-DHCPv6
 firewall_rule_wan_Allow-ICMPv6-Forward
 firewall_rule_wan_Allow-ICMPv6-Input
 firewall_rule_wan_Allow-Ping
+firewall_rule_guests_Allow-DHCP-Renew
+firewall_rule_guests_Allow-DHCPv6
+firewall_rule_guests_Allow-ICMPv6-Forward
+firewall_rule_guests_Allow-ICMPv6-Input
+firewall_rule_guests_Allow-Ping
 )
 
 network=(

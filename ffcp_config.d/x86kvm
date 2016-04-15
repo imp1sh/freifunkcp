@@ -66,6 +66,7 @@ CONFIG_PACKAGE_px5g=y
 CONFIG_PACKAGE_respondd=y
 CONFIG_PACKAGE_rpcd=y
 CONFIG_PACKAGE_screen=y
+CONFIG_PACKAGE_tcpdump=y
 CONFIG_PACKAGE_terminfo=y
 CONFIG_PACKAGE_uhttpd=y
 CONFIG_PACKAGE_uhttpd-mod-ubus=y

@@ -1,3 +1,5 @@
 config interface 'wan6'
-        option ifname 'eth2'
+        option ifname 'eth0'
+        option _orig_ifname 'eth0'
+        option _orig_bridge 'true'
         option proto 'dhcpv6'
