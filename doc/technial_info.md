@@ -3,10 +3,14 @@
  # VLAN
  - VLAN  3 <-> WAN
  - VLAN  5 <-> LAN
- - VLAN 11 <-> MESH (native batman-adv)
+ - VLAN  7 <-> MESH (native batman-adv) connection 1
+ - VLAN  8 <-> MESH (native batman-adv) connection 2
+ - VLAN  9 <-> MESH (native batman-adv) connection 3
+ - VLAN 10 <-> MESH (native batman-adv) connection 4
+ - VLAN 11 <-> MESH (native batman-adv) connection 5
  - VLAN 12 <-> MESH guests (bridged batman-adv)
 
- # SWITCH
+ # SWITCH ar71xx
  - WAN Port - WAN - untagged VLAN 3
  - 1st Switch Port - LAN - untagged VLAN 5
  - 2nd Switch Port - MESH guests - untagged VLAN 12
@@ -27,7 +31,11 @@
 # X86 KVM
 
  # Wired NIC
- - eth0 - LAN (VLAN 5)
- - eth1 - mesh (VLAN 11)
- - eth2 - wan (VLAN 3)
- - eth3 - guests ( VLAN 12)
+ - eth0 - WAN (VLAN 3)
+ - eth1 - LAN (VLAN 5)
+ - eth2 - guests ( VLAN 12)
+ - eth3 - mesh_cable1 ( VLAN  7 )
+ - eth4 - mesh_cable2 ( VLAN  8 )
+ - eth5 - mesh_cable3 ( VLAN  9 )
+ - eth6 - mesh_cable4 ( VLAN 10 )
+ - eth7 - mesh_cable5 ( VLAN 11 )

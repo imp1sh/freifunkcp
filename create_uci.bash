@@ -120,46 +120,68 @@ else
 	if [ $notinparametersdir -eq 0 ]; then
 		source "$parametersdir/$parameterfile"
 		echo "$parametersdir/$parameterfile sourced"
-		source "$devicesdir/$devicetype"
-		echo "$devicesdir/$devicetype sourced"
-		source "$envdir/$envfile"
-		echo "$envdir/$envfile sourced"
+		if [ -f $devicesdir/$devicetype ]; then
+			source "$devicesdir/$devicetype"
+			echo "$devicesdir/$devicetype sourced"
+		elif [ -f $privdevicesdir/$devicetype ]; then
+			source "$privdevicesdir/$devicetype"
+			echo "$privdevicesdir/$devicetype sourced"
+		else
+			echo "Error. No device file with the name $devicetype found neither in $devicesdir nor in $privdevicesdir."
+			exit 17
+		fi
+		if [ -f "$envdir/$envfile" ]; then
+			source "$envdir/$envfile"
+			echo "$envdir/$envfile sourced"
+			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
+		elif [ -f $privenvdir/$envfile ]; then
+			source "$privenvdir/$envfile"
+			echo "$privenvdir/$envfile sourced"
+			cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
+		else
+			echo "Error. No env file with the name $envfile found neither in $envdir nor in $privenvdir"
+			exit 18
+		fi
 		# part where the central config files are being distributed to subordinary scripts
 	        # very ipmortant, if this file is not being distributed, node will have incomplete info
-		if ( [ -f $parametersdir/$parameterfile ] && [ -d $ucidefaultspath ] ) ; then
+		if  [ -d $ucidefaultspath ]  ; then
 			cp -f $parametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
 		else
 			echo "Either parameter file at $parametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
 			exit 15
 		fi
-		if ( [ -f $envdir/$envfile ] &&  [ -d $ucidefaultspath ] ) ; then
-			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
-		else
-			echo "Either env file at $envdir/$envfile is missing or path to uci-defaults $ucidefaultspath is wrong."
-			exit 16
-		fi
 	else
 	# is private
 		source $privparametersdir/$parameterfile
 		echo "$privparametersdir/$parameterfile sourced"
-		source "$privparametersdir/$devicetype"
-		echo "$privparametersdir/$devicetype sourced"
-		source "$privenvdir/$envfile"
-		echo "$privenvdir/$envfile sourced"
+		if [ -f $privdevicesdir/$devicetype ]; then
+			source "$privdevicesdir/$devicetype"
+			echo "$privdevicesdir/$devicetype sourced"
+		elif [ -f $devicesdir/$devicetype ]; then
+			source "$devicesdir/$devicetype"
+			echo "$devicesdir/$devicetype sourced"
+		else
+			echo "Error. No device file with the name $devicetype found neither in $privparametersdir nor in $devicesdir"
+			exit 20
+		fi
+		if [ -f $privenvdir/$envfile ]; then
+			source "$privenvdir/$envfile"
+			echo "$privenvdir/$envfile sourced"
+			cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
+		elif [ -f $envdir/$envfile ];then
+			source "$envdir/$envfile"
+			echo "$envdir/$envfile sourced"
+			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
+		else
+			echo "Error. No env file with the name $envfile found neither in $privenvdir nor in $envdir."
+			exit 21
+		fi
 		if ( [ -f $privparametersdir/$parameterfile ] && [ -d $ucidefaultspath ] ) ; then
                         cp -f $privparametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
                 else
                         echo "Either parameter file at $privparametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
                         exit 15
                 fi
-		if ( [ -f $privenvdir/$envfile ] &&  [ -d $ucidefaultspath ] ) ; then
-                        cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
-                else
-                        echo "Either env file at $privenvdir/$envfile is missing or path to uci-defaults $ucidefaultspath is wrong."
-                        exit 16
-                fi
-
-
 	fi
 
 	# initialize config files
