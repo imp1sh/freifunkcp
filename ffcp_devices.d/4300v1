@@ -39,7 +39,7 @@ network_guests_4300v1
 network_lan_4300v1_24_and_5_default
 network_mesh_wifi24
 network_mesh_wifi5
-network_mesh_cable_4300v1
+network_mesh_cable5_4300v1
 network_wan6_4300v1
 network_wan_4300v1
 )

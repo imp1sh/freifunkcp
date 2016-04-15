@@ -1,5 +1,5 @@
-config interface 'mesh_cable'
-        option ifname 'eth1'
+config interface 'mesh_cable4'
+        option ifname 'eth6'
         option mtu '1528'
         option proto 'batadv'
         option mesh 'bat0'

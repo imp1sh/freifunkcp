@@ -36,7 +36,11 @@ network_loopback
 network_switch
 network_guests_x86kvm
 network_lan_x86kvm
-network_mesh_cable_x86kvm
+network_mesh1_cable_x86kvm
+network_mesh2_cable_x86kvm
+network_mesh3_cable_x86kvm
+network_mesh4_cable_x86kvm
+network_mesh5_cable_x86kvm
 network_wan6_x86kvm
 network_wan_x86kvm
 )

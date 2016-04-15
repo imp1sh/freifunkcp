@@ -1,4 +1,4 @@
-config interface 'mesh_cable'
+config interface 'mesh_cable5'
         option ifname 'eth0.11'
         option mtu '1528'
         option proto 'batadv'
