@@ -42,23 +42,16 @@ grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
 grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
 
 # add to motd
-if [ -n "$devicetype" ]; then
-	echo "Devicetype: $devicetype" >> "$bannerfile"
-fi
-if [ -n "$envfile" ]; then
-	echo "Environmentfile: $envfile" >> "$bannerfile"
-fi
-if [ -n "$hostalias" ]; then
-	echo "Hostalias: $hostalias" >> "$bannerfile"
-fi
-if [ -n "$firmware_op_name" ]; then
-	echo "Firmware operator: $firmware_op_name"
-fi
-if [ -n $node_op_name ]; then
-	echo "Node operator: $node_op_name" >> "$bannerfile"
-fi
+echo "Devicetype: $devicetype" >> "$bannerfile"
+echo "Environmentfile: $envfile" >> "$bannerfile"
+echo "Hostname: $hwaddrwocolon" >> "$bannerfile"
+echo "Hostalias: $hostalias" >> "$bannerfile"
+echo "Firmware operator: $firmware_op_name"
+echo "Node operator: $node_op_name" >> "$bannerfile"
+
 echo -n " @Commenced duty: "
 date >> "$bannerfile"
+echo "-----------------------------------------------------" >> "$bannerfile"
 
 # set default MAC for gluon
 echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac
