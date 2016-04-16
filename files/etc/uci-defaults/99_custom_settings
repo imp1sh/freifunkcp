@@ -8,6 +8,7 @@ sourceeth="eth0"
 privulafirst8="FD"
 guestnetidentifier=1
 privnetidentifier=2
+bannerfile="/etc/banner"
 
 #get last 40 bits from $sourceeth interface (spine)
 hwaddr=$(ifconfig $sourceeth|grep HWaddr|awk '{print $5}')
@@ -21,7 +22,13 @@ privnetip=`echo $privulafirst8${hwaddrwocolon:2:2}:${hwaddrwocolon:4:2}${hwaddrw
 
 # UCI
 # hostname
-uci set system.@system[0].hostname=$(echo -n "$hostnamebasis$hwaddrwocolon")
+
+if [ -z ${hostalias+x} ]; then
+	uci set system.@system[0].hostname=$(echo -n "$hostnamebasis$hwaddrwocolon")
+else
+	uci set system.@system[0].hostname=$(echo -n "$hostnamebasis$hostalias")
+fi
+
 # private net ula
 uci set network.lan.ula_prefix=$privnet
 # mesh net ula
@@ -33,6 +40,25 @@ echo "$sidecode" >> /lib/freifunkcp/sitecode
 # set release/version
 grep Version /etc/banner | awk '{ print $2}' > /lib/gluon/gluon-version
 grep Release /etc/banner | awk '{ print $2}' > /lib/gluon/release
+
+# add to motd
+if [ -n "$devicetype" ]; then
+	echo "Devicetype: $devicetype" >> "$bannerfile"
+fi
+if [ -n "$envfile" ]; then
+	echo "Environmentfile: $envfile" >> "$bannerfile"
+fi
+if [ -n "$hostalias" ]; then
+	echo "Hostalias: $hostalias" >> "$bannerfile"
+fi
+if [ -n "$firmware_op_name" ]; then
+	echo "Firmware operator: $firmware_op_name"
+fi
+if [ -n $node_op_name ]; then
+	echo "Node operator: $node_op_name" >> "$bannerfile"
+fi
+echo -n " @Commenced duty: "
+date >> "$bannerfile"
 
 # set default MAC for gluon
 echo $hwaddr > /lib/gluon/core/sysconfig/primary_mac

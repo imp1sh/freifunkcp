@@ -15,7 +15,7 @@
  - 1st Switch Port - LAN - untagged VLAN 5
  - 2nd Switch Port - MESH guests - untagged VLAN 12
  - 3rd Switch Port - MESH - untagged VLAN 11
- - 4th Switch Port - LAN+MESH+WAN+MESH guests - tagged VLAN3/5/11/12
+ - 4th Switch Port - LAN+MESH+WAN+MESH guests - tagged VLAN3/7-12
 
  # DEVICES with 1 Port
  - in default configuration it is configured as MESH - untagged VLAN 11
