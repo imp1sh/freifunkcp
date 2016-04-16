@@ -1,0 +1,7 @@
+config rule
+        option name 'Allow-SSH'
+        option src 'guests'
+        option proto 'tcp'
+        option dest_port '22'
+        option target 'ACCEPT'
+        option family 'ipv6'

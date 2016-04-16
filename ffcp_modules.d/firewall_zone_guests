@@ -4,3 +4,4 @@ config zone
         option input 'REJECT'
         option output 'ACCEPT'
         option network 'guests'
+	option conntrack '1'
