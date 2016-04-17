@@ -1,0 +1,7 @@
+config rule
+        option name 'Allow-ZABBIX'
+        option src 'guests'
+        option proto 'tcp'
+        option dest_port '10050'
+        option target 'ACCEPT'
+        option family 'ipv6'
