@@ -8,6 +8,9 @@ fileconfigname=".config"
 configbefore=".config.before"
 pathcp="/bin/cp"
 recreateconfig=true
+buildthreads=3
+bindir="../bin/"
+binoutdir="$scriptdir/allbins"
 
 function compareandcopy {
 	# echo "first parameter is $1"
@@ -73,7 +76,10 @@ for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename
 		echo "generating full $fileconfigname from diffconfig file"
 		make defconfig  > $fileconfigname
 	fi
+	make -j $buildthreads
+
 	cd -
+	hwbinpath
 	echo "### END $parameterpriv ###"
 done
 echo "###### END non private ######"

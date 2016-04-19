@@ -14,6 +14,8 @@ devicetype="x86kvm"
 envfile="freifunk-aachen.conf"
 # Hardware config for make for your device found in ffcp_config.d or ffcp_private_config.d
 hwconfig="x86kvm"
+# Firmware path beneath bin where the compiled firmware will be placed
+hwbinpath="x86"
 # timezone, openwrt format
 timezone="Europe/Amsterdam"
 ##### IPv6
