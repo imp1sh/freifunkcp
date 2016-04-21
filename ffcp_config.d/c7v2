@@ -1,11 +1,7 @@
 CONFIG_TARGET_ar71xx=y
 CONFIG_TARGET_ar71xx_generic=y
 CONFIG_TARGET_ar71xx_generic_ARCHERC7=y
-CONFIG_BUSYBOX_CUSTOM=y
-CONFIG_BUSYBOX_CONFIG_DESKTOP=y
-CONFIG_BUSYBOX_CONFIG_WHOAMI=y
 CONFIG_FASTD_ENABLE_CIPHER_NULL=y
-CONFIG_FASTD_ENABLE_CIPHER_SALSA20=y
 CONFIG_FASTD_ENABLE_CIPHER_SALSA2012=y
 CONFIG_FASTD_ENABLE_MAC_GHASH=y
 CONFIG_FASTD_ENABLE_MAC_UHASH=y
@@ -21,96 +17,71 @@ CONFIG_KMOD_BATMAN_ADV_LEGACY_DAT=y
 CONFIG_OPENSSL_WITH_EC=y
 CONFIG_PACKAGE_ALFRED_VIS=y
 CONFIG_PACKAGE_alfred=y
-CONFIG_PACKAGE_authsae=y
 CONFIG_PACKAGE_babeld=y
-CONFIG_PACKAGE_ecdsautils=y
+CONFIG_PACKAGE_bind-host=y
+CONFIG_PACKAGE_bind-libs=y
+CONFIG_PACKAGE_bmx6=y
+CONFIG_PACKAGE_bmx7=y
 CONFIG_PACKAGE_ethtool=y
 CONFIG_PACKAGE_fastd=y
-CONFIG_PACKAGE_gluon-announce=y
-CONFIG_PACKAGE_gluon-announced=y
+CONFIG_PACKAGE_gluon-alfred=y
 CONFIG_PACKAGE_gluon-neighbour-info=y
-CONFIG_PACKAGE_grep=y
+CONFIG_PACKAGE_gluon-respondd=y
 CONFIG_PACKAGE_htop=y
-CONFIG_PACKAGE_iftop=y
-CONFIG_PACKAGE_ip=y
-CONFIG_PACKAGE_json4lua=y
+CONFIG_PACKAGE_ip-full=y
 CONFIG_PACKAGE_kmod-batman-adv-legacy=y
-CONFIG_PACKAGE_kmod-bonding=m
-CONFIG_PACKAGE_kmod-crypto-aes=y
 CONFIG_PACKAGE_kmod-crypto-crc32c=y
 CONFIG_PACKAGE_kmod-crypto-hash=y
+CONFIG_PACKAGE_kmod-ip6-tunnel=y
+CONFIG_PACKAGE_kmod-iptunnel6=y
 CONFIG_PACKAGE_kmod-lib-crc16=y
 CONFIG_PACKAGE_kmod-lib-crc32c=y
-CONFIG_PACKAGE_kmod-scsi-core=y
 CONFIG_PACKAGE_kmod-tun=y
-CONFIG_PACKAGE_kmod-usb-storage=y
-CONFIG_PACKAGE_kmod-usb-storage-extras=y
-CONFIG_PACKAGE_kmod-usb2-pci=y
-CONFIG_PACKAGE_less=y
-CONFIG_PACKAGE_libconfig=y
 CONFIG_PACKAGE_libgd=y
+CONFIG_PACKAGE_libgluonutil=y
 CONFIG_PACKAGE_libiwinfo-lua=y
 CONFIG_PACKAGE_libjpeg=y
 CONFIG_PACKAGE_liblua=y
 CONFIG_PACKAGE_libncurses=y
-CONFIG_PACKAGE_libncursesw=y
 CONFIG_PACKAGE_libopenssl=y
 CONFIG_PACKAGE_libpcap=y
-CONFIG_PACKAGE_libpcre=y
+CONFIG_PACKAGE_libplatforminfo=y
 CONFIG_PACKAGE_libpng=y
 CONFIG_PACKAGE_libpolarssl=y
 CONFIG_PACKAGE_libpthread=y
 CONFIG_PACKAGE_librt=y
+CONFIG_PACKAGE_libsqlite3=m
+CONFIG_PACKAGE_libstdcpp=y
 CONFIG_PACKAGE_libubus-lua=y
 CONFIG_PACKAGE_libuci-lua=y
 CONFIG_PACKAGE_libustream-polarssl=y
 CONFIG_PACKAGE_lua=y
-CONFIG_PACKAGE_lua-deflate=y
-CONFIG_PACKAGE_lua-ethtool-stats=y
-CONFIG_PACKAGE_luasocket=y
 CONFIG_PACKAGE_luci=y
 CONFIG_PACKAGE_luci-app-firewall=y
 CONFIG_PACKAGE_luci-app-vnstat=y
 CONFIG_PACKAGE_luci-base=y
 CONFIG_PACKAGE_luci-lib-ip=y
-CONFIG_PACKAGE_luci-lib-json=y
-CONFIG_PACKAGE_luci-lib-jsonc=y
 CONFIG_PACKAGE_luci-lib-nixio=y
 CONFIG_PACKAGE_luci-mod-admin-full=y
 CONFIG_PACKAGE_luci-proto-ipv6=y
 CONFIG_PACKAGE_luci-proto-ppp=y
 CONFIG_PACKAGE_luci-ssl=y
 CONFIG_PACKAGE_luci-theme-bootstrap=y
+CONFIG_PACKAGE_micrond=y
+CONFIG_PACKAGE_nmap=y
 CONFIG_PACKAGE_px5g=y
 CONFIG_PACKAGE_respondd=y
 CONFIG_PACKAGE_rpcd=y
 CONFIG_PACKAGE_screen=y
 CONFIG_PACKAGE_sudo=y
+CONFIG_PACKAGE_tcpdump=y
 CONFIG_PACKAGE_terminfo=y
-CONFIG_PACKAGE_uboot-ar71xx-nbg460n_550n_550nh=y
 CONFIG_PACKAGE_uhttpd=y
 CONFIG_PACKAGE_uhttpd-mod-ubus=y
-# CONFIG_PACKAGE_usign is not set
 CONFIG_PACKAGE_vim=y
 CONFIG_PACKAGE_vnstat=y
 CONFIG_PACKAGE_vnstati=y
-CONFIG_PACKAGE_wpad=y
-# CONFIG_PACKAGE_wpad-mini is not set
 CONFIG_PACKAGE_zabbix-agent=y
 CONFIG_PACKAGE_zabbix-agentd=y
+CONFIG_PACKAGE_zabbix-proxy=m
 CONFIG_PACKAGE_zlib=y
-# CONFIG_SIGNED_PACKAGES is not set
-CONFIG_TARGET_INIT_PATH="/bin:/sbin:/usr/bin:/usr/sbin"
-CONFIG_WPA_SUPPLICANT_INTERNAL=y
-# CONFIG_ATH10K_API2_FW is not set
-# CONFIG_ATH10K_STA_FW is not set
-CONFIG_PACKAGE_gluon-announce=y
-CONFIG_PACKAGE_gluon-announced=y
-# CONFIG_PACKAGE_kmod-iwlagn is not set
-# CONFIG_PACKAGE_kmod-net-hermes is not set
-# CONFIG_PACKAGE_kmod-net-hermes-pci is not set
-# CONFIG_PACKAGE_kmod-net-hermes-plx is not set
-# CONFIG_PACKAGE_kmod-rxrpc is not set
-CONFIG_TARGET_INIT_PATH="/bin:/sbin:/usr/bin:/usr/sbin"
-# CONFIG_TARGET_ar71xx_generic_ANTMINER_S1 is not set
-# CONFIG_TARGET_ar71xx_generic_ANTMINER_S3 is not set

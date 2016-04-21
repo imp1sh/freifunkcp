@@ -8,23 +8,34 @@ fileconfigname=".config"
 configbefore=".config.before"
 pathcp="/bin/cp"
 recreateconfig=true
-buildthreads=3
-bindir="../bin/"
-binoutdir="$scriptdir/allbins"
+buildthreads=5
+bindir="../bin"
+binoutdir="$scriptdir/ffcp_bins"
+binoutdirpriv="$scriptdir/ffcp_private_bins"
+binfilec7v2="openwrt-ar71xx-generic-archer-c7-v2-squashfs-factory.bin openwrt-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
+binfille4300v1="openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
+binfile1043v1="openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
+binfilewndr3700v1="openwrt-ar71xx-generic-wndr3700-squashfs-factory.img openwrt-ar71xx-generic-wndr3700-squashfs-factory-NA.img openwrt-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin"
+binfilex86kvm="openwrt-x86-kvm_guest-combined-ext4.img"
+
 
 function compareandcopy {
+	if [ -z $1 ];  then
+		echo "Error. Parameter 1 not given for compareandcopy."
+		return 1
+	fi
 	# echo "first parameter is $1"
 	# first parameter has to be the variable which is if it's private or non private
 	privornot=$1
         if [ -f $scriptdir/../$configbefore ]; then
         	# new and old both there
         	if cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore > /dev/null 2>&1; then
-        		echo "do cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are the same than program is running fine here."
+        		echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are the same than program is running fine here."
         	        # new and old same content
         	        recreateconfig=false
         	else
                         # new and old not the same
-                        echo "do cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are different than program is running fine here."
+                        echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are different than program is running fine here."
                         echo -e "\tcopying configpriv file into place"
                         $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$fileconfigname
 			$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore
@@ -37,12 +48,67 @@ function compareandcopy {
         fi
 }
 
+function copybinfile {
+	if [ -z $1 ] || [ -z $2 ]; then
+		echo "Parameter 1 and/or 2 not given for copybinfile"
+		return 1
+	fi
+	echo -e "\t### START function copybinfile ###"
+	# echo parameterlocal might be wndr3700v2_firstfloor.conf or x86kvm_rick.conf or something like this
+	local parameterlocal=$1
+	echo -e "\tLocal Parameter: $parameterlocal"
+	local parameterwithoutprefix=$(echo $parameterlocal | awk -F'.' '{print $1}')
+	local parameterprefix=$(echo $parameterlocal | awk -F'.' '{print $2}')
+	# hwconfiglocal might be x86kvm or c7v2 or something like this
+	local binfilefull="binfile$2"
+	for i in $(echo ${!binfilefull}); do
+		echo -e "\t\t Doing: $i"
+		if [ -f $bindir/$hwbinpath/$i ];then
+        		local binwithoutsuffix=$(echo "$i" | awk -F'.' '{print $1}')
+			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
+			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
+                	echo -e "\t\t\tcopying $bindir/$hwbinpath/$i to $binoutdir/$binnewfile"
+                	$pathcp $bindir/$hwbinpath/$i $binoutdir/$binnewfile
+        	else
+        	        echo -e "\t\t\tError. file $bindir/$hwbinpath/$i not found."
+        	        continue
+        	fi
+	done
+	echo "### END function copybinfile ###"
+}
+
 echo "###### START non private ######"
 for parameter in $(ls ffcp_parameters.d/*.conf | xargs -n 1 basename); do
 	echo "### START $parameter ###"
 	echo "running $parameter";
 	source ./$dirparameters/$parameter
-	#echo "/bin/cp $scriptdir/$dirhwconfig/$hwconfig $scriptdir/../$fileconfigname"
+	if [ $? -ne 0 ];then
+		# this is HIGHLY unlikely but not impossible
+		echo -e "\t./$dirparameters/$parameter file not there or not executeable in $shell, skipping to next parameter"
+		echo "### END $parameter ###"
+		continue
+	fi
+	# check if old config from build loop before is still the same
+        if [ -f $scriptdir/$dirhwconfig/$hwconfig ]; then
+                compareandcopy $(echo $dirhwconfig)
+        elif [ -f $scriptdir/$dirhwconfigpriv/$hwconfig ]; then
+                compareandcopy $(echo $dirhwconfigpriv)
+        else
+                echo -e "\tNo hwconfig file at $scriptdir/$dirhwconfigpriv/$hwconfig nor at $scriptdir/$dirhwconfig/$hwconfig"
+		echo "### END $parameter ###"
+                continue
+        fi
+	# create uci
+        $scriptdir/create_uci.bash $parameter
+        cd $scriptdir/..
+        if [ "$recreateconfig" = true ]; then
+                echo "generating full $fileconfigname from diffconfig file"
+                make defconfig  > $fileconfigname
+        fi
+        echo -e "\t start building with $buildthreads threads. Please be patient."
+        make -j $buildthreads
+        cd -
+	copybinfile $parameter $hwconfig
 	echo "### END $parameter ###"
 done
 echo "###### END non private ######"
@@ -58,6 +124,7 @@ for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename
 	if [ $? -ne 0 ];then
 		# this is HIGHLY unlikely but not impossible
 		echo -e "\t./$dirparameterspriv/$parameterpriv file not there or not executeable in $shell, skipping to next parameterpriv"
+		echo "### END $parameterpriv ###"
 		continue
 	fi
 	# check if old config from build loop before is still the same
@@ -67,6 +134,7 @@ for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename
 		compareandcopy $(echo $dirhwconfig)
 	else
 		echo -e "\tNo hwconfig file at $scriptdir/$dirhwconfigpriv/$hwconfig nor at $scriptdir/$dirhwconfig/$hwconfig"
+		echo "### END $parameterpriv ###"
 		continue
 	fi
 	# create uci
@@ -76,10 +144,10 @@ for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename
 		echo "generating full $fileconfigname from diffconfig file"
 		make defconfig  > $fileconfigname
 	fi
+	echo -e "\t start building with $buildthreads threads. Please be patient."
 	make -j $buildthreads
-
 	cd -
-	hwbinpath
+	copybinfile $parameterpriv $hwconfig
 	echo "### END $parameterpriv ###"
 done
 echo "###### END non private ######"
