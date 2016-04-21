@@ -148,6 +148,8 @@ if [ $? -eq 0 ]; then
 	for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename); do
 		runparameter ${parameterpriv} true
 	done
+else
+	echo "Error. No *.conf files in ffcp_private_parameters.d."
 fi
 echo "###### END non private ######"
 exit 0
