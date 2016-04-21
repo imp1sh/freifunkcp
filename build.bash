@@ -86,7 +86,7 @@ function runparameter {
 	fi
 	local localparameter=$1
 	local ispriv=$2
-	if [ $ispriv ]; then
+	if $ispriv ; then
 		local parameterdir=$dirparameterspriv
 	else
 		local parameterdir=$dirparameters
