@@ -143,8 +143,11 @@ echo "###### END non private ######"
 
 
 echo "###### START private ######"
-for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename); do
-	runparameter ${parameterpriv} true
-done
+ls ffcp_private_parameters.d/*.conf
+if [ $? -eq 0 ]; then
+	for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename); do
+		runparameter ${parameterpriv} true
+	done
+fi
 echo "###### END non private ######"
 exit 0
