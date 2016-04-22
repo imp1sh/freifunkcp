@@ -1,22 +1,6 @@
 #!/bin/bash
+source ffcp_variables
 scriptdir="$(dirname "$0")"
-dirhwconfig="ffcp_config.d"
-dirhwconfigpriv="ffcp_private_config.d"
-dirparameters="ffcp_parameters.d"
-dirparameterspriv="ffcp_private_parameters.d"
-fileconfigname=".config"
-configbefore=".config.before"
-pathcp="/bin/cp"
-recreateconfig=true
-buildthreads=5
-bindir="../bin"
-binoutdir="$scriptdir/ffcp_bins"
-binoutdirpriv="$scriptdir/ffcp_private_bins"
-binfilec7v2="openwrt-ar71xx-generic-archer-c7-v2-squashfs-factory.bin openwrt-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
-binfille4300v1="openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
-binfile1043v1="openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
-binfilewndr3700v1="openwrt-ar71xx-generic-wndr3700-squashfs-factory.img openwrt-ar71xx-generic-wndr3700-squashfs-factory-NA.img openwrt-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin"
-binfilex86kvm="openwrt-x86-kvm_guest-combined-ext4.img"
 
 function compareandcopy {
 	if [ -z $1 ];  then
@@ -26,24 +10,24 @@ function compareandcopy {
 	# echo "first parameter is $1"
 	# first parameter has to be the variable which is if it's private or non private
 	privornot=$1
-        if [ -f $scriptdir/../$configbefore ]; then
+        if [ -f $scriptdir/../$filehwconfigbefore ]; then
         	# new and old both there
-        	if cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore > /dev/null 2>&1; then
-        		echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are the same than program is running fine here."
+        	if cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore > /dev/null 2>&1; then
+        		echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore. If both are the same than program is running fine here."
         	        # new and old same content
         	        recreateconfig=false
         	else
                         # new and old not the same
-                        echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore. If both are different than program is running fine here."
+                        echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore. If both are different than program is running fine here."
                         echo -e "\tcopying configpriv file into place"
-                        $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$fileconfigname
-			$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore
+                        $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfig
+			$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore
                 fi
         else
                 # only new file is there
-                echo -e "\tcopying configpriv to $scriptdir/../$fileconfigname"
-                $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$fileconfigname
-		$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$configbefore
+                echo -e "\tcopying configpriv to $scriptdir/../$filehwconfig"
+                $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfig
+		$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore
         fi
 }
 
@@ -62,14 +46,14 @@ function copybinfile {
 	local binfilefull="binfile$2"
 	for i in $(echo ${!binfilefull}); do
 		echo -e "\t\t Doing: $i"
-		if [ -f $bindir/$hwbinpath/$i ];then
+		if [ -f ../$pathopenwrtbin/$hwbinpath/$i ];then
         		local binwithoutsuffix=$(echo "$i" | awk -F'.' '{print $1}')
 			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
 			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
-                	echo -e "\t\t\tcopying $bindir/$hwbinpath/$i to $binoutdir/$binnewfile"
-                	$pathcp $bindir/$hwbinpath/$i $binoutdir/$binnewfile
+                	echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinout/$binnewfile"
+                	$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinout/$binnewfile
         	else
-        	        echo -e "\t\t\tError. file $bindir/$hwbinpath/$i not found."
+        	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/$i not found."
         	        continue
         	fi
 	done
@@ -82,60 +66,74 @@ function runparameter {
 	if [ -z $1 ] || [ -z $2 ]; then
 		echo -e "\tError. One or both parameters not given for function runparameter. Please specify."
 		echo -e "\tSkipping for $1"
-		continue
+		return 1
 	fi
 	local localparameter=$1
 	local ispriv=$2
 	if $ispriv ; then
-		local parameterdir=$dirparameterspriv
+		local parameterdir=$pathparameterspriv
 	else
-		local parameterdir=$dirparameters
+		local parameterdir=$pathparameters
 	fi
 	echo "### START $parameter ###"
-	source ./$parameterdir/$localparameter
+	if [ ! -f $scriptdir/$parameterdir/$localparameter ]; then
+		echo -e "\tError. File $scriptdir/$parameterdir/$localparameter not available"
+		return 5
+	fi
+	source $scriptdir/$parameterdir/$localparameter
 	if [ $? -ne 0 ];then
                 # this is HIGHLY unlikely but not impossible
                 echo -e "\t./$parameterdir/$localparameter file not there or not executeable in $shell, skipping to next parameter"
                 echo "### END $localparameter ###"
-                continue
+                return 2
         fi
 	if $ispriv; then
-		if [ -f $scriptdir/$dirhwconfigpriv/$hwconfig ]; then
-	                compareandcopy $(echo $dirhwconfigpriv)
-	        elif [ -f $scriptdir/$dirhwconfig/$hwconfig ]; then
-	                compareandcopy $(echo $dirhwconfig)
+		if [ -f $scriptdir/$pathhwconfigpriv/$hwconfig ]; then
+	                compareandcopy $(echo $pathhwconfigpriv)
+	        elif [ -f $scriptdir/$pathhwconfig/$hwconfig ]; then
+	                compareandcopy $(echo $pathhwconfig)
 	        else
-	                echo -e "\tNo hwconfig file at $scriptdir/$dirhwconfigpriv/$hwconfig nor at $scriptdir/$dirhwconfig/$hwconfig"
+	                echo -e "\tNo hwconfig file at $scriptdir/$pathhwconfigpriv/$hwconfig nor at $scriptdir/$pathhwconfig/$hwconfig"
 	                echo "### END $localparameter ###"
-	                continue
+	                return 3
 	        fi
 	else
-		if [ -f $scriptdir/$dirhwconfig/$hwconfig ]; then
-	                compareandcopy $(echo $dirhwconfig)
-	        elif [ -f $scriptdir/$dirhwconfigpriv/$hwconfig ]; then
-	                compareandcopy $(echo $dirhwconfigpriv)
+		if [ -f $scriptdir/$pathhwconfig/$hwconfig ]; then
+	                compareandcopy $(echo $pathhwconfig)
+	        elif [ -f $scriptdir/$pathhwconfigpriv/$hwconfig ]; then
+	                compareandcopy $(echo $pathhwconfigpriv)
 	        else
-	                echo -e "\tNo hwconfig file at $scriptdir/$dirhwconfigpriv/$hwconfig nor at $scriptdir/$dirhwconfig/$hwconfig"
+	                echo -e "\tNo hwconfig file at $scriptdir/$pathhwconfigpriv/$hwconfig nor at $scriptdir/$pathhwconfig/$hwconfig"
 	                echo "### END $parameter ###"
-	                continue
+	                return 4
 	        fi
 	fi
 	# create uci
         $scriptdir/create_uci.bash $localparameter
         cd $scriptdir/..
         if [ "$recreateconfig" = true ]; then
-                echo "generating full $fileconfigname from diffconfig file"
-                make defconfig  > $fileconfigname
+                echo "generating full $filehwconfig from diffconfig file"
+                make defconfig  > $filehwconfig
         fi
         echo -e "\t start building with $buildthreads threads. Please be patient."
         make -j $buildthreads
         cd -
         copybinfile $localparameter $hwconfig
         echo "### END $localparameter ###"
+	return 0
 }
 
+# run specific parameter
+if [ -n $1 ]; then
+	specificparameter=$1
+	runparameter $specificparameter true
+	runparameter $specificparameter false
+	fi
+	exit 0
+fi
+
 echo "###### START non private ######"
-for parameter in $(ls ffcp_parameters.d/*.conf | xargs -n 1 basename); do
+for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
 	runparameter ${parameter} false
 done
 echo "###### END non private ######"
@@ -143,13 +141,13 @@ echo "###### END non private ######"
 
 
 echo "###### START private ######"
-ls ffcp_private_parameters.d/*.conf
+ls $scriptdir/$pathparameterspriv/*.conf
 if [ $? -eq 0 ]; then
-	for parameterpriv in $(ls ffcp_private_parameters.d/*.conf | xargs -n 1 basename); do
+	for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
 		runparameter ${parameterpriv} true
 	done
 else
-	echo "Error. No *.conf files in ffcp_private_parameters.d."
+	echo "Error. No *.conf files in $pathparameterspriv."
 fi
 echo "###### END non private ######"
 exit 0

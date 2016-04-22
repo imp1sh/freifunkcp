@@ -1,35 +1,6 @@
 #!/bin/bash
-# edit for your needs
-
-# do not edit below
-ucidefaultspath=files/etc/uci-defaults
-# instead maybe source from ./doc/configs
-configs=(alfred batmanadv dhcp dropbear firewall network system vnstat wireless)
+source ffcp_variables
 parameterfile="$1"
-configpath=./files/etc/config
-sshpubkeyfile=sshpubkeys
-uciparameterfile="ffcp_parameter.conf"
-ucienvfile="ffcp_env.conf"
-
-alfredfile="$configpath/alfred"
-batmanadvfile="$configpath/batman-adv"
-dhcpfile="$configpath/dhcp"
-dropbearfile="$configpath/dropbear"
-dropbearkeyfiles="./files/etc/dropbear/authorized_keys"
-firewallfile="$configpath/firewall"
-networkfile="$configpath/network"
-systemfile="$configpath/system"
-vnstatfile="$configpath/vnstat"
-wirelessfile="$configpath/wireless"
-
-modulesdir="ffcp_modules.d"
-privmodulesdir="ffcp_private_modules.d"
-devicesdir="ffcp_devices.d"
-privdevicesdir="ffcp_private_devices.d"
-parametersdir="ffcp_parameters.d"
-privparametersdir="ffcp_private_parameters.d"
-envdir="ffcp_env.d"
-privenvdir="ffcp_private_env.d"
 
 function initfile {
 	# $1 is file to check given as relative path
@@ -43,26 +14,26 @@ function catelement {
 	if [ -f $1/$2 ]; then
 		cat $1/$2
 	else
-		cat $privmodulesdir/$2
+		cat $pathmodulespriv/$2
 	fi
 }
 function grabarrayelement {
 	declare -a argAry1=("${!1}")
 	for $(echo $1element) in "${argAry1[@]}"; do
-		catelement "$modulesdir" "$1"element >> "$1"file
+		catelement "$pathmodules" "$1"element >> "$1"file
 	done
 }
 function listdevices {
 	echo -e "\tdevices:"
-	ls $devicesdir
+	ls $pathdevices
 	echo -e "\tprivate devices:"
-	ls $privdevicesdir
+	ls $pathdevicespriv
 }
 function listparameters {
 	echo -e "\tparameters:"
-	ls $parametersdir/*.conf | awk -F'/' '{print $NF}'
+	ls $pathparameters/*.conf | awk -F'/' '{print $NF}'
 	echo -e "\tprivate parameters:"
-	ls $privparametersdir/*.conf | awk -F'/' '{print $NF}'
+	ls $pathparameterspriv/*.conf | awk -F'/' '{print $NF}'
 }
 function isuseable {
 	# $1 is file $2 is folder1 $3 is folder2
@@ -95,19 +66,19 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 # check if chosen parameter is a private one or a regular one
-if [ `ls $parametersdir|grep -c $parameterfile` -eq 0 ]; then
-	notinparametersdir=1
+if [ `ls $pathparameters|grep -c $parameterfile` -eq 0 ]; then
+	notinpathparameters=1
 else
-	notinparametersdir=0
+	notinpathparameters=0
 fi
-if [ `ls $privparametersdir | grep -c $parameterfile` -eq 0 ]; then
-	notinprivparametersdir=1
+if [ `ls $pathparameterspriv | grep -c $parameterfile` -eq 0 ]; then
+	notinpathparameterspriv=1
 else
-	notinprivparametersdir=0
+	notinpathparameterspriv=0
 fi
 
 # if equal then config is either in both or in none of both dirs. Both not acceptable.
-if [ $notinparametersdir -eq $notinprivparametersdir ] ; then
+if [ $notinpathparameters -eq $notinpathparameterspriv ] ; then
 	echo "The given config is wrong. It's either in none or in both folders. Please choose one of the available configs!"
 	listparameters
 	#exit ${argAry1[@]}A
@@ -117,124 +88,124 @@ else
 	# here's the action
 
 	# is regular
-	if [ $notinparametersdir -eq 0 ]; then
-		source "$parametersdir/$parameterfile"
-		echo "$parametersdir/$parameterfile sourced"
-		if [ -f $devicesdir/$devicetype ]; then
-			source "$devicesdir/$devicetype"
-			echo "$devicesdir/$devicetype sourced"
-		elif [ -f $privdevicesdir/$devicetype ]; then
-			source "$privdevicesdir/$devicetype"
-			echo "$privdevicesdir/$devicetype sourced"
+	if [ $notinpathparameters -eq 0 ]; then
+		source "$pathparameters/$parameterfile"
+		echo "$pathparameters/$parameterfile sourced"
+		if [ -f $pathdevices/$devicetype ]; then
+			source "$pathdevices/$devicetype"
+			echo "$pathdevices/$devicetype sourced"
+		elif [ -f $pathdevicespriv/$devicetype ]; then
+			source "$pathdevicespriv/$devicetype"
+			echo "$pathdevicespriv/$devicetype sourced"
 		else
-			echo "Error. No device file with the name $devicetype found neither in $devicesdir nor in $privdevicesdir."
+			echo "Error. No device file with the name $devicetype found neither in $pathdevices nor in $pathdevicespriv."
 			exit 17
 		fi
-		if [ -f "$envdir/$envfile" ]; then
-			source "$envdir/$envfile"
-			echo "$envdir/$envfile sourced"
-			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
-		elif [ -f $privenvdir/$envfile ]; then
-			source "$privenvdir/$envfile"
-			echo "$privenvdir/$envfile sourced"
-			cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
+		if [ -f "$pathenv/$envfile" ]; then
+			source "$pathenv/$envfile"
+			echo "$pathenv/$envfile sourced"
+			cp -f $pathenv/$envfile $pathucidefaults/$fileucienv
+		elif [ -f $pathenvpriv/$envfile ]; then
+			source "$pathenvpriv/$envfile"
+			echo "$pathenvpriv/$envfile sourced"
+			cp -f $pathenvpriv/$envfile $pathucidefaults/$fileucienv
 		else
-			echo "Error. No env file with the name $envfile found neither in $envdir nor in $privenvdir"
+			echo "Error. No env file with the name $envfile found neither in $pathenv nor in $pathenvpriv"
 			exit 18
 		fi
 		# part where the central config files are being distributed to subordinary scripts
 	        # very ipmortant, if this file is not being distributed, node will have incomplete info
-		if  [ -d $ucidefaultspath ]  ; then
-			cp -f $parametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
+		if  [ -d $pathucidefaults ]  ; then
+			cp -f $pathparameters/$parameterfile $pathucidefaults/$fileuciparameter
 		else
-			echo "Either parameter file at $parametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+			echo "Either parameter file at $pathparameters/$parameterfile is missing or path to uci-defaults $pathucidefaults is wrong."
 			exit 15
 		fi
 	else
 	# is private
-		source $privparametersdir/$parameterfile
-		echo "$privparametersdir/$parameterfile sourced"
-		if [ -f $privdevicesdir/$devicetype ]; then
-			source "$privdevicesdir/$devicetype"
-			echo "$privdevicesdir/$devicetype sourced"
-		elif [ -f $devicesdir/$devicetype ]; then
-			source "$devicesdir/$devicetype"
-			echo "$devicesdir/$devicetype sourced"
+		source $pathparameterspriv/$parameterfile
+		echo "$pathparameterspriv/$parameterfile sourced"
+		if [ -f $pathdevicespriv/$devicetype ]; then
+			source "$pathdevicespriv/$devicetype"
+			echo "$pathdevicespriv/$devicetype sourced"
+		elif [ -f $pathdevices/$devicetype ]; then
+			source "$pathdevices/$devicetype"
+			echo "$pathdevices/$devicetype sourced"
 		else
-			echo "Error. No device file with the name $devicetype found neither in $privparametersdir nor in $devicesdir"
+			echo "Error. No device file with the name $devicetype found neither in $pathparameterspriv nor in $pathdevices"
 			exit 20
 		fi
-		if [ -f $privenvdir/$envfile ]; then
-			source "$privenvdir/$envfile"
-			echo "$privenvdir/$envfile sourced"
-			cp -f $privenvdir/$envfile $ucidefaultspath/$ucienvfile
-		elif [ -f $envdir/$envfile ];then
-			source "$envdir/$envfile"
-			echo "$envdir/$envfile sourced"
-			cp -f $envdir/$envfile $ucidefaultspath/$ucienvfile
+		if [ -f $pathenvpriv/$envfile ]; then
+			source "$pathenvpriv/$envfile"
+			echo "$pathenvpriv/$envfile sourced"
+			cp -f $pathenvpriv/$envfile $pathucidefaults/$fileucienv
+		elif [ -f $pathenv/$envfile ];then
+			source "$pathenv/$envfile"
+			echo "$pathenv/$envfile sourced"
+			cp -f $pathenv/$envfile $pathucidefaults/$fileucienv
 		else
-			echo "Error. No env file with the name $envfile found neither in $privenvdir nor in $envdir."
+			echo "Error. No env file with the name $envfile found neither in $pathenvpriv nor in $pathenv."
 			exit 21
 		fi
-		if ( [ -f $privparametersdir/$parameterfile ] && [ -d $ucidefaultspath ] ) ; then
-                        cp -f $privparametersdir/$parameterfile $ucidefaultspath/$uciparameterfile
+		if ( [ -f $pathparameterspriv/$parameterfile ] && [ -d $pathucidefaults ] ) ; then
+                        cp -f $pathparameterspriv/$parameterfile $pathucidefaults/$fileuciparameter
                 else
-                        echo "Either parameter file at $privparametersdir/$parameterfile is missing or path to uci-defaults $ucidefaultspath is wrong."
+                        echo "Either parameter file at $pathparameterspriv/$parameterfile is missing or path to uci-defaults $pathucidefaults is wrong."
                         exit 15
                 fi
 	fi
 
 	# initialize config files
-	for fileelement in $alfredfile $batmanadvfile $dhcpfile $dropbearfile $firewallfile $networkfile $systemfile $vnstatfile $wirelessfile $dropbearkeyfiles; do
+	for fileelement in $filemodulealfred $filemodulebatmanadv $filemoduledhcp $filemoduledropear $filemodulefirewall $filemodulenetwork $filemodulesystem $filemodulevnstat $filemodulewireless $pathucidropbear/$filedropbearkeys; do
 		initfile $fileelement
 	done
 	# loop over elements
 	# not working, yet
 	# grabarrayelement alfred
 	for alfredelement in "${alfred[@]}"; do
-		catelement $modulesdir $alfredelement >> $alfredfile
+		catelement $pathmodules $alfredelement >> $filemodulealfred
 	done
 	echo "alfred done"
 	for batmanadvelement in "${batmanadv[@]}"; do
-		catelement $modulesdir $batmanadvelement >> $batmanadvfile
+		catelement $pathmodules $batmanadvelement >> $filemodulebatmanadv
 	done
 	echo "batmanadv done"
 	for dhcpelement in "${dhcp[@]}"; do
-		catelement $modulesdir $dhcpelement >> $dhcpfile
+		catelement $pathmodules $dhcpelement >> $filemoduledhcp
 	done
 	echo "dhcp done"
 	for dropbearelement in "${dropbear[@]}"; do
-		catelement $modulesdir $dropbearelement >> $dropbearfile
+		catelement $pathmodules $dropbearelement >> $filemoduledropear
 	done
 	echo "dropbear done"
 	for firewallelement in "${firewall[@]}"; do
-		catelement $modulesdir $firewallelement >> $firewallfile
+		catelement $pathmodules $firewallelement >> $filemodulefirewall
 	done
 	echo "firewall done"
 	for networkelement in "${network[@]}"; do
-		catelement $modulesdir $networkelement >> $networkfile
+		catelement $pathmodules $networkelement >> $filemodulenetwork
 	done
 	echo "network done"
 	for systemelement in "${system[@]}"; do
-		catelement $modulesdir $systemelement >> $systemfile
+		catelement $pathmodules $systemelement >> $filemodulesystem
 	done
 	echo "system done"
 	for vnstatelement in "${vnstat[@]}"; do
-		catelement $modulesdir $vnstatelement >> $vnstatfile
+		catelement $pathmodules $vnstatelement >> $filemodulevnstat
 	done
 	echo "vnstat done"
 	for wirelesselement in "${wireless[@]}"; do
-		catelement $modulesdir $wirelesselement >> $wirelessfile
+		catelement $pathmodules $wirelesselement >> $filemodulewireless
 	done
 	echo "wireless done"
 	
 	# distribute sourced keys from ffcp_parameter.conf into dropbear authorized_keys
 	# array variable is being sourced 
-	if [ -f $sshpubkeyfile ]; then
-		source $sshpubkeyfile
+	if [ -f $filesshpubkeys ]; then
+		source $filesshpubkeys
 		echo "ssh pubkeys sourced."
-			for key in "${sshpubkeys[@]}"; do
-			echo $key >> $dropbearkeyfiles
+		for key in "${sshpubkeys[@]}"; do
+			echo $key >> $pathucidropbear/$filedropbearkeys
 		done
 	else
 		echo "no ssh key files handled."
