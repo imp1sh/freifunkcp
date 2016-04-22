@@ -30,9 +30,9 @@ else
 fi
 
 # private net ula
-uci set network.lan.ula_prefix=$privnet
+# uci set network.lan.ula_prefix=$privnet
 # mesh net ula
-uci set network.guests.ula_prefix="$domainula/$domainulasize"
+# uci set network.guests.ula_prefix="$domainula/$domainulasize"
 
 # set site code which is $sidecode
 echo "$sidecode" >> /lib/freifunkcp/sitecode
