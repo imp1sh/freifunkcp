@@ -2,6 +2,21 @@
 source ffcp_variables
 scriptdir="$(dirname "$0")"
 
+function listparameters {
+        echo -e "\tparameters:"
+        ls $pathparameters/*.conf | awk -F'/' '{print $NF}'
+        echo -e "\tprivate parameters:"
+        ls $pathparameterspriv/*.conf | awk -F'/' '{print $NF}'
+}
+
+function tellhow {
+	echo "First parameter give either specific parameter you want to run or all for all parameters."
+	echo "Second parameter give true or false. true means you'd like to run private. If none is given both will be tried."
+	echo "Parameter files need to end in *.conf"
+	echo "Here's a list of parameters you can choose from:"
+	listparameters
+}
+
 function compareandcopy {
 	if [ -z $1 ];  then
 		echo "Error. Parameter 1 not given for compareandcopy."
@@ -123,31 +138,90 @@ function runparameter {
 	return 0
 }
 
-# run specific parameter
-if [ -n $1 ]; then
+# no parameter given
+if [ -z $1 ] && [ -z $2 ]; then
+	tellhow
+	exit 3
+# do all parameters private and non private
+elif [ $1 == "all" ] && [ -z $2 ]; then
+	echo "###### START non private ######"
+	ls $scriptdir/$pathparameters/*.conf
+	if [ $? -eq 0 ]; then
+		for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
+			runparameter ${parameter} false
+		done
+	else
+		echo "Error. No *.conf files in $pathparameters"
+	fi
+	echo "###### END non private ######"
+
+	echo "###### START private ######"
+	ls $scriptdir/$pathparameterspriv/*.conf
+	if [ $? -eq 0 ]; then
+		for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
+			runparameter ${parameterpriv} true
+		done
+	else
+		echo "Error. No *.conf files in $pathparameterspriv."
+	fi
+	echo "###### END non private ######"
+# do all parameters but either only for private or for non-private
+elif [ $1 == "all" ] && [ -n $2 ]; then
+	if [ $2 == "true" ]; then
+		ls $scriptdir/$pathparameterspriv/*.conf
+		if [ $? -eq 0 ]; then
+			for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
+	                        runparameter ${parameterpriv} true
+	                done
+		else
+			echo "Error. No *.conf files in $pathparameterspriv."
+		fi
+	elif [ $2 == "false" ]; then
+		ls $scriptdir/$pathparameters/*.conf
+		if [ $? -eq 0 ]; then
+			for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
+	                        runparameter ${parameter} false
+	                done
+		else
+			echo "Error. No *.conf files in $pathparameters"
+		fi
+	else
+		tellhow
+	fi
+# only first given, search for parameter and run that's found first
+elif [ -n $1 ] && [ -z $2 ]; then
 	specificparameter=$1
-	runparameter $specificparameter true
-	runparameter $specificparameter false
+	ls $scriptdir/$pathparameters/$1
+	if [ $? -eq 0 ];then
+		runparameter $specificparameter false
+	fi
+	ls $scriptdir/$pathparameterspriv/*.conf
+	if [ $? -eq 0 ];then
+		runparameter $specificparameter true
+	else
+		"Error. File $1 not found neither in $pathparameterspriv nor in $pathparameters."
+		exit 2
 	fi
 	exit 0
+elif [ -n $1 ] && [ -n $2 ]; then
+	if [ $2 == "true" ]; then
+                ls $scriptdir/$pathparameterspriv/*.conf
+		 if [ $? -eq 0 ]; then
+			runparameter $1 true
+		else
+			echo "Error. File $1 not found in $pathparameterspriv"
+			exit 4
+		fi
+	elif [ $2 == "false" ]; then
+		ls $scriptdir/$pathparameters/*.conf
+                 if [ $? -eq 0 ]; then
+                        runparameter $1 false
+		else
+			echo "Error. File $1 not found in $pathparameters"
+                        exit 5
+		fi
+	else
+		echo "Error. in $2"
+		tellhow
+	fi
 fi
-
-echo "###### START non private ######"
-for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
-	runparameter ${parameter} false
-done
-echo "###### END non private ######"
-
-
-
-echo "###### START private ######"
-ls $scriptdir/$pathparameterspriv/*.conf
-if [ $? -eq 0 ]; then
-	for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
-		runparameter ${parameterpriv} true
-	done
-else
-	echo "Error. No *.conf files in $pathparameterspriv."
-fi
-echo "###### END non private ######"
-exit 0
