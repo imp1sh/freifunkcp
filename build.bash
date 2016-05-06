@@ -24,26 +24,29 @@ function compareandcopy {
 	fi
 	# echo "first parameter is $1"
 	# first parameter has to be the variable which is if it's private or non private
-	privornot=$1
-        if [ -f $scriptdir/../$filehwconfigbefore ]; then
-        	# new and old both there
-        	if cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore > /dev/null 2>&1; then
-        		echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore. If both are the same than program is running fine here."
-        	        # new and old same content
-        	        recreateconfig=false
-        	else
-                        # new and old not the same
-                        echo -e "\tdo cmp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore. If both are different than program is running fine here."
-                        echo -e "\tcopying configpriv file into place"
-                        $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfig
-			$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore
-                fi
-        else
+	local localpathhwconfig=$1
+        #if [ -f $scriptdir/../$filehwconfigbefore ]; then
+        #	# new and old both there
+        #	if cmp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore > /dev/null 2>&1; then
+        #		echo -e "\tdo cmp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore. If both are the same than program is running fine here."
+        #	        # new and old same content
+	#		recreateconfig=false
+        #	else
+        #		# new and old not the same
+        #		echo -e "\tdo cmp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore. If both are different than program is running fine here."
+        #		echo -e "\tcopying configpriv file into place"
+        #		# echo "$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfig"
+	#		# echo "$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore"
+        #               $pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfig
+	#		$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore
+        #       fi
+        #else
                 # only new file is there
-                echo -e "\tcopying configpriv to $scriptdir/../$filehwconfig"
-                $pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfig
-		$pathcp $scriptdir/$privornot/$hwconfig $scriptdir/../$filehwconfigbefore
-        fi
+                echo "$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfig"
+		#echo "$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore"
+                $pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfig
+	#	$pathcp $scriptdir/$localpathhwconfig/$hwconfig $scriptdir/../$filehwconfigbefore
+        #fi
 }
 
 function copybinfile {
@@ -58,15 +61,20 @@ function copybinfile {
 	local parameterwithoutprefix=$(echo $parameterlocal | awk -F'.' '{print $1}')
 	local parameterprefix=$(echo $parameterlocal | awk -F'.' '{print $2}')
 	# hwconfiglocal might be x86kvm or c7v2 or something like this
-	local binfilefull="binfile$2"
+	local binfilefull="filebin$2"
 	for i in $(echo ${!binfilefull}); do
 		echo -e "\t\t Doing: $i"
 		if [ -f ../$pathopenwrtbin/$hwbinpath/$i ];then
         		local binwithoutsuffix=$(echo "$i" | awk -F'.' '{print $1}')
 			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
 			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
-                	echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinout/$binnewfile"
-                	$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinout/$binnewfile
+			if $ispriv; then
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinoutpriv/$binnewfile"
+				$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinoutpriv/$binnewfile
+			else
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinout/$binnewfile"
+	                	$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinout/$binnewfile
+			fi
         	else
         	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/$i not found."
         	        continue
@@ -84,7 +92,7 @@ function runparameter {
 		return 1
 	fi
 	local localparameter=$1
-	local ispriv=$2
+	ispriv=$2
 	if $ispriv ; then
 		local parameterdir=$pathparameterspriv
 	else
@@ -126,13 +134,16 @@ function runparameter {
 	# create uci
         $scriptdir/create_uci.bash $localparameter
         cd $scriptdir/..
-        if [ "$recreateconfig" = true ]; then
-                echo "generating full $filehwconfig from diffconfig file"
-                make defconfig  > $filehwconfig
-        fi
+        #if "$recreateconfig"; then
+	        echo "generating full $filehwconfig from diffconfig file"
+	         make defconfig  > $filehwconfig
+        #fi
+        echo "generating full $filehwconfig from diffconfig file"
+        make defconfig  > $filehwconfig
         echo -e "\t start building with $buildthreads threads. Please be patient."
         make -j $buildthreads
         cd -
+	echo "copybinfile $localparameter $hwconfig"
         copybinfile $localparameter $hwconfig
         echo "### END $localparameter ###"
 	return 0
@@ -145,7 +156,7 @@ if [ -z $1 ] && [ -z $2 ]; then
 # do all parameters private and non private
 elif [ $1 == "all" ] && [ -z $2 ]; then
 	echo "###### START non private ######"
-	ls $scriptdir/$pathparameters/*.conf
+	ls $scriptdir/$pathparameters/*.conf &>/dev/null
 	if [ $? -eq 0 ]; then
 		for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
 			runparameter ${parameter} false
@@ -156,7 +167,7 @@ elif [ $1 == "all" ] && [ -z $2 ]; then
 	echo "###### END non private ######"
 
 	echo "###### START private ######"
-	ls $scriptdir/$pathparameterspriv/*.conf
+	ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
 	if [ $? -eq 0 ]; then
 		for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
 			runparameter ${parameterpriv} true
@@ -168,7 +179,7 @@ elif [ $1 == "all" ] && [ -z $2 ]; then
 # do all parameters but either only for private or for non-private
 elif [ $1 == "all" ] && [ -n $2 ]; then
 	if [ $2 == "true" ]; then
-		ls $scriptdir/$pathparameterspriv/*.conf
+		ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
 		if [ $? -eq 0 ]; then
 			for parameterpriv in $(ls $scriptdir/$pathparameterspriv/*.conf | xargs -n 1 basename); do
 	                        runparameter ${parameterpriv} true
@@ -177,7 +188,7 @@ elif [ $1 == "all" ] && [ -n $2 ]; then
 			echo "Error. No *.conf files in $pathparameterspriv."
 		fi
 	elif [ $2 == "false" ]; then
-		ls $scriptdir/$pathparameters/*.conf
+		ls $scriptdir/$pathparameters/*.conf &>/dev/null
 		if [ $? -eq 0 ]; then
 			for parameter in $(ls $scriptdir/$pathparameters/*.conf | xargs -n 1 basename); do
 	                        runparameter ${parameter} false
@@ -191,12 +202,14 @@ elif [ $1 == "all" ] && [ -n $2 ]; then
 # only first given, search for parameter and run that's found first
 elif [ -n $1 ] && [ -z $2 ]; then
 	specificparameter=$1
-	ls $scriptdir/$pathparameters/$1
+	ls $scriptdir/$pathparameters/$1 &>/dev/null
 	if [ $? -eq 0 ];then
+		echo "Parameter file found in $pathparameters."
 		runparameter $specificparameter false
 	fi
-	ls $scriptdir/$pathparameterspriv/*.conf
+	ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
 	if [ $? -eq 0 ];then
+		echo "Parameter file found in $pathparameterspriv."
 		runparameter $specificparameter true
 	else
 		"Error. File $1 not found neither in $pathparameterspriv nor in $pathparameters."
@@ -205,7 +218,7 @@ elif [ -n $1 ] && [ -z $2 ]; then
 	exit 0
 elif [ -n $1 ] && [ -n $2 ]; then
 	if [ $2 == "true" ]; then
-                ls $scriptdir/$pathparameterspriv/*.conf
+                ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
 		 if [ $? -eq 0 ]; then
 			runparameter $1 true
 		else
@@ -213,7 +226,7 @@ elif [ -n $1 ] && [ -n $2 ]; then
 			exit 4
 		fi
 	elif [ $2 == "false" ]; then
-		ls $scriptdir/$pathparameters/*.conf
+		ls $scriptdir/$pathparameters/*.conf &>/dev/null
                  if [ $? -eq 0 ]; then
                         runparameter $1 false
 		else
