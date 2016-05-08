@@ -13,7 +13,7 @@ We want to network with our neighbours, because that's the most natural thing on
 * vnstat traffic monitor already setup
 * Meshing via 2,4 GHz as well as 5 GHz as well as via cable already setup
 * very remote devices with only one cable going to it: you don't have to compromise with features
-* script: create_uci.bash is also a kind of management suite for openwrt buildroot to handle all your devices and configurations
+* script: create_uci.bash is also a kind of management suite for openwrt/lede buildroot to handle all your devices and configurations
 * based upon OpenWrt Chaos Calmer stable
 * able to handle all different freifunk odours (please donate config!)
 
@@ -35,15 +35,16 @@ I would say for those people who aren't afraid of configuring an OpenWrt based d
 If you actually like administration of routers and also like meshed networks, you are very likely to be in the right place.
 
 ## What's the overall state?
-* beta 0.61
-* actively searching for people to support this solution
+* testing with lede instead of OpenWrt (https://www.lede-project.org)
+* beta 0.62
+* actively searching for people to support this project
 * zabbix agent support out of the box
 * [Prebuilt images](http://images.gosix.net)
 * Based on Chaos Calmer stable, but you can also choose development trunk if you prefer (http://wiki.openwrt.org/about/latest)
 * <strike>Map integration (alfred) status: 95 %</strike>
 * Map integration (respondd) status: 0%
-* Using common OpenWrt buildroot environment (http://wiki.openwrt.org/doc/howto/build)
-* We currently only support TP-Link Archer C7v2, 1043v1 and TP-Link 4300 v1. More to come soon. Consider donating device if you want your device supported.
+* Using common OpenWrt/lede buildroot environment (http://wiki.openwrt.org/doc/howto/build)
+* We currently only support TP-Link Archer C7v2, 1043v1, x86kvm, x86 and TP-Link 4300 v1. More to come soon. Consider donating device if you want your device supported.
 
 ## What's not working
 * This solution does not yet offer vpn/fastd at all. So currently you can only run as satellite. There are also currently no measures taken to get vpn running any time soon. Use gluon offloader or normal gluon device.
