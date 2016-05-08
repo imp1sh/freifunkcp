@@ -9,7 +9,7 @@ usually like this:
 ./freifunkcp/env/
 
 # Setup buildroot environment
-1. `git clone git://git.openwrt.org/15.05/openwrt.git freifunkcp`
+1. `git clone git://git.openwrt.org/15.05/openwrt.git freifunkcp`<br>Alternatively use lede: git clone http://git.lede-project.org/source.git freifunkcp
 
 2. `cd freifunkcp`
 
@@ -27,8 +27,8 @@ usually like this:
 
 8. `rm .config`
 
-9. `ln -s ./env/.config .`
+9. Install the right hardware config, for example x86 by invoking `cp env/ffcp_config.d/x86 .config`
 
-10. `ln -s ./env/files .`
+10. `make defconfig`
 
 11. Usually next step is to follow [howto_build](howto_build.md)
