@@ -6,6 +6,9 @@ batmanadv=(
 batmanadv_bat0
 )
 
+ddns=(
+)
+
 dhcp=(
 dhcp_dnsmasq_ffcp
 dhcp_lan_on
@@ -41,6 +44,9 @@ network_mesh_wifi24
 network_mesh_cable5_1043v1
 network_wan6_1043v1
 network_wan_1043v1
+)
+
+openvpn=(
 )
 
 system=(

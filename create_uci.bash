@@ -156,7 +156,7 @@ else
 	fi
 
 	# initialize config files
-	for fileelement in $filemodulealfred $filemodulebatmanadv $filemoduledhcp $filemoduledropear $filemodulefirewall $filemodulenetwork $filemodulesystem $filemodulevnstat $filemodulewireless $pathucidropbear/$filedropbearkeys; do
+	for fileelement in $filemodulealfred $filemodulebatmanadv $filemoduleddns $filemoduledhcp $filemoduledropear $filemodulefirewall $filemodulenetwork $filemoduleopenvpn $filemodulesystem $filemodulevnstat $filemodulewireless $pathucidropbear/$filedropbearkeys; do
 		initfile $fileelement
 	done
 	# loop over elements
@@ -170,6 +170,10 @@ else
 		catelement $pathmodules $batmanadvelement >> $filemodulebatmanadv
 	done
 	echo "batmanadv done"
+	for ddnselement in "${ddns[@]}"; do
+		catelement $pathmodules $ddnselement >> $filemoduleddns
+	done
+	echo "ddns done"
 	for dhcpelement in "${dhcp[@]}"; do
 		catelement $pathmodules $dhcpelement >> $filemoduledhcp
 	done
@@ -186,6 +190,10 @@ else
 		catelement $pathmodules $networkelement >> $filemodulenetwork
 	done
 	echo "network done"
+	for openvpnelement in "${openvpn[@]}"; do
+		catelement $pathmodules $openvpnelement >> $filemoduleopenvpn
+	done
+	echo "openvpn done"
 	for systemelement in "${system[@]}"; do
 		catelement $pathmodules $systemelement >> $filemodulesystem
 	done
