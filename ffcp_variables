@@ -5,6 +5,7 @@ pathuciconfig="files/etc/config"
 pathucidropbear="files/etc/dropbear"
 pathcp="/bin/cp"
 pathopenwrtbin="bin"
+pathopenvpncerts="/etc/openvpn"
 
 # non private
 pathmodules="ffcp_modules.d"
