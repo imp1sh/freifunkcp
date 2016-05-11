@@ -162,49 +162,93 @@ else
 	# loop over elements
 	# not working, yet
 	# grabarrayelement alfred
-	for alfredelement in "${alfred[@]}"; do
-		catelement $pathmodules $alfredelement >> $filemodulealfred
-	done
+	if [ ${#alfred[@]} -eq 0 ];then
+		rm $filemodulealfred
+	else
+		for alfredelement in "${alfred[@]}"; do
+			catelement $pathmodules $alfredelement >> $filemodulealfred
+		done
+	fi
 	echo "alfred done"
-	for batmanadvelement in "${batmanadv[@]}"; do
-		catelement $pathmodules $batmanadvelement >> $filemodulebatmanadv
-	done
+	if [ ${#batmanadv[@]} -eq 0 ];then
+                rm $filemodulebatmanadv
+        else
+		for batmanadvelement in "${batmanadv[@]}"; do
+			catelement $pathmodules $batmanadvelement >> $filemodulebatmanadv
+		done
+	fi
 	echo "batmanadv done"
-	for ddnselement in "${ddns[@]}"; do
-		catelement $pathmodules $ddnselement >> $filemoduleddns
-	done
+	if [ ${#ddns[@]} -eq 0 ];then
+                rm $filemoduleddns
+        else
+		for ddnselement in "${ddns[@]}"; do
+			catelement $pathmodules $ddnselement >> $filemoduleddns
+		done
+	fi
 	echo "ddns done"
-	for dhcpelement in "${dhcp[@]}"; do
-		catelement $pathmodules $dhcpelement >> $filemoduledhcp
-	done
+	if [ ${#dhcp[@]} -eq 0 ];then
+                rm $filemoduledhcp
+        else
+		for dhcpelement in "${dhcp[@]}"; do
+			catelement $pathmodules $dhcpelement >> $filemoduledhcp
+		done
+	fi
 	echo "dhcp done"
-	for dropbearelement in "${dropbear[@]}"; do
-		catelement $pathmodules $dropbearelement >> $filemoduledropear
-	done
+	if [ ${#dropbear[@]} -eq 0 ];then
+                rm $filemoduledropbear
+        else
+		for dropbearelement in "${dropbear[@]}"; do
+			catelement $pathmodules $dropbearelement >> $filemoduledropear
+		done
+	fi
 	echo "dropbear done"
-	for firewallelement in "${firewall[@]}"; do
-		catelement $pathmodules $firewallelement >> $filemodulefirewall
-	done
+	if [ ${#firewall[@]} -eq 0 ];then
+                rm $filemodulefirewall
+        else
+		for firewallelement in "${firewall[@]}"; do
+			catelement $pathmodules $firewallelement >> $filemodulefirewall
+		done
+	fi
 	echo "firewall done"
-	for networkelement in "${network[@]}"; do
-		catelement $pathmodules $networkelement >> $filemodulenetwork
-	done
+	if [ ${#network[@]} -eq 0 ];then
+                rm $filemodulenetwork
+        else
+		for networkelement in "${network[@]}"; do
+			catelement $pathmodules $networkelement >> $filemodulenetwork
+		done
+	fi
 	echo "network done"
-	for openvpnelement in "${openvpn[@]}"; do
-		catelement $pathmodules $openvpnelement >> $filemoduleopenvpn
-	done
+	if [ ${#openvpn[@]} -eq 0 ];then
+                rm $filemoduleopenvpn
+        else
+		for openvpnelement in "${openvpn[@]}"; do
+			catelement $pathmodules $openvpnelement >> $filemoduleopenvpn
+		done
+	fi
 	echo "openvpn done"
-	for systemelement in "${system[@]}"; do
-		catelement $pathmodules $systemelement >> $filemodulesystem
-	done
+	if [ ${#system[@]} -eq 0 ];then
+                rm $filemodulesystem
+        else
+		for systemelement in "${system[@]}"; do
+			catelement $pathmodules $systemelement >> $filemodulesystem
+		done
+	fi
 	echo "system done"
-	for vnstatelement in "${vnstat[@]}"; do
-		catelement $pathmodules $vnstatelement >> $filemodulevnstat
-	done
+	if [ ${#vnstat[@]} -eq 0 ];then
+                rm $filemodulevnstat
+        else
+		for vnstatelement in "${vnstat[@]}"; do
+			catelement $pathmodules $vnstatelement >> $filemodulevnstat
+		done
+	fi
 	echo "vnstat done"
-	for wirelesselement in "${wireless[@]}"; do
-		catelement $pathmodules $wirelesselement >> $filemodulewireless
-	done
+	if [ ${#wireless[@]} -eq 0 ];then
+                rm $filemodulewireless
+        else
+		for wirelesselement in "${wireless[@]}"; do
+			catelement $pathmodules $wirelesselement >> $filemodulewireless
+		done
+	fi
 	echo "wireless done"
 	
 	# distribute sourced keys from ffcp_parameter.conf into dropbear authorized_keys
