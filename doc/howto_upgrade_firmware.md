@@ -1,3 +1,4 @@
 # How to upgrade firmware
-- feel free to use main development branch instead of stable branch
-- build your firmware and flash
+- if something has changed since the last built, update your files
+- build again
+- flash
