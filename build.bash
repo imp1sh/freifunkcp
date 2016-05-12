@@ -138,8 +138,6 @@ function runparameter {
 	        echo "generating full $filehwconfig from diffconfig file"
 	         make defconfig  > $filehwconfig
         #fi
-        echo "generating full $filehwconfig from diffconfig file"
-        make defconfig  > $filehwconfig
         echo -e "\t start building with $buildthreads threads. Please be patient."
         make -j $buildthreads
         cd -
