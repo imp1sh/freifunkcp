@@ -1,4 +1,5 @@
 # Freifunkcp
+![Image of login screen](https://github.com/imp1sh/freifunkcp/blob/masterfiles/doc/160512_screenshot_freifunkcp.png)<br>
 Firstly Freifunkcp is a script based solution that gives you the possibility to manage firmwares for your OpenWrt devices no matter if it's for your company or for some OpenWrt based project.
 Secondly it is an OpenWrt release that is being built this environment. It is by default compatible to Freifunk (batman-adv). In the future we plan to switch to babeld if Freifunk is also making this transition.
 freifunkcp stands for Freifunk ComPatible
