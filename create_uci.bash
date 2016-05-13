@@ -123,6 +123,7 @@ else
 		fi
 	else
 	# is private
+		echo "ispriv"
 		source $pathparameterspriv/$parameterfile
 		echo "$pathparameterspriv/$parameterfile sourced"
 		if [ -f $pathdevicespriv/$devicetype ]; then
@@ -265,6 +266,7 @@ else
 	echo "sshkeys done"
 
 	if [ -n $pathopenvpncerts ] && [ -n "${openvpn[configname]}" ]; then
+		echo "in here"
 		rm -rf --preserve-root $pathopenvpncerts/*
 		echo "${openvpn[cacert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_cacert" 
 		echo "${openvpn[servercert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_servercert"
@@ -272,7 +274,11 @@ else
 		echo "${openvpn[dh]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_dh"
 		echo "${openvpn[pkcs12]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_pkcs12"
 	elif [ -n $pathopenvpncerts ]; then
+		echo "delete all vpn"
+		echo "$pathopenvpncerts and ${openvpn[configname]} and ${openvpn[dh]}"
 		rm -rf --preserve-root $pathopenvpncerts/*
+	else
+		echo "other"
 	fi
 	echo "openvpn done"
 	echo "all done"

@@ -49,15 +49,12 @@ rsysloghost=""
 # set port if you defined host (optional, otherwise default port is used)
 rsyslogport=""
 ##### OPENVPN
-declare -A openvpn
-openvpn=( ["configname"]="roadwarrior_meier"
-["cacert"]=""
-["servercert"]=""
-["serverkey"]=""
-["dh"]=""
-["pkcs12"]=""
-)
-
+openvpn0config="roadwarrior_meier"
+openvpn0cacert=""
+openvpn0servercert=""
+openvpn0serverkey=""
+openvpn0dh=""
+openvpn0pkcs12=""
 
 # FIXED PARAMETERS
 # Configuration parameter that is in the end written into file into zabbix_agentd.conf.d
