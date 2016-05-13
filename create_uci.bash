@@ -265,20 +265,16 @@ else
 	fi
 	echo "sshkeys done"
 
-	if [ -n $pathopenvpncerts ] && [ -n "${openvpn[configname]}" ]; then
-		echo "in here"
+	if [ -n $pathopenvpncerts ] && [ -n "$openvpn0config" ]; then
 		rm -rf --preserve-root $pathopenvpncerts/*
-		echo "${openvpn[cacert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_cacert" 
-		echo "${openvpn[servercert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_servercert"
-		echo "${openvpn[serverkey]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_serverkey"
-		echo "${openvpn[dh]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_dh"
-		echo "${openvpn[pkcs12]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_pkcs12"
+		echo "$openvpn0cacert" > "${pathopenvpncerts}/openvpn_${openvpn0config}_cacert" 
+		echo "$openvpn0servercert" > "$pathopenvpncerts/openvpn_${openvpn0config}_servercert"
+		echo "$openvpn0serverkey" > "$pathopenvpncerts/openvpn_${openvpn0config}_serverkey"
+		echo "$openvpn0dh" > "$pathopenvpncerts/openvpn_${openvpn0config}_dh"
+		echo "$openvpn0pkcs12" > "$pathopenvpncerts/openvpn_${openvpn0config]}_pkcs12"
 	elif [ -n $pathopenvpncerts ]; then
 		echo "delete all vpn"
-		echo "$pathopenvpncerts and ${openvpn[configname]} and ${openvpn[dh]}"
 		rm -rf --preserve-root $pathopenvpncerts/*
-	else
-		echo "other"
 	fi
 	echo "openvpn done"
 	echo "all done"
