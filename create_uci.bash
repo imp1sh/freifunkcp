@@ -265,6 +265,14 @@ else
 	fi
 	echo "sshkeys done"
 
+	for j in openvpn0cacert openvpn0servercert openvpn0serverkey openvpn0dh openvpn0pkcs12; do
+		if [ -f $j ]; then
+			cp $j ${pathopenvpncerts}
+		else
+			rm ${pathopenvpncerts}/$j
+		fi
+	done
+
 	if [ -n $pathopenvpncerts ] && [ -n "$openvpn0config" ]; then
 		rm -rf --preserve-root $pathopenvpncerts/*
 		echo "$openvpn0cacert" > "${pathopenvpncerts}/openvpn_${openvpn0config}_cacert" 
