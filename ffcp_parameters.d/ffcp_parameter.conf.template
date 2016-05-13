@@ -48,6 +48,15 @@ ZabbixServerActiveValue=""
 rsysloghost=""
 # set port if you defined host (optional, otherwise default port is used)
 rsyslogport=""
+##### OPENVPN
+declare -A openvpn
+openvpn=( ["configname"]="roadwarrior_meier"
+["cacert"]=""
+["servercert"]=""
+["serverkey"]=""
+["dh"]=""
+["pkcs12"]=""
+)
 
 
 # FIXED PARAMETERS
