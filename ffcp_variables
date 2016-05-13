@@ -3,9 +3,9 @@
 pathucidefaults="files/etc/uci-defaults"
 pathuciconfig="files/etc/config"
 pathucidropbear="files/etc/dropbear"
+pathopenvpncerts="files/etc/openvpn"
 pathcp="/bin/cp"
 pathopenwrtbin="bin"
-pathopenvpncerts="/etc/openvpn"
 
 # non private
 pathmodules="ffcp_modules.d"

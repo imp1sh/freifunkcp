@@ -264,5 +264,16 @@ else
 	fi
 	echo "sshkeys done"
 
+	if [ -n $pathopenvpncerts ] && [ -n "${openvpn[configname]}" ]; then
+		rm -rf --preserve-root $pathopenvpncerts/*
+		echo "${openvpn[cacert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_cacert" 
+		echo "${openvpn[servercert]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_servercert"
+		echo "${openvpn[serverkey]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_serverkey"
+		echo "${openvpn[dh]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_dh"
+		echo "${openvpn[pkcs12]}" > "$pathopenvpncerts/openvpn_${openvpn[configname]}_pkcs12"
+	elif [ -n $pathopenvpncerts ]; then
+		rm -rf --preserve-root $pathopenvpncerts/*
+	fi
+	echo "openvpn done"
 	echo "all done"
 fi
