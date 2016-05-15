@@ -272,18 +272,6 @@ else
 			rm ${pathopenvpncerts}/$j
 		fi
 	done
-
-	if [ -n $pathopenvpncerts ] && [ -n "$openvpn0config" ]; then
-		rm -rf --preserve-root $pathopenvpncerts/*
-		echo "$openvpn0cacert" > "${pathopenvpncerts}/openvpn_${openvpn0config}_cacert" 
-		echo "$openvpn0servercert" > "$pathopenvpncerts/openvpn_${openvpn0config}_servercert"
-		echo "$openvpn0serverkey" > "$pathopenvpncerts/openvpn_${openvpn0config}_serverkey"
-		echo "$openvpn0dh" > "$pathopenvpncerts/openvpn_${openvpn0config}_dh"
-		echo "$openvpn0pkcs12" > "$pathopenvpncerts/openvpn_${openvpn0config]}_pkcs12"
-	elif [ -n $pathopenvpncerts ]; then
-		echo "delete all vpn"
-		rm -rf --preserve-root $pathopenvpncerts/*
-	fi
 	echo "openvpn done"
 	echo "all done"
 fi
