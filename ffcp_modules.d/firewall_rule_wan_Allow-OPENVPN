@@ -1,0 +1,7 @@
+config rule
+        option target 'ACCEPT'
+        option src 'wan'
+        option proto 'udp'
+        option dest_port '1194'
+        option name 'allow_openvpn'
+

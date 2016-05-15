@@ -1,0 +1,4 @@
+config forwarding
+        option dest 'lan'
+        option src 'roadwarrior'
+

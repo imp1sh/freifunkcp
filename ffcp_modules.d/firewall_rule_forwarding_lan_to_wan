@@ -1,0 +1,4 @@
+config forwarding
+        option dest 'wan'
+        option src 'lan'
+
