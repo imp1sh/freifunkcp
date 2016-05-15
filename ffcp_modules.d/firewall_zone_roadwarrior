@@ -1,0 +1,9 @@
+config zone
+        option name 'roadwarrior'
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option network 'roadwarrior'
+        option forward 'ACCEPT'
+        option log '1'
+        option log_limit '10/minute'
+
