@@ -131,7 +131,6 @@ else
 		fi
 	else
 	# is private
-		echo "ispriv"
 		source $pathparameterspriv/$parameterfile
 		echo "$pathparameterspriv/$parameterfile sourced"
 		if [ -f $pathdevicespriv/$devicetype ]; then
