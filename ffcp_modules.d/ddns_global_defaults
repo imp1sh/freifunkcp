@@ -1,0 +1,4 @@
+config ddns 'global'
+        option date_format '%F %R'
+        option log_lines '250'
+        option allow_local_ip '0'
