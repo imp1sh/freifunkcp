@@ -13,10 +13,8 @@ function initfile {
 function catelement {
 	# $1 is module path and $2 is module name, i.e. filename
 	if [ -f $1/$2 ]; then
-		echo "cat non private module file $2"
 		cat $1/$2
 	else
-		echo "cat private module file $2"
 		cat $pathmodulespriv/$2
 	fi
 }
