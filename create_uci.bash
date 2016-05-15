@@ -11,9 +11,12 @@ function initfile {
 	fi
 }
 function catelement {
+	# $1 is module path and $2 is module name, i.e. filename
 	if [ -f $1/$2 ]; then
+		echo "cat non private module file $2"
 		cat $1/$2
 	else
+		echo "cat private module file $2"
 		cat $pathmodulespriv/$2
 	fi
 }
@@ -59,7 +62,7 @@ function isuseable {
 	fi
 }
 
-# check if first parameter is given
+# check if first parameter is given which is the parameter's file name, either private or non private
 if [ -z "$1" ]; then
 	echo "Error. Please choose one of the available configs by giving its name as a parameter!"
 	listparameters
@@ -87,10 +90,14 @@ else
 	# config is ok to use
 	# here's the action
 
+	
+
 	# is regular
 	if [ $notinpathparameters -eq 0 ]; then
+		# read parameter file
 		source "$pathparameters/$parameterfile"
 		echo "$pathparameters/$parameterfile sourced"
+		# read device file
 		if [ -f $pathdevices/$devicetype ]; then
 			source "$pathdevices/$devicetype"
 			echo "$pathdevices/$devicetype sourced"
@@ -101,6 +108,7 @@ else
 			echo "Error. No device file with the name $devicetype found neither in $pathdevices nor in $pathdevicespriv."
 			exit 17
 		fi
+		# read env file
 		if [ -f "$pathenv/$envfile" ]; then
 			source "$pathenv/$envfile"
 			echo "$pathenv/$envfile sourced"
@@ -156,6 +164,7 @@ else
                 fi
 	fi
 
+	# Modules are being utilized down here
 	# initialize config files
 	for fileelement in $filemodulealfred $filemodulebatmanadv $filemoduleddns $filemoduledhcp $filemoduledropear $filemodulefirewall $filemodulenetwork $filemoduleopenvpn $filemodulesystem $filemodulevnstat $filemodulewireless $pathucidropbear/$filedropbearkeys; do
 		initfile $fileelement
