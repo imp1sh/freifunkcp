@@ -109,6 +109,11 @@ if [ $raise -gt 1 ] ; then
 	/etc/init.d/zabbix_agentd enable
 fi
 
+# enabling openvpn
+if [ -f /etc/init.d/openvpn ]; then
+	/etc/init.d/openvpn enable
+fi
+
 # set remote syslog server
 if [ -n "$rsysloghost" ] ; then
 	# remote host
