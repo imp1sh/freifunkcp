@@ -6,3 +6,4 @@ config wifi-device 'radio1'
         option htmode 'HT20'
         option txpower '26'
         option country 'DE'
+

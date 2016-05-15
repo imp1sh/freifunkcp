@@ -1,3 +1,4 @@
 config interface 'wan6'
         option ifname 'eth1'
         option proto 'dhcpv6'
+

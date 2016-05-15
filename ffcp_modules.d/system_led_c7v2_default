@@ -21,3 +21,4 @@ config led 'led_wlan5g'
         option name 'WLAN5G'
         option sysfs 'tp-link:blue:wlan5g'
         option trigger 'phy0tpt'
+

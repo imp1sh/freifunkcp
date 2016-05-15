@@ -5,3 +5,4 @@ config rule
         option icmp_type 'echo-request'
         option family 'ipv4'
         option target 'ACCEPT'
+

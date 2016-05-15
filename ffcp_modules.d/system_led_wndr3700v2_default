@@ -9,3 +9,4 @@ config led 'led_usb'
         option trigger 'usbdev'
         option dev '1-1'
         option interval '50'
+

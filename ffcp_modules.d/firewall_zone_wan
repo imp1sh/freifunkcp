@@ -6,3 +6,4 @@ config zone
         option masq '1'
         option mtu_fix '1'
         option network 'wan wan6'
+

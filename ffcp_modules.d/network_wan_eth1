@@ -3,3 +3,4 @@ config interface 'wan'
         option _orig_ifname 'eth1'
         option _orig_bridge 'true'
         option ifname 'eth1'
+

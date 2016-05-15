@@ -9,3 +9,4 @@ config led 'led_wlan'
         option name 'WLAN'
         option sysfs 'tp-link:green:wlan'
         option trigger 'phy0tpt'
+

@@ -8,3 +8,4 @@ config rule
         option dest_port '546'
         option family 'ipv6'
         option target 'ACCEPT'
+

@@ -5,3 +5,4 @@ config rule
         option dest_port '22'
         option target 'ACCEPT'
         option family 'ipv6'
+

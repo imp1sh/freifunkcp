@@ -16,3 +16,4 @@ config led 'led_wlan2g'
         option name 'WLAN2G'
         option sysfs 'tp-link:blue:wlan2g'
         option trigger 'phy0tpt'
+

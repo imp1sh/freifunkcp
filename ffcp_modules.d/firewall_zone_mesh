@@ -4,3 +4,4 @@ config zone
         option input 'REJECT'
         option output 'REJECT'
         option network 'mesh_cable1 mesh_cable2 mesh_cable3 mesh_cable4 mesh_cable5 mesh_wifi24 mesh_wifi5'
+

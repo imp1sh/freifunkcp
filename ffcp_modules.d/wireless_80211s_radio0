@@ -7,3 +7,4 @@ config wifi-iface 'freifunkcp'
         option mesh_id 'batmans'
         option disabled '0'
         option ssid 'freifunkcp'
+

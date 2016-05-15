@@ -4,3 +4,4 @@ config zone
         option output 'ACCEPT'
         option forward 'ACCEPT'
         option network 'lan'
+

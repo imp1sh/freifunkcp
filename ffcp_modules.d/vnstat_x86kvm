@@ -10,3 +10,4 @@ config vnstat
         list interface 'eth5'
         list interface 'eth6'
         list interface 'eth7'
+

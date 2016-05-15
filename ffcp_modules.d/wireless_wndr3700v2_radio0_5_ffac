@@ -6,3 +6,4 @@ config wifi-device 'radio0'
         option channel '44'
         option txpower '17'
         option country 'DE'
+

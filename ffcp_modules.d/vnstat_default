@@ -8,3 +8,4 @@ config vnstat
         list interface 'bat0'
         list interface 'br-guests'
         list interface 'br-lan'
+

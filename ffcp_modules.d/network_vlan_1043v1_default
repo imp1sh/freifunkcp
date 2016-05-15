@@ -17,3 +17,4 @@ config switch_vlan
         option device 'switch0'
         option vlan '12'
         option ports '2 4t 5t'
+

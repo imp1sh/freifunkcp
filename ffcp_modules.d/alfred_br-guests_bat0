@@ -4,3 +4,4 @@ config 'alfred' 'alfred'
         option batmanif 'bat0'
         option start_vis '1'
         option run_facters '0'
+

@@ -6,3 +6,4 @@ config wifi-iface 'appriv24'
         option encryption 'psk2'
         option key 'sdfjkslj(9h4839h8)H8'
 	option disabled '1'
+

@@ -13,3 +13,4 @@ config rule
         option limit '1000/sec'
         option family 'ipv6'
         option target 'ACCEPT'
+

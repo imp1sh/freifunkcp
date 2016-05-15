@@ -3,3 +3,4 @@ config interface 'mesh_cable2'
         option mtu '1528'
         option proto 'batadv'
         option mesh 'bat0'
+

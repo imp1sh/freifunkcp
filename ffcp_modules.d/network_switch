@@ -4,3 +4,4 @@ config switch
         option enable_vlan '1'
         option mirror_source_port '0'
         option mirror_monitor_port '0'
+
