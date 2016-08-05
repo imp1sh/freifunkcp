@@ -205,7 +205,7 @@ else
                 rm $filemoduledropbear
         else
 		for dropbearelement in "${dropbear[@]}"; do
-			catelement $pathmodules $dropbearelement >> $filemoduledropear
+			catelement $pathmodules $dropbearelement >> $filemoduledropbear
 		done
 	fi
 	echo "dropbear done"
