@@ -1,4 +1,4 @@
-config wifi-iface 'adhoc5'
+config wifi-iface
         option network 'mesh_wifi5'
         option device 'radio0'
         option ifname 'adhoc5'

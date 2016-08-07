@@ -1,4 +1,4 @@
-config wifi-iface 'appub24'
+config wifi-iface
         option device 'radio1'
         option mode 'ap'
         option ifname 'appub24'

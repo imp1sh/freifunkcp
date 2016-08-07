@@ -1,4 +1,4 @@
-config wifi-iface 'appub5'
+config wifi-iface
         option device 'radio0'
         option mode 'ap'
         option ifname 'appub5'

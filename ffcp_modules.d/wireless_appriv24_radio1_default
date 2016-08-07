@@ -1,4 +1,4 @@
-config wifi-iface 'appriv24'
+config wifi-iface
         option device 'radio1'
         option mode 'ap'
         option ssid 'changemySSIDandKEY'

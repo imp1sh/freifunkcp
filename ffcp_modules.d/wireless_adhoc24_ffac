@@ -1,4 +1,4 @@
-config wifi-iface 'adhoc24'
+config wifi-iface
         option network 'mesh_wifi24'
         option device 'radio1'
         option ifname 'adhoc24'

@@ -1,4 +1,4 @@
-config wifi-iface 'freifunkcp'
+config wifi-iface
         option device 'radio0'
         option ifname '80211s'
         option encryption 'none'
