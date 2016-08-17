@@ -1,3 +1,8 @@
+[beta 0.7]
+2016-08-17
+- tested with current LEDE Reboot r1363, kernel 4.4.15
+- new firmware releases will soon be available at https://images.gosix.net
+
 [beta 0.62]
 2016-04-13
 - revised build structure in order to build automatically for different devices and environments, better documentation is yet to come. create_uci.bash
