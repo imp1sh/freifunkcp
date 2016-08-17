@@ -5,7 +5,8 @@ pathuciconfig="files/etc/config"
 pathucidropbear="files/etc/dropbear"
 pathopenvpncerts="files/etc/openvpn"
 pathcp="/bin/cp"
-pathopenwrtbin="bin"
+#pathopenwrtbin="bin"
+pathopenwrtbin="bin/targets"
 
 # non private
 pathmodules="ffcp_modules.d"
@@ -43,12 +44,12 @@ filehwconfigbefore=".config.before"
 filedropbearkeys="authorized_keys"
 
 # bin file lists
-filebinc7v2="openwrt-ar71xx-generic-archer-c7-v2-squashfs-factory.bin openwrt-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
-filebin4300v1="openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
-filebin1043v1="openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
-filebinwndr3700v1="openwrt-ar71xx-generic-wndr3700-squashfs-factory.img openwrt-ar71xx-generic-wndr3700-squashfs-factory-NA.img openwrt-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin"
-filebinx86kvm="openwrt-x86-kvm_guest-combined-ext4.img"
+filebinc7v2="lede-ar71xx-generic-archer-c7-v2-squashfs-factory.bin lede-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
+filebin4300v1="lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
+filebin1043v1="lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
+filebinwndr3700v1="lede-ar71xx-generic-wndr3700-squashfs-factory.img lede-ar71xx-generic-wndr3700-squashfs-factory-NA.img lede-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin"
+filebinx86kvm="lede-x86-kvm_guest-combined-ext4.img"
 
 modulegroups=(alfred batmanadv ddns dhcp dropbear firewall network openvpn system vnstat wireless)
 recreateconfig="true"
-buildthreads=5
+buildthreads=1

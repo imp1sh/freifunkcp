@@ -69,10 +69,10 @@ function copybinfile {
 			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
 			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
 			if $ispriv; then
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinoutpriv/$binnewfile"
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinoutpriv/$binnewfile"
 				$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinoutpriv/$binnewfile
 			else
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/$i to $scriptdir/$pathbinout/$binnewfile"
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinout/$binnewfile"
 	                	$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinout/$binnewfile
 			fi
         	else
@@ -136,7 +136,7 @@ function runparameter {
         cd $scriptdir/..
         #if "$recreateconfig"; then
 	        echo "generating full $filehwconfig from diffconfig file"
-	         make defconfig  > $filehwconfig
+	         make defconfig
         #fi
         echo -e "\t start building with $buildthreads threads. Please be patient."
         make -j $buildthreads
