@@ -93,7 +93,7 @@ if [ -n "$ZabbixServerValue" ] ; then
 	echo "UserParameter=wifi.usersappub24, iw dev appub24 station dump|grep Station|wc -l" >> $zabbixparampath
 	echo "UserParameter=wifi.usersappub5, iw dev appub5 station dump|grep Station|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.numbernodes, sudo /usr/sbin/batctl o|grep -v Originator|grep -v MainIF|wc -l" >> $zabbixparampath
-	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|wc -l" >> $zabbixparampath
+	echo "UserParameter=mesh.numbergateways, sudo /usr/sbin/batctl gwl|grep -v Gateway|grep -v range|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.numbermacache, sudo /usr/sbin/batctl dc|grep -v MAC|grep -v ARP|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.numberneighbors, sudo batctl o |grep -v Originator|grep -v MainIF|awk -F')' '{print \$2}'|awk '{print \$1}'|awk '{print \$1}'|uniq -u|wc -l" >> $zabbixparampath
 	echo "UserParameter=mesh.listneighbors, /lib/freifunkcp/neighbordiscovery" >> $zabbixparampath
