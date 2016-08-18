@@ -64,19 +64,19 @@ function copybinfile {
 	local binfilefull="filebin$2"
 	for i in $(echo ${!binfilefull}); do
 		echo -e "\t\t Doing: $i"
-		if [ -f ../$pathopenwrtbin/$hwbinpath/$i ];then
+		if [ -f ../$pathopenwrtbin/$hwbinpath/generic/$i ];then
         		local binwithoutsuffix=$(echo "$i" | awk -F'.' '{print $1}')
 			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
 			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
 			if $ispriv; then
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinoutpriv/$binnewfile"
-				$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinoutpriv/$binnewfile
+				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinoutpriv/$binnewfile
 			else
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinout/$binnewfile"
-	                	$pathcp ../$pathopenwrtbin/$hwbinpath/$i $scriptdir/$pathbinout/$binnewfile
+	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinout/$binnewfile
 			fi
         	else
-        	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/$i not found."
+        	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/generic/$i not found."
         	        continue
         	fi
 	done
