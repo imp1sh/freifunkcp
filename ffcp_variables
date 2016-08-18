@@ -52,4 +52,4 @@ filebinx86kvm="lede-x86-kvm_guest-combined-ext4.img"
 
 modulegroups=(alfred batmanadv ddns dhcp dropbear firewall network openvpn system vnstat wireless)
 recreateconfig="true"
-buildthreads=1
+buildthreads=5
