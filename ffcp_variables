@@ -38,6 +38,7 @@ filemoduleopenvpn="$pathuciconfig/openvpn"
 filemodulesystem="$pathuciconfig/system"
 filemodulevnstat="$pathuciconfig/vnstat"
 filemodulewireless="$pathuciconfig/wireless"
+filechecksum="sha256sums"
 
 filehwconfig=".config"
 filehwconfigbefore=".config.before"
@@ -47,8 +48,8 @@ filedropbearkeys="authorized_keys"
 filebinc7v2="lede-ar71xx-generic-archer-c7-v2-squashfs-factory.bin lede-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
 filebin4300v1="lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
 filebin1043v1="lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
-filebinwndr3700v1="lede-ar71xx-generic-wndr3700-squashfs-factory.img lede-ar71xx-generic-wndr3700-squashfs-factory-NA.img lede-ar71xx-generic-wndr3700-squashfs-sysupgrade.bin"
-filebinx86kvm="lede-x86-kvm_guest-combined-ext4.img"
+filebinwndr3700v2="lede-ar71xx-generic-wndr3700v2-squashfs-factory.img lede-ar71xx-generic-wndr3700v2-squashfs-sysupgrade.bin"
+filebinx86="lede-x86-generic-combined-ext4.img lede-x86-generic-combined-squashfs.img lede-x86-generic-generic-rootfs.tar.gz lede-x86-generic-rootfs-ext4.img lede-x86-generic-rootfs-squashfs.img lede-x86-generic-vmlinuz"
 
 modulegroups=(alfred batmanadv ddns dhcp dropbear firewall network openvpn system vnstat wireless)
 recreateconfig="true"

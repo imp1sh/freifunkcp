@@ -1,4 +1,14 @@
 [beta 0.7]
+2016-08-18
+- build.bash now also copies checksum file
+- build.bash won't change the bin filename any more, so sha256 fit exactly
+- slightly improved if statements in build.bash
+- removed x86kvm because lede doesn't know it
+- new subfolders in binfolders -> x86 and ar71xx
+- typo in ffcp_variables wndr3700v2 instead of wndr3700v1
+- corrected filenames for wndr3700v2 and x86
+- removed some packages from config files because image got larger than 8 MiB: authsae, babeld, bmx6, bmx7, ethtool, fastd, htop, nmap, tcpdump, respondd, zabbix-proxy
+
 2016-08-17
 - tested with current LEDE Reboot r1363, kernel 4.4.15
 - new firmware releases will soon be available at https://images.gosix.net

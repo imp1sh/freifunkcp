@@ -4,8 +4,8 @@ scriptdir="$(dirname "$0")"
 
 function listparameters {
         echo -e "\tparameters:"
-        ls $pathparameters/*.conf | awk -F'/' '{print $NF}'
-        echo -e "\tprivate parameters:"
+	ls $pathparameters/*.conf | awk -F'/' '{print $NF}'
+	echo -e "\tprivate parameters:"
         ls $pathparameterspriv/*.conf | awk -F'/' '{print $NF}'
 }
 
@@ -69,18 +69,22 @@ function copybinfile {
 			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
 			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
 			if $ispriv; then
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinoutpriv/$binnewfile"
-				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinoutpriv/$binnewfile
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinoutpriv/$hwbinpath/$i"
+				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinoutpriv/$hwbinpath/$i
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum"
+				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinoutpriv/$hwbinpath/
 			else
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinout/$binnewfile"
-	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinout/$binnewfile
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinout/$hwbinpath/$i"
+	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinout/$hwbinpath/$i
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinout/$hwbinpath/$filechecksum"
+				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinout/$hwbinpath/
 			fi
         	else
         	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/generic/$i not found."
         	        continue
         	fi
 	done
-	echo "### END function copybinfile ###"
+	echo -e "\t### END function copybinfile ###"
 }
 
 function runparameter {
@@ -200,32 +204,27 @@ elif [ $1 == "all" ] && [ -n $2 ]; then
 # only first given, search for parameter and run that's found first
 elif [ -n $1 ] && [ -z $2 ]; then
 	specificparameter=$1
-	ls $scriptdir/$pathparameters/$1 &>/dev/null
-	if [ $? -eq 0 ];then
+	if [ -f $scriptdir/$pathparameters/$1 ];then
 		echo "Parameter file found in $pathparameters."
 		runparameter $specificparameter false
-	fi
-	ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
-	if [ $? -eq 0 ];then
+	elif [ -f $scriptdir/$pathparameterspriv/$1 ];then
 		echo "Parameter file found in $pathparameterspriv."
 		runparameter $specificparameter true
 	else
-		"Error. File $1 not found neither in $pathparameterspriv nor in $pathparameters."
+		echo "Error. File $1 not found neither in $pathparameterspriv nor in $pathparameters."
 		exit 2
 	fi
 	exit 0
 elif [ -n $1 ] && [ -n $2 ]; then
 	if [ $2 == "true" ]; then
-                ls $scriptdir/$pathparameterspriv/*.conf &>/dev/null
-		 if [ $? -eq 0 ]; then
+		 if [ -f $scriptdir/$pathparameterspriv/$1 ]; then
 			runparameter $1 true
 		else
 			echo "Error. File $1 not found in $pathparameterspriv"
 			exit 4
 		fi
 	elif [ $2 == "false" ]; then
-		ls $scriptdir/$pathparameters/*.conf &>/dev/null
-                 if [ $? -eq 0 ]; then
+                 if [ -f $scriptdir/$pathparameters/$1 ]; then
                         runparameter $1 false
 		else
 			echo "Error. File $1 not found in $pathparameters"
