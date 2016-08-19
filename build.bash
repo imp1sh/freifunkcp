@@ -62,22 +62,26 @@ function copybinfile {
 	local parameterprefix=$(echo $parameterlocal | awk -F'.' '{print $2}')
 	# hwconfiglocal might be x86kvm or c7v2 or something like this
 	local binfilefull="filebin$2"
+	# this iterates through all filenames that correspond to a specific device. Those filnames are defined in an array in ffcp_variables
 	for i in $(echo ${!binfilefull}); do
 		echo -e "\t\t Doing: $i"
 		if [ -f ../$pathopenwrtbin/$hwbinpath/generic/$i ];then
-        		local binwithoutsuffix=$(echo "$i" | awk -F'.' '{print $1}')
-			local binsuffix=$(echo "$i" | awk -F'.' '{print $2}')
-			local binnewfile=$(echo "$binwithoutsuffix-$parameterwithoutprefix.$binsuffix")
+			local binbase=${i%%"."*}
+			local binsuffix=${i#*"."}
+			local binold=${i}
+			local binnew=${binbase}-${parameterwithoutprefix}.${binsuffix}
 			if $ispriv; then
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinoutpriv/$hwbinpath/$i"
-				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinoutpriv/$hwbinpath/$i
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$binold to $scriptdir/$pathbinoutpriv/$hwbinpath/$binnew"
+				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$binold $scriptdir/$pathbinoutpriv/$hwbinpath/$binnew
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum"
 				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinoutpriv/$hwbinpath/
+				$pathsed -i 's/$binold/$binnew/g' $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum
 			else
-				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$i to $scriptdir/$pathbinout/$hwbinpath/$i"
-	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$i $scriptdir/$pathbinout/$hwbinpath/$i
+				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$binold to $scriptdir/$pathbinout/$hwbinpath/$binnew"
+	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$binold $scriptdir/$pathbinout/$hwbinpath/$binnew
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinout/$hwbinpath/$filechecksum"
 				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinout/$hwbinpath/
+				$pathsed -i 's/$binold/binnew/g' $scriptdir/$pathbinout/$hwbinpath/$filechecksum
 			fi
         	else
         	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/generic/$i not found."
