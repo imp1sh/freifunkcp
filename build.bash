@@ -240,4 +240,8 @@ elif [ -n $1 ] && [ -n $2 ]; then
 		tellhow
 	fi
 fi
+# tidy up
 rm -f $pathuciconfig/*
+rm -f $pathucidropbear/*
+rm -f $pathucidefaults/$fileucienv
+rm -f $pathucidefaults/$fileuciparameter
