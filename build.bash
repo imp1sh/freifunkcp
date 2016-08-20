@@ -75,13 +75,15 @@ function copybinfile {
 				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$binold $scriptdir/$pathbinoutpriv/$hwbinpath/$binnew
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum"
 				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinoutpriv/$hwbinpath/
+				echo "$pathsed -i 's/$binold/$binnew/g' $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum"
 				$pathsed -i 's/$binold/$binnew/g' $scriptdir/$pathbinoutpriv/$hwbinpath/$filechecksum
 			else
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$binold to $scriptdir/$pathbinout/$hwbinpath/$binnew"
 	                	$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$binold $scriptdir/$pathbinout/$hwbinpath/$binnew
 				echo -e "\t\t\tcopying ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum to $scriptdir/$pathbinout/$hwbinpath/$filechecksum"
 				$pathcp ../$pathopenwrtbin/$hwbinpath/generic/$filechecksum $scriptdir/$pathbinout/$hwbinpath/
-				$pathsed -i 's/$binold/binnew/g' $scriptdir/$pathbinout/$hwbinpath/$filechecksum
+				echo "$pathsed -i 's/$binold/$binnew/g' $scriptdir/$pathbinout/$hwbinpath/$filechecksum"
+				$pathsed -i 's/$binold/$binnew/g' $scriptdir/$pathbinout/$hwbinpath/$filechecksum
 			fi
         	else
         	        echo -e "\t\t\tError. file ../$pathopenwrtbin/$hwbinpath/generic/$i not found."
@@ -218,7 +220,6 @@ elif [ -n $1 ] && [ -z $2 ]; then
 		echo "Error. File $1 not found neither in $pathparameterspriv nor in $pathparameters."
 		exit 2
 	fi
-	exit 0
 elif [ -n $1 ] && [ -n $2 ]; then
 	if [ $2 == "true" ]; then
 		 if [ -f $scriptdir/$pathparameterspriv/$1 ]; then
@@ -239,3 +240,4 @@ elif [ -n $1 ] && [ -n $2 ]; then
 		tellhow
 	fi
 fi
+rm -f $pathuciconfig/*

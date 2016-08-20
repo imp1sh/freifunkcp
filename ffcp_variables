@@ -5,7 +5,7 @@ pathuciconfig="files/etc/config"
 pathucidropbear="files/etc/dropbear"
 pathopenvpncerts="files/etc/openvpn"
 pathcp="/bin/cp"
-pathsed="/usb/bin/sed"
+pathsed="/usr/bin/sed"
 #pathopenwrtbin="bin"
 pathopenwrtbin="bin/targets"
 
