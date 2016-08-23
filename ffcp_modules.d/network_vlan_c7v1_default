@@ -1,0 +1,20 @@
+config switch_vlan
+        option device 'switch0'
+        option vlan '3'
+        option ports '1 5t 6t'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '5'
+        option ports '0t 2 5t'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '11'
+        option ports '0t 4 5t'
+
+config switch_vlan
+        option device 'switch0'
+        option vlan '12'
+        option ports '0t 3 5t'
+
