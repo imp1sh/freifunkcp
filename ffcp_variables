@@ -47,6 +47,7 @@ filedropbearkeys="authorized_keys"
 
 # bin file lists
 filebinc7v2="lede-ar71xx-generic-archer-c7-v2-squashfs-factory.bin lede-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin"
+filebinc7v1="lede-ar71xx-generic-archer-c7-v1-squashfs-factory.bin  lede-ar71xx-generic-archer-c7-v1-squashfs-sysupgrade.bin"
 filebin4300v1="lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wdr4300-v1-il-squashfs-sysupgrade.bin lede-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin"
 filebin1043v1="lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin lede-ar71xx-generic-tl-wr1043nd-v1-squashfs-sysupgrade.bin"
 filebinwndr3700v2="lede-ar71xx-generic-wndr3700v2-squashfs-factory.img lede-ar71xx-generic-wndr3700v2-squashfs-sysupgrade.bin"
