@@ -4,6 +4,6 @@ config wifi-device 'radio1'
         option hwmode '11g'
         option path 'pci0000:00/0000:00:11.0'
         option htmode 'HT20'
-        option txpower '20
+        option txpower '20'
         option country 'DE'
 
