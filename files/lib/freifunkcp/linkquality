@@ -1,5 +1,18 @@
 #!/bin/ash
-tq=$(sudo batctl o | egrep "^c4:6e:1f:ea:c0:d6"|awk -F'(' '{print $2}'|awk -F')' '{print $1}')
-echo $(expr $tq % 2.55)
-loss=$(sudo batctl p -c 3 $1 | grep loss|awk -F, '{print $3}'|awk -F'\%' '{print $1}')
-echo `expr 100 - $loss`
+# we need exactly one argument
+if [ $# -eq 1 ]; then
+	# argument needs to be a mac address
+	if [ $(echo $1 | egrep -c "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$") -eq 1 ]; then
+		# argument needs to be direct neighbor in batman
+		if [ $(sudo batctl o | egrep -c "^$1") -eq 1 ]; then
+				tq=$(sudo batctl o | grep -e "^$1" | awk -F'(' '{print $2}' | awk -F')' '{print $1}')
+				/lib/freifunkcp/calc.lua $tq
+		else
+			exit 3
+		fi
+	else
+		exit 2
+	fi
+else
+	exit 1
+fi
