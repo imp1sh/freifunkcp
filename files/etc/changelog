@@ -1,3 +1,9 @@
+[beta 0.71]
+2016-08-23
+- Support of TP-Link Archer C7v1
+- couple of fixes, mainly related to build environment 
+- zabbix check linkquality and neighbordiscovery now working like a charm
+
 [beta 0.7]
 2016-08-18
 - build.bash now also copies checksum file
