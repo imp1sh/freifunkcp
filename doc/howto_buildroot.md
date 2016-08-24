@@ -19,7 +19,8 @@ usually like this:
 
 4. `git clone https://github.com/imp1sh/freifunkcp.git env`
 
-5. `cp ./env/feeds.conf .`
+5. This step is optional if you want to include some gluon elements. Not recommended right now. <br>
+`cp ./env/feeds.conf .`
 
 6. `./scripts/feeds update -a`
 
