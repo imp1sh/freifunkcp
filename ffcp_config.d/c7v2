@@ -23,11 +23,13 @@ CONFIG_OPENVPN_openssl_ENABLE_SOCKS=y
 CONFIG_PACKAGE_ALFRED_VIS=y
 CONFIG_PACKAGE_alfred=y
 # CONFIG_PACKAGE_ath10k-firmware-qca988x is not set
+CONFIG_PACKAGE_ath10k-firmware-qca988x-ct=y
 CONFIG_PACKAGE_bind-host=y
 CONFIG_PACKAGE_bind-libs=y
 CONFIG_PACKAGE_ip=y
 CONFIG_PACKAGE_ip-full=y
 # CONFIG_PACKAGE_kmod-ath10k is not set
+CONFIG_PACKAGE_kmod-ath10k-ct=y
 CONFIG_PACKAGE_kmod-batman-adv-legacy=y
 CONFIG_PACKAGE_kmod-crypto-crc32c=y
 CONFIG_PACKAGE_kmod-crypto-hash=y
