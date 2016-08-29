@@ -1,3 +1,8 @@
+[beta 0.72]
+- forgot ath10k for c7v2, now Candela Tech (CT) Firmware experimentally
+-  made feeds.conf optional, no third party module needed for
+batman-adv-legacy no more
+
 [beta 0.71]
 2016-08-23
 - Support of TP-Link Archer C7v1
