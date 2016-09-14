@@ -141,6 +141,11 @@ function runparameter {
 	                return 4
 	        fi
 	fi
+	# tidy up first
+	rm -f $pathuciconfig/*
+	rm -f $pathucidropbear/*
+	rm -f $pathucidefaults/$fileucienv
+	rm -f $pathucidefaults/$fileuciparameter
 	# create uci
         $scriptdir/create_uci.bash $localparameter
         cd $scriptdir/..
@@ -240,7 +245,7 @@ elif [ -n $1 ] && [ -n $2 ]; then
 		tellhow
 	fi
 fi
-# tidy up
+# after playing you have to tidy up
 rm -f $pathuciconfig/*
 rm -f $pathucidropbear/*
 rm -f $pathucidefaults/$fileucienv

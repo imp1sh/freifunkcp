@@ -87,9 +87,11 @@ if [ $notinpathparameters -eq $notinpathparameterspriv ] ; then
 else
 	# config is ok to use
 	# here's the action
-
-	
-
+        # tidy up first
+        rm -f $pathuciconfig/*
+        rm -f $pathucidropbear/*
+        rm -f $pathucidefaults/$fileucienv
+        rm -f $pathucidefaults/$fileuciparameter
 	# is regular
 	if [ $notinpathparameters -eq 0 ]; then
 		# read parameter file
@@ -280,4 +282,10 @@ else
 	done
 	echo "openvpn done"
 	echo "all done"
+        # after playing you have to tidy up
+        rm -f $pathuciconfig/*
+        rm -f $pathucidropbear/*
+        rm -f $pathucidefaults/$fileucienv
+        rm -f $pathucidefaults/$fileuciparameter
+
 fi
