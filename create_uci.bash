@@ -282,10 +282,5 @@ else
 	done
 	echo "openvpn done"
 	echo "all done"
-        # after playing you have to tidy up
-        rm -f $pathuciconfig/*
-        rm -f $pathucidropbear/*
-        rm -f $pathucidefaults/$fileucienv
-        rm -f $pathucidefaults/$fileuciparameter
-
+        # after playing you should not tidy up
 fi
